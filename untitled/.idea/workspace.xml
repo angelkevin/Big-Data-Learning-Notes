@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f88a3945-832d-4e6d-a5c6-c401dc150dc7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Hadoop/.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/HdfsClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/HdfsClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/Flowjob.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/Flowjob.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/HdfsClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/HdfsClient.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +21,9 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -47,7 +45,7 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit3",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3": "junit.framework.TestCase",
     "last_directory_selection": "D:/java/untitled/src/test/java",
-    "last_opened_file_path": "D:/java/untitled",
+    "last_opened_file_path": "D:/java/zkw1",
     "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
   }
 }]]></component>
@@ -158,7 +156,7 @@
       <workItem from="1658321410382" duration="1424000" />
       <workItem from="1658658761814" duration="5457000" />
       <workItem from="1658674279047" duration="123000" />
-      <workItem from="1658734987510" duration="801000" />
+      <workItem from="1658734987510" duration="2770000" />
     </task>
     <task id="LOCAL-00001" summary="kisskiss">
       <created>1657879203507</created>
@@ -202,7 +200,21 @@
       <option name="project" value="LOCAL" />
       <updated>1658735178818</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="kisskiss">
+      <created>1658735899044</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1658735899044</updated>
+    </task>
+    <task id="LOCAL-00008" summary="kisskiss">
+      <created>1658735950708</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1658735950708</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
