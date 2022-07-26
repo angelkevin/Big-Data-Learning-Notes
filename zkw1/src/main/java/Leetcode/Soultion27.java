@@ -1,5 +1,5 @@
 package Leetcode;
-
+// 快慢指针
 public class Soultion27 {
     public int removeDuplicates(int[] nums) {
         int slow = 0;
