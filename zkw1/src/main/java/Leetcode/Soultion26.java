@@ -1,6 +1,6 @@
 package Leetcode;
 // 快慢指针
-public class Soultion27 {
+public class Soultion26 {
     public int removeDuplicates(int[] nums) {
         int slow = 0;
         for (int fast = 0; fast < nums.length; fast++) {
