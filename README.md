@@ -14,9 +14,24 @@ hadoop 已经完成初始化；hive为本地模式；防火墙已经关闭；roo
 
 ---
 
+虚拟网络编辑如下
+
+![image](https://user-images.githubusercontent.com/71579923/182029086-8ba049e8-e36c-470e-9487-f6ed89e1b4a7.png)
+
+NAT设置如下
+
+![image](https://user-images.githubusercontent.com/71579923/182029123-879ac17d-261b-4c95-8581-046800d46536.png)
+
+
 vmware虚拟网络格式为NAT模式
 
-设置网络为IPV4设置为手动
+
+![image](https://user-images.githubusercontent.com/71579923/182029072-5a4f92d4-876d-4295-94d8-71e251b513ee.png)
+
+
+---
+
+在系统中新建网络为IPV4并设置为手动
 
 地址：192.168.170.133
 
