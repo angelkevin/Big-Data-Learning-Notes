@@ -1,13 +1,24 @@
-# 大数据开发环境
+# 一个用java刷题的大学生，一个学大数据的大学生
+### 第一个文件夹是存放自己刷力扣的答案
+### 第二个文件夹是存放自己学大数据生态的一些代码
+
+---
+
+# 大数据开发环境介绍
+## 这是我自己搭建的开发环境，虽然都是单节点模式，在学习的情况下还是足够使用的
+
+如果大家需要的话可以点[此链接](https://pan.baidu.com/s/14FSmYCgVfaVmF0zWk1Tutw?pwd=zkw6)下载哦！欢迎白嫖，如果可以给我点一个⭐start⭐的话我也感激不尽😊。
 
 
-此虚拟机基于VMware以及centos7构建完成，包含hadoop,kafka,flume,hive,mysql,sqoop,zookeepr,jdk
+此虚拟机基于VMware以及centos7构建完成，包含hadoop,kafka,flume,hive,mysql,sqoop,zookeepr,jdk，各个版本都是兼容的，本人亲测有效。
 
 ---
 
-hadoop 已经完成初始化，hive为本地模式。
+hadoop 已经完成初始化；hive为本地模式；防火墙已经关闭；root密码是：root；MySQL的用户名为root，密码是：123456；用户hadoop的密码为：hadoop。
 
 ---
+
+vmware虚拟网络格式为NAT模式
 
 设置网络为IPV4设置为手动
 
@@ -54,3 +65,7 @@ export SQOOP_HOME=/opt/softwares/sqoop-1.4.6.bin__hadoop-2.0.4-alpha
 export PATH=$PATH:$SQOOP_HOME/bin
 export KAFKA_HOME=/opt/softwares/kafka_2.11-2.4.1
 export PATH=$PATH:$KAFKA_HOME/bin
+```
+如果有需要帮忙的地方可以给我发邮件📧<2215408861@qq.com>
+
+安装过程参考书籍《Hadoop大数据开发实战》 张伟洋著
