@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f88a3945-832d-4e6d-a5c6-c401dc150dc7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/HdfsClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/HdfsClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/HdfsClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/HdfsClient.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +26,6 @@
   <component name="Git.Settings">
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -48,7 +49,10 @@
     "last_directory_selection": "D:/java/untitled/src/test/java",
     "last_opened_file_path": "D:/java/untitled",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.38965517",
+    "settings.editor.selected.configurable": "MavenSettings"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -62,7 +66,7 @@
       <recent name="org.example" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.HdfsClient.mkdir">
+  <component name="RunManager" selected="JUnit.HdfsClient">
     <configuration name="MapReduce" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.MapReduce" />
       <module name="Hadoop" />
@@ -137,8 +141,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.HdfsClient.mkdir" />
         <item itemvalue="JUnit.HdfsClient" />
+        <item itemvalue="JUnit.HdfsClient.mkdir" />
         <item itemvalue="Application.MapReduce" />
         <item itemvalue="JUnit.test1Test" />
       </list>
@@ -160,7 +164,8 @@
       <workItem from="1658674279047" duration="123000" />
       <workItem from="1658734987510" duration="2770000" />
       <workItem from="1659112220786" duration="928000" />
-      <workItem from="1659268983817" duration="771000" />
+      <workItem from="1659268983817" duration="2119000" />
+      <workItem from="1659332736659" duration="1545000" />
     </task>
     <task id="LOCAL-00001" summary="kisskiss">
       <created>1657879203507</created>
@@ -232,7 +237,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659269121540</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="kisskiss">
+      <created>1659273622184</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1659273622184</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -248,5 +260,9 @@
     </ignored-roots>
     <MESSAGE value="kisskiss" />
     <option name="LAST_COMMIT_MESSAGE" value="kisskiss" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

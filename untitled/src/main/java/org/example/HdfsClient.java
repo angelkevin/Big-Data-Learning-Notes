@@ -20,7 +20,7 @@ public class HdfsClient {
     public void initHdfsClent() throws URISyntaxException, IOException, InterruptedException {
 
         Configuration configuration = new Configuration();
-        configuration.set("fs.default.name", "hdfs://hadoop000:8020");
+        configuration.set("fs.default.name", "hdfs://192.168.170.133:9000");
         fs = FileSystem.get(configuration);
     }
 
@@ -32,7 +32,7 @@ public class HdfsClient {
     @Test
     public void mkdir() throws IOException {
 
-        fs.mkdirs(new Path("hdfs://hadoop000:8020/test"));
+        fs.mkdirs(new Path("hdfs://192.168.170.133:9000/test"));
     }
 
     public void fileDetail() throws IOException {
