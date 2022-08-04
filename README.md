@@ -6,7 +6,7 @@
 如果大家需要的话可以点[此链接](https://pan.baidu.com/s/1h70_3xJaMJtiggNM_X-UdQ?pwd=zkw6)下载哦！欢迎白嫖，如果可以给我点一个⭐start⭐的话我也感激不尽😊。
 
 
-此虚拟机基于VMware以及centos7构建完成，包含hadoop,kafka,flume,hive,mysql,sqoop,zookeepr,jdk，各个版本都是兼容的，本人亲测有效。
+此虚拟机基于VMware以及centos7构建完成，包含hadoop,kafka,flume,hive,mysql,sqoop,zookeepr,jdk，hive on spark，各个版本都是兼容的，本人亲测有效。
 
 ---
 
