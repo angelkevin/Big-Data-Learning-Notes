@@ -3,7 +3,7 @@
 # 大数据开发环境介绍
 ## 这是我自己搭建的开发环境，虽然都是单节点模式，在学习的情况下还是足够使用的
 
-如果大家需要的话可以点[此链接](https://pan.baidu.com/s/14FSmYCgVfaVmF0zWk1Tutw?pwd=zkw6)下载哦！欢迎白嫖，如果可以给我点一个⭐start⭐的话我也感激不尽😊。
+如果大家需要的话可以点[此链接](https://pan.baidu.com/s/1h70_3xJaMJtiggNM_X-UdQ?pwd=zkw6)下载哦！欢迎白嫖，如果可以给我点一个⭐start⭐的话我也感激不尽😊。
 
 
 此虚拟机基于VMware以及centos7构建完成，包含hadoop,kafka,flume,hive,mysql,sqoop,zookeepr,jdk，各个版本都是兼容的，本人亲测有效。
