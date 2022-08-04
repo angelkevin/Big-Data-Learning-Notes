@@ -42,13 +42,6 @@ vmware虚拟网络格式为NAT模式
 DNS：192.168.170.2
 
 ---
-在 / 目录下有start.sh这是我写的用来一键启停hadoop，kafka，zookeeper的脚本
-
-启动命令为./start.sh start
-
-停止命令为./start.sh stop
-
----
 
 本文件为OVF虚拟机文件导入vmware即可使用
 
