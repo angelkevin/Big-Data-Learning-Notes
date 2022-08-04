@@ -6,7 +6,6 @@ import org.apache.flume.Context;
 import org.apache.flume.Event;
 import org.apache.flume.interceptor.Interceptor;
 
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.List;
@@ -17,7 +16,16 @@ import java.util.List;
  * 3.静态内部类builder
  */
 public class ETLInterceptor implements Interceptor {
+    public static boolean isjson(String log) {
+        boolean flag = false;
+        try {
+            JSONObject.parseObject(log);
+            flag = true;
+        } catch (JSONException ignored) {
 
+        }
+        return flag;
+    }
 
     @Override
     public void initialize() {
@@ -29,7 +37,7 @@ public class ETLInterceptor implements Interceptor {
         byte[] body = event.getBody();
         String log = new String(body, StandardCharsets.UTF_8);
 
-        boolean flag = JSON.isjson(log);
+        boolean flag = isjson(log);
 
         return flag ? event : null;
     }
@@ -51,7 +59,8 @@ public class ETLInterceptor implements Interceptor {
     public void close() {
 
     }
-    public static class Builder implements Interceptor.Builder{
+
+    public static class Builder implements Interceptor.Builder {
 
         @Override
         public Interceptor build() {

@@ -5,21 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f88a3945-832d-4e6d-a5c6-c401dc150dc7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/ETLInterceptor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/JSON.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/FlowBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/FlowBean.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/FlowMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/FlowMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/FlowReduce.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/FlowReduce.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/Flowjob.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/Flowjob.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/HdfsClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/HdfsClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/Map.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/Map.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/MapReduce.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/MapReduce.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/Reduce.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/Reduce.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/org/example/AppTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/org/example/test1Test.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/ETLInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/ETLInterceptor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,6 +168,8 @@
       <workItem from="1659446239818" duration="3007000" />
       <workItem from="1659449281748" duration="2341000" />
       <workItem from="1659514080174" duration="26000" />
+      <workItem from="1659536309726" duration="53000" />
+      <workItem from="1659605064470" duration="3119000" />
     </task>
     <task id="LOCAL-00001" summary="kisskiss">
       <created>1657879203507</created>
@@ -266,7 +255,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659345541060</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="kisskiss">
+      <created>1659536338010</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1659536338010</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
