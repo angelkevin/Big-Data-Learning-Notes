@@ -81,6 +81,20 @@ export JAVA_HOME=/opt/softwares/jdk1.8.0_212
         <name>fs.defaultFS</name>
         <value>hdfs://centos01:9000</value> <!--name node 端口以及Hadoop地址-->
     </property>
+    <property>        
+    <name>io.compression.codecs</name>        
+    <value>org.apache.hadoop.io.compress.GzipCodec,
+        org.apache.hadoop.io.compress.DefaultCodec,            
+        org.apache.hadoop.io.compress.BZip2Codec,            
+        org.apache.hadoop.io.compress.SnappyCodec,            
+        com.hadoop.compression.lzo.LzoCodec,            
+        com.hadoop.compression.lzo.LzopCodec        
+    </value>    
+</property>     
+<property>        
+    <name>io.compression.codec.lzo.class</name>        
+    <value>com.hadoop.compression.lzo.LzoCodec</value>    
+</property>
 </configuration>
 ```
 
