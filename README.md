@@ -6,7 +6,7 @@
 如果大家需要的话可以点[此链接](https://pan.baidu.com/s/1h70_3xJaMJtiggNM_X-UdQ?pwd=zkw6)下载哦！欢迎白嫖，如果可以给我点一个⭐start⭐的话我也感激不尽😊。
 
 
-此虚拟机基于VMware以及centos7构建完成，包含hadoop,kafka,flume,hive,mysql,sqoop,zookeepr,jdk，hive on spark，各个版本都是兼容的，本人亲测有效。
+此虚拟机基于VMware以及centos7构建完成，包含hadoop,kafka,flume,hive,mysql,sqoop,zookeepr,jdk,hive on spark，各个版本都是兼容的，本人亲测有效。
 
 ---
 
@@ -53,10 +53,9 @@ DNS：192.168.170.2
 ```
 ```shell
 # 环境变量
-/etc/profile文件内容为
 export HADOOP_HOME=/opt/softwares/hadoop-3.1.3
-export PATH=$PATH:$HADOOP_HOME/bin 
-export PATH=$PATH:$HADOOP_HOME/sbin 
+export PATH=$PATH:$HADOOP_HOME/bin
+export PATH=$PATH:$HADOOP_HOME/sbin
 export JAVA_HOME=/opt/softwares/jdk1.8.0_212
 export PATH=$PATH:$JAVA_HOME/bin
 export ZOOKEEPER_HOME=/opt/softwares/apache-zookeeper-3.5.7-bin
@@ -69,6 +68,8 @@ export SQOOP_HOME=/opt/softwares/sqoop-1.4.6.bin__hadoop-2.0.4-alpha
 export PATH=$PATH:$SQOOP_HOME/bin
 export KAFKA_HOME=/opt/softwares/kafka_2.11-2.4.1
 export PATH=$PATH:$KAFKA_HOME/bin
+export SPARK_HOME=/opt/softwares/spark-3.0.0-bin-hadoop3.2
+export PATH=$PATH:$SPARK_HOME/bin
 ```
 如果有需要帮忙的地方可以给我发邮件📧<2215408861@qq.com>
 
