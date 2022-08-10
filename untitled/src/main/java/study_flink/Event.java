@@ -7,11 +7,14 @@ import java.sql.Timestamp;
 //所有的属性都是可以序列化的和公有的
 
 
-
 public class Event {
     public String user;
     public String url;
     public long timestamp;
+
+    // 无参构造类
+    public Event() {
+    }
 
     public Event(String user, String url, long timestamp) {
         this.user = user;

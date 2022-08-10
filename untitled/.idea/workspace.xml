@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f88a3945-832d-4e6d-a5c6-c401dc150dc7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/study_flink/MySourcetest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/study_flink/MySource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/study_flink/MySource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/study_flink/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/study_flink/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/study_flink/FLink/BatchWordCount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/study_flink/WordCount/BatchWordCount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/study_flink/FLink/StreamWordCounts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/study_flink/WordCount/StreamWordCounts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/study_flink/FLink/StreamWordcount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/study_flink/WordCount/StreamWordcount.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,7 +185,7 @@
       <workItem from="1660028840752" duration="2141000" />
       <workItem from="1660095975273" duration="8926000" />
       <workItem from="1660115690996" duration="3067000" />
-      <workItem from="1660135657193" duration="2475000" />
+      <workItem from="1660135657193" duration="3203000" />
     </task>
     <task id="LOCAL-00001" summary="kisskiss">
       <created>1657879203507</created>
@@ -326,7 +327,21 @@
       <option name="project" value="LOCAL" />
       <updated>1660136425838</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Changes">
+      <created>1660138274980</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1660138274980</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Changes">
+      <created>1660138418116</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1660138418116</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
