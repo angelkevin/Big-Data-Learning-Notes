@@ -1,4 +1,4 @@
-package FLink;
+package study_flink.FLink;
 
 import org.apache.flink.api.common.typeinfo.Types;
 import org.apache.flink.api.java.ExecutionEnvironment;

@@ -1,23 +1,19 @@
-package FLink;
+package study_flink.FLink;
 
 import org.apache.flink.api.common.typeinfo.Types;
 import org.apache.flink.api.java.tuple.Tuple2;
-import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.util.Collector;
 
-public class StreamWordCounts {
+
+public class StreamWordcount {
+
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-//        ParameterTool parameterTool = ParameterTool.fromArgs(args);
-//        String s = parameterTool.get("host");
-//        int port = parameterTool.getInt("port");
-
-
-        DataStreamSource<String> line = env.socketTextStream("centos01", 7777);
+        DataStreamSource<String> line = env.readTextFile("input/1.txt");
         SingleOutputStreamOperator<Tuple2<String, Long>> res = line.flatMap((String data, Collector<Tuple2<String, Long>> out) -> {
             String[] words = data.split(",");
             for (String word : words
@@ -33,7 +29,6 @@ public class StreamWordCounts {
         sum.print();
 
         env.execute();
+
     }
-
-
 }
