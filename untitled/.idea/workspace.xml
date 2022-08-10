@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f88a3945-832d-4e6d-a5c6-c401dc150dc7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/study_flink/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/study_flink/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/study_flink/FLink/BatchWordCount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/study_flink/WordCount/BatchWordCount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/study_flink/FLink/StreamWordCounts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/study_flink/WordCount/StreamWordCounts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/study_flink/FLink/StreamWordcount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/study_flink/WordCount/StreamWordcount.java" afterDir="false" />
-    </list>
+    <list default="true" id="f88a3945-832d-4e6d-a5c6-c401dc150dc7" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -185,7 +179,7 @@
       <workItem from="1660028840752" duration="2141000" />
       <workItem from="1660095975273" duration="8926000" />
       <workItem from="1660115690996" duration="3067000" />
-      <workItem from="1660135657193" duration="3203000" />
+      <workItem from="1660135657193" duration="3507000" />
     </task>
     <task id="LOCAL-00001" summary="kisskiss">
       <created>1657879203507</created>
@@ -341,7 +335,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660138418116</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Changes">
+      <created>1660139174879</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1660139174879</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
