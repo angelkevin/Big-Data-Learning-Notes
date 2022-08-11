@@ -1,4 +1,4 @@
-package study_flink;
+package study_flink.Transform;
 
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.common.typeinfo.TypeHint;
@@ -7,6 +7,7 @@ import org.apache.flink.api.common.typeinfo.Types;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.util.Collector;
+import study_flink.Event;
 
 public class TransformFlatMapTest {
     public static void main(String[] args) throws Exception {

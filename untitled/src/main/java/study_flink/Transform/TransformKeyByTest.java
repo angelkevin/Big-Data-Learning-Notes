@@ -1,9 +1,10 @@
-package study_flink;
+package study_flink.Transform;
 
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import study_flink.Event;
 
 public class TransformKeyByTest {
     public static void main(String[] args) throws Exception {
