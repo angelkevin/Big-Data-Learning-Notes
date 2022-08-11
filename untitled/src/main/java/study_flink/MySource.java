@@ -23,6 +23,7 @@ public class MySource implements SourceFunction<Event> {
             Thread.sleep(5000);
         }
     }
+
     @Override
     public void cancel() {
         running = false;
