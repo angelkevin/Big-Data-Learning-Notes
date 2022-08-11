@@ -1,6 +1,9 @@
 [![OSCS Status](https://www.oscs1024.com/platform/badge/angelkevin/java.svg?size=small)](https://www.oscs1024.com/project/angelkevin/java?ref=badge_small)
-
-
+![](https://img.shields.io/badge/hadoop-blue.svg)
+![](https://img.shields.io/badge/flume-blue.svg)
+![](https://img.shields.io/badge/kafka-blue.svg)
+![](https://img.shields.io/badge/hive_on_spark-blue.svg)
+![](https://img.shields.io/badge/flink-blue.svg)
 ---
 
 # 大数据开发环境介绍
