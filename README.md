@@ -1,3 +1,6 @@
+[![OSCS Status](https://www.oscs1024.com/platform/badge/angelkevin/java.svg?size=small)](https://www.oscs1024.com/project/angelkevin/java?ref=badge_small)
+
+
 ---
 
 # 大数据开发环境介绍
