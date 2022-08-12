@@ -1,6 +1,7 @@
-package study_flink;
+package study_flink.Source;
 
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
+import study_flink.Source.Event;
 
 import java.util.Calendar;
 import java.util.Random;

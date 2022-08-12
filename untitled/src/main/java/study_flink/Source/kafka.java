@@ -1,4 +1,4 @@
-package study_flink;
+package study_flink.Source;
 
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
