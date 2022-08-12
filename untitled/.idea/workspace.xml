@@ -86,7 +86,20 @@
       <recent name="org.example" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TransformPartitionTest">
+  <component name="RunManager" selected="Application.Eventtest">
+    <configuration name="Eventtest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="study_flink.Source.Eventtest" />
+      <module name="Hadoop" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="study_flink.Source.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TransformPartitionTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="study_flink.Transform.TransformPartitionTest" />
       <module name="Hadoop" />
@@ -102,19 +115,6 @@
     </configuration>
     <configuration name="TransformRichFunctionTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="study_flink.Transform.TransformRichFunctionTest" />
-      <module name="Hadoop" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="study_flink.Transform.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="study_flink.Transform.TransformFilterTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="study_flink.Transform.TransformFilterTest" />
       <module name="Hadoop" />
       <extension name="coverage">
         <pattern>
@@ -154,11 +154,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Eventtest" />
         <item itemvalue="Application.TransformPartitionTest" />
         <item itemvalue="Application.TransformRichFunctionTest" />
         <item itemvalue="Application.study_flink.Transform.TransformReduceTest" />
         <item itemvalue="Application.study_flink.Transform.TransformKeyByTest" />
-        <item itemvalue="Application.study_flink.Transform.TransformFilterTest" />
       </list>
     </recent_temporary>
   </component>

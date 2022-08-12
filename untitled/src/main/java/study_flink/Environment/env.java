@@ -1,4 +1,4 @@
-package study_flink.Source;
+package study_flink.Environment;
 
 import org.apache.flink.api.common.RuntimeExecutionMode;
 import org.apache.flink.streaming.api.environment.LocalStreamEnvironment;
