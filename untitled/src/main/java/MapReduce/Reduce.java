@@ -1,4 +1,4 @@
-package org.example;
+package MapReduce;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
