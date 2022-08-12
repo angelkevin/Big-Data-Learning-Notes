@@ -5,17 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f88a3945-832d-4e6d-a5c6-c401dc150dc7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/study_flink/Transform/WaterMark.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/ETLInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/KafkaInterceptor/ETLInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/FlowBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MapReduce/FlowBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/FlowMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MapReduce/FlowMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/FlowReduce.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MapReduce/FlowReduce.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Flowjob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MapReduce/Flowjob.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/HdfsClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MapReduce/HdfsClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/JSON.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MapReduce/JSON.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MapReduce/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MapReduce.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MapReduce/MapReduce.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Reduce.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MapReduce/Reduce.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/study_flink/Sink/SinkToFileTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/study_flink/Sink/SinkToFileTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/study_flink/Sink/SinkToKafkaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/study_flink/Sink/SinkToKafkaTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +184,7 @@
       <workItem from="1660219966833" duration="4722000" />
       <workItem from="1660229927626" duration="151000" />
       <workItem from="1660286145213" duration="8480000" />
-      <workItem from="1660307945706" duration="348000" />
+      <workItem from="1660307945706" duration="4118000" />
     </task>
     <task id="LOCAL-00001" summary="kisskiss">
       <created>1657879203507</created>
@@ -438,7 +431,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660294752569</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Changes">
+      <created>1660308308444</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1660308308444</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

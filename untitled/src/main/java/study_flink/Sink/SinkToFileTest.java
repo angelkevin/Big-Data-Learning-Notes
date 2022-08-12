@@ -21,7 +21,8 @@ public class SinkToFileTest {
                 new Event("zkw", "pornhub", 100000L));
 
         //写入到文件
-        StreamingFileSink<String> stringDefaultRowFormatBuilder = StreamingFileSink.<String>forRowFormat(new Path("./output"), new SimpleStringEncoder<>("UTF-8")).withRollingPolicy(
+        StreamingFileSink<String> stringDefaultRowFormatBuilder = StreamingFileSink.<String>forRowFormat(new Path("./output"),
+                new SimpleStringEncoder<>("UTF-8")).withRollingPolicy(
                 DefaultRollingPolicy
                         .builder()
                         //时间限制

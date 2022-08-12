@@ -16,7 +16,6 @@ public class SinkToKafkaTest {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment executionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment();
         executionEnvironment.setParallelism(1);
-
         Properties properties = new Properties();
         properties.setProperty("bootstrap.servers", "centos01:9092");
         DataStreamSource<String> kafkadata = executionEnvironment.addSource(new FlinkKafkaConsumer<String>("test", new SimpleStringSchema(), properties));
