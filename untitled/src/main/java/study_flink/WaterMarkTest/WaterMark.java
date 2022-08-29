@@ -37,5 +37,16 @@ public class WaterMark {
                     }
                 })
         );
+        eventDataStreamSource.assignTimestampsAndWatermarks(new WatermarkStrategy<Event>() {
+            @Override
+            public WatermarkGenerator<Event> createWatermarkGenerator(WatermarkGeneratorSupplier.Context context) {
+                return null;
+            }
+
+            @Override
+            public TimestampAssigner<Event> createTimestampAssigner(TimestampAssignerSupplier.Context context) {
+                return WatermarkStrategy.super.createTimestampAssigner(context);
+            }
+        });
     }
 }
