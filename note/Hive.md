@@ -66,3 +66,12 @@ clustered by(id) sorte into 4 buckets
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' ;
 ```
 
+# DDl
+
+```sql
+alter table test rename to test8; -- 重命名表，新表的名字不能存在
+alter table table_name change column id stu_id int; -- 重命名列并转化类型
+alter table table_name add colums (name string); -- 添加列
+alter table table_name replace colums (name string); -- 替换列，全部替换
+```
+
