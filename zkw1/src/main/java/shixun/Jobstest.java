@@ -163,12 +163,12 @@ public class Jobstest {
         dbUtil.getConn();
         Jobstest jobstest = new Jobstest();
         ArrayList columnName = dbUtil.columnName();
-        String sql = "select distinct * from jobs";
+        String sql = "select distinct * from tbjob_base";
         ArrayList<ArrayList> queryall = dbUtil.queryall(sql);
         ArrayList<ArrayList> arrayLists = new ArrayList<>();
         for (ArrayList arrayList : queryall) {
             ArrayList<String> objects = new ArrayList<>();
-            jobs.setF_id((String) arrayList.get(0));
+            jobs.setF_id(String.valueOf( arrayList.get(0)));
             jobs.setF_jobname(jobstest.job_name((String) arrayList.get(1)));
             jobs.setF_degree(jobstest.degree((String) arrayList.get(3)));
             jobs.setF_salary(jobstest.ave_f_salary((String) arrayList.get(4)));
@@ -179,12 +179,11 @@ public class Jobstest {
             jobs.setF_scale((String) arrayList.get(8));
             jobs.setF_city((String) arrayList.get(9));
             jobs.setF_website(jobstest.web((String) arrayList.get(10)));
-            jobs.setF_updatetime(jobstest.update((String) arrayList.get(11), (String) arrayList.get(12)));
+            jobs.setF_updatetime((String) arrayList.get(12));
             jobs.setF_collecttime((String) arrayList.get(12));
             jobs.setF_location((String) arrayList.get(13));
             jobs.setF_lng((String) arrayList.get(14));
             jobs.setF_lat((String) arrayList.get(15));
-            jobs.setF_official((String) arrayList.get(16));
             jobs.setF_logo((String) arrayList.get(17));
 
             objects.add(jobs.getF_id());
@@ -203,7 +202,6 @@ public class Jobstest {
             objects.add(jobs.getF_location());
             objects.add(jobs.getF_lng());
             objects.add(jobs.getF_lat());
-            objects.add(jobs.getF_official());
             objects.add(jobs.getF_logo());
 
             arrayLists.add(objects);

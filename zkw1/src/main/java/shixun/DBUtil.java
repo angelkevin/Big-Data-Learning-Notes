@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class DBUtil {
 
-    private String url = "jdbc:mysql://192.168.170.133:3306/myemployees?useUnicode=true&characterEncoding=utf8";
+    private String url = "jdbc:mysql://192.168.170.133:3306/salarydb?useUnicode=true&characterEncoding=utf8";
     private String user = "root";
     private String password = "123456";
 
@@ -147,7 +147,7 @@ public class DBUtil {
     }
 
     public ArrayList<String> columnName() throws SQLException {
-        String sql = "SELECT * from jobs";
+        String sql = "SELECT * from  tbjob_base";
         preparedStatement = connection.prepareStatement(sql);
         resultSet = preparedStatement.executeQuery();
         ResultSetMetaData metaData = resultSet.getMetaData();

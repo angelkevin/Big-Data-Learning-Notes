@@ -75,3 +75,16 @@ alter table table_name add colums (name string); -- 添加列
 alter table table_name replace colums (name string); -- 替换列，全部替换
 ```
 
+# DML
+
+ ```sql
+ load data [local] input '数据的path' [overwrite] into table student [partition=...]
+ -- load data 表示加载数据
+ -- local 表示从本地加载，否则从HDFS加载
+ -- inpath 表示加载路径
+ -- overwrite 表示覆盖表中的已知数据，否则表示追加
+ -- into table 表示加载到那张表
+ -- student 表示表名具体的
+ -- partition 表示上传到指定分区
+ ```
+
