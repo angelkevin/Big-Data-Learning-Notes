@@ -5,19 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f88a3945-832d-4e6d-a5c6-c401dc150dc7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../zkw1/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Demo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Demo1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../zkw1/src/main/java/GGGG.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Student.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../zkw1/src/main/java/StudentTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../zkw1/src/main/java/pic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../zkw1/src/main/java/read.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution704.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../note/Hive.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Hive.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/java/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/src/main/java/test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/target/classes/test.class" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/target/classes/test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution27.java" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution27.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,23 +38,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit3",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3": "junit.framework.TestCase",
-    "last_directory_selection": "D:/java/untitled/src/test/java",
-    "last_opened_file_path": "D:/java/zkw1",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.38965517",
-    "settings.editor.selected.configurable": "copyright"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit3&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3&quot;: &quot;junit.framework.TestCase&quot;,
+    &quot;last_directory_selection&quot;: &quot;D:/java/untitled/src/test/java&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/java/zkw1&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.38965517&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;copyright&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="junit.framework.TestCase" />
@@ -204,6 +195,9 @@
       <workItem from="1661745959227" duration="34000" />
       <workItem from="1661863712052" duration="837000" />
       <workItem from="1662001868114" duration="9000" />
+      <workItem from="1663248248494" duration="239000" />
+      <workItem from="1663328650784" duration="12000" />
+      <workItem from="1663330740617" duration="56000" />
     </task>
     <task id="LOCAL-00001" summary="kisskiss">
       <created>1657879203507</created>

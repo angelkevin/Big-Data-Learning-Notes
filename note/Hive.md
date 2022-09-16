@@ -77,8 +77,10 @@ alter table table_name replace colums (name string); -- 替换列，全部替换
 
 # DML
 
- ```sql
- load data [local] input '数据的path' [overwrite] into table student [partition=...]
+## 数据导入
+
+```sql
+ load data [local] input '数据的path' [overwrite] into table student [partition=...];
  -- load data 表示加载数据
  -- local 表示从本地加载，否则从HDFS加载
  -- inpath 表示加载路径
@@ -86,5 +88,90 @@ alter table table_name replace colums (name string); -- 替换列，全部替换
  -- into table 表示加载到那张表
  -- student 表示表名具体的
  -- partition 表示上传到指定分区
- ```
+ 
+ insert into table student select * from student_1;
+ -- 边查询边插入，查询导入
+ 
+ insert overwrite table student select * from student_1;
+ -- 查询导入，覆盖写入
+ 
+ create table student3 as select id,name from student;
+ -- 根据查询结果创建表
+ 
+ create table student5(id string,name string) row format delimited fields terminated by '\t' location '/student5';
+ -- 根据location创建表加载数据 一般使用外部表
+ 
+ import table student2 from '/user/hive/warehouse/export/student';
+ -- 先用export导出后，再将数据导入
+ 
+```
+
+## 数据导出
+
+```sql
+insert overwrite local directory '/opt/student' select * from student row format delimited files terminated by ',';
+-- insert 导出文件 并且用逗号分割 不用local就是导入到hdfs路径，local是导入到本地
+ 
+dfs -get /user/hive/student.txt /opt/student3.txt
+-- Hadoop命令导出到本地
+
+hive -e 'select * from default.student;' >> student1.txt
+-- 使用hive的shell命令
+
+export table student2 to '/user/hive/warehouse/export/student';
+-- 导出到hdfs路径
+
+truncate table student;
+-- 清楚表的数据，只删除管理表，不删除外部表中的数据
+```
+
+## 数据查询
+
+```sql
+select [all|distinct] from table;
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
