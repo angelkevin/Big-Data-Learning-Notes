@@ -129,6 +129,39 @@ truncate table student;
 
 ```sql
 select [all|distinct] from table;
+-- 查询操作
+
+as 
+-- 给列起别名
+
+count -- 求总行数
+max -- 求最大值
+min -- 求最小值
+sum -- 求总和
+avg -- 求平均
+
+select * from stu where -- where后跟条件
+
+select e.ename,e.deno,d.dname from emp e jion dept d on e.deptno=d.deptno;
+-- 内连接，只有进行连接两个表中都存在与连接条件相匹配的数据才会被保留下来
+
+select e.empno,e.empname,d.deptno,d.deptname from emp e left join deop on d no e.deptno = d.deptno
+-- 左外连接，以左表为主，右边没有交集的数据为Null
+
+select e.empno,e.empname,d.deptno,d.deptname from emp e right join deop on d no e.deptno = d.deptno
+-- 右外连接，以右表为主，左边没有交集的数据为Null
+
+
+select e.empno,e.empname,d.deptno,d.deptname from emp e full join deop on d no e.deptno = d.deptno
+-- 全连接 outer
+
+select * from stu ，student；
+-- 笛卡尔积，表中所有行相互连接，连接条件无效
+
+select * from stu order by id [desc]
+-- 默认升序，desc降序
+
+
 ```
 
 

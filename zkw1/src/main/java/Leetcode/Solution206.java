@@ -5,14 +5,14 @@ public class Solution206 {
 
         ListNode pre = null;
         ListNode cur = head;
-
-        while (head!=null){
-            ListNode tmp  = cur.next;
+        while (cur!=null){
+            ListNode tmp = cur.next;
             cur.next = pre;
             pre = cur;
-            cur= tmp;
+            cur = tmp;
         }
-        return pre;
+        return cur;
+
     }
 
 
