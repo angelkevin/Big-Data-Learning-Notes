@@ -5,15 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f88a3945-832d-4e6d-a5c6-c401dc150dc7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution704.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Hadoop/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Hadoop/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Hadoop/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Hadoop/src/main/java/org/example/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Hadoop/src/test/java/org/example/AppTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/MapReduce/test.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution18.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution344.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution454.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution541.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../note/Hive.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Hive.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution27.java" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution27.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core-site.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hdfs-site.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MapReduce/HdfsClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MapReduce/HdfsClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MapReduce/HdfsClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/MapReduce/HdfsClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution15.java" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution15.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution2.java" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/java/zz.java" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/src/main/java/zz.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -30,6 +51,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
   <component name="ProjectId" id="2ByPk7B1h2WIWrdOqwnKT9TJbfr" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -38,26 +62,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit3&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3&quot;: &quot;junit.framework.TestCase&quot;,
-    &quot;last_directory_selection&quot;: &quot;D:/java/untitled/src/test/java&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/java/zkw1&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.38965517&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;copyright&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit3",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3": "junit.framework.TestCase",
+    "last_directory_selection": "D:/java/untitled/src/test/java",
+    "last_opened_file_path": "D:/java/Hadoop",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.38965517",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="junit.framework.TestCase" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\java\untitled\src" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="org.example" />
@@ -66,13 +93,13 @@
       <recent name="org.example" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TransformFlatMapTest">
-    <configuration name="Eventtest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="study_flink.Source.Eventtest" />
+  <component name="RunManager" selected="Application.test">
+    <configuration name="HdfsClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MapReduce.HdfsClient" />
       <module name="Hadoop" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="study_flink.Source.*" />
+          <option name="PATTERN" value="MapReduce.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -106,12 +133,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="study_flink.Transform.TransformPartitionTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="study_flink.Transform.TransformPartitionTest" />
+    <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MapReduce.test" />
       <module name="Hadoop" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="study_flink.WaterMarkTest.*" />
+          <option name="PATTERN" value="MapReduce.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -119,26 +146,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="study_flink.Transform.TransformRichFunctionTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="study_flink.Transform.TransformRichFunctionTest" />
+    <configuration name="HdfsClient" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Hadoop" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="study_flink.WaterMarkTest.*" />
+          <option name="PATTERN" value="MapReduce.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="MapReduce" />
+      <option name="MAIN_CLASS_NAME" value="MapReduce.HdfsClient" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.test" />
+        <item itemvalue="JUnit.HdfsClient" />
+        <item itemvalue="Application.HdfsClient" />
         <item itemvalue="Application.TransformFlatMapTest" />
         <item itemvalue="Application.study_flink.Sink.SinkToFileTest" />
-        <item itemvalue="Application.Eventtest" />
-        <item itemvalue="Application.study_flink.Transform.TransformPartitionTest" />
-        <item itemvalue="Application.study_flink.Transform.TransformRichFunctionTest" />
       </list>
     </recent_temporary>
   </component>
@@ -198,6 +227,12 @@
       <workItem from="1663248248494" duration="239000" />
       <workItem from="1663328650784" duration="12000" />
       <workItem from="1663330740617" duration="56000" />
+      <workItem from="1663917035437" duration="1062000" />
+      <workItem from="1663918120302" duration="941000" />
+      <workItem from="1663919085511" duration="685000" />
+      <workItem from="1663919789770" duration="593000" />
+      <workItem from="1663920399163" duration="863000" />
+      <workItem from="1663921573790" duration="23000" />
     </task>
     <task id="LOCAL-00001" summary="kisskiss">
       <created>1657879203507</created>
@@ -489,6 +524,10 @@
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.ArrayIndexOutOfBoundsException" package="java.lang" />
           <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.ClassNotFoundException" package="java.lang" />
+          <option name="timeStamp" value="2" />
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>

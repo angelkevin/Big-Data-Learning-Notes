@@ -14,7 +14,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 public class HdfsClient {
-    private FileSystem fs;
+    public FileSystem fs;
 
     @Before
     public void initHdfsClent() throws URISyntaxException, IOException, InterruptedException {
@@ -32,7 +32,8 @@ public class HdfsClient {
     @Test
     public void mkdir() throws IOException {
 
-        fs.mkdirs(new Path("hdfs://192.168.170.133:9000/test"));
+        boolean mkdirs = fs.mkdirs(new Path("hdfs://192.168.170.133:9000/zzz"));
+        System.out.println(mkdirs);
     }
 
     public void fileDetail() throws IOException {

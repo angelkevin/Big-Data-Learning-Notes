@@ -49,6 +49,17 @@ drop table test.emp;		-- 删除表test.emp，只删除元数据，不会删除�
    INPUTFORMAT 'com.hadoop.mapred.DeprecatedLzoTextInputFormat'
    OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
  LOCATION '/warehouse/gmall/ods/ods_activity_info/';
+ 
+ load data local inpath '/1.txt' into table dept partition(day = '22') -- 加载数据到分区
+ show partition [table] -- 展示分区
+ alter table [table_name] drop partition(day='2022') -- 删除分区
+ desc formatted [table_name] -- 查看分区表的结构
+ msck repair table [table name] -- 批量修复分区
+ alter table [table name] add partition(day='2021') --  添加分区
+ 
+ hive.exec.dynamic.partition=ture
+ -- 动态分区按照最后一个作为分区
+ 
  ```
 
 # 分桶表
@@ -64,6 +75,13 @@ create table test_bucket_sorted (
 )
 clustered by(id) sorte into 4 buckets
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' ;
+
+load data local inpath '/1.txt' into table stu;
+-- 分桶规则是用哈希
+-- reducer 最好设置为-1,让其自己决定，或者设置大于等于桶的个数
+
+select * from table_name table sample(bucket 1 out of 4 on id)
+-- 分桶表，抽样查询
 ```
 
 # DDl
@@ -142,6 +160,11 @@ avg -- 求平均
 
 select * from stu where -- where后跟条件
 
+```
+
+### join连接
+
+```sql
 select e.ename,e.deno,d.dname from emp e jion dept d on e.deptno=d.deptno;
 -- 内连接，只有进行连接两个表中都存在与连接条件相匹配的数据才会被保留下来
 
@@ -151,16 +174,28 @@ select e.empno,e.empname,d.deptno,d.deptname from emp e left join deop on d no e
 select e.empno,e.empname,d.deptno,d.deptname from emp e right join deop on d no e.deptno = d.deptno
 -- 右外连接，以右表为主，左边没有交集的数据为Null
 
-
 select e.empno,e.empname,d.deptno,d.deptname from emp e full join deop on d no e.deptno = d.deptno
 -- 全连接 outer
 
 select * from stu ，student；
 -- 笛卡尔积，表中所有行相互连接，连接条件无效
+```
 
+### 排序
+
+```sql
 select * from stu order by id [desc]
 -- 默认升序，desc降序
 
+select * from emp distribut by deptno sort by;
+-- 分区排序，分区自定义分区，记得设置reduce，
+
+select * from emp  cluster by deptno;
+-- 结合了distribut 和 sort，只能升序，
+
+-- order by全局排序，只有一个reducer（ASC 升序，RESC 降序）效率低
+-- sort by 每个reducer里面内部排序，和distribut by 一起使用
+-- cluster by 当sort by 和distribut by 字段相同的时候并且是升序，使用clust by，
 
 ```
 
