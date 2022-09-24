@@ -199,6 +199,46 @@ select * from emp  cluster by deptno;
 
 ```
 
+# Hive-DML函数
+
+```sql
+nvl([value],[value]) -- 给Null复制,可以写死代替，也可以用字段代替
+
+case [table_name] when [conditions] then [value] else [value] end -- case 后跟表名，when后跟条件，then 后跟条件成立的值，else 后跟条件不成立的值   <=> if(conditions,value,value)
+
+concat([value],-,[value]...) -- 拼接列，或者值
+concat_ws([regex ],[value],[value]...) -- 提前写分隔符，除了拼接字符串，也可以拼接数组，map
+collect_set -- 只接受基本数据类型，他的主要作用是将某字段的值进行去重汇总，产生Array类型字段
+
+explode([col]) -- 将一切复杂的map和array拆分成多行 
+lateral VIEW explode(split(str,[regex])) [table_name] AS name; -- 加侧写表，和原来的表产生连接
+
+-- 窗口函数，后面只能跟over
+over(partition by 列名 order by 列名 rows between 开始位置 and 结束位置)
+select name , count(*) over() from stu; -- 每一条数据后都跟着结果，over
+select name,orderdate,sum() over(partition by name) from bussness; -- 开窗，用name进行分区 over( row between value and value) 
+    -- n preceding 往前n行 
+    -- n followng 往后n行
+    -- unbounded  preceding 表示从前面的起点 
+    -- unbounded followng 表示到后面的终点
+select name，orderdate,lag(orderdata,1) over(partition by name order by orderdate) from bussiness;
+-- 展现前一行的数据
+-- LAG(col,n,default_val):往前第n行数据 
+-- LEAD(col,n,default_val)：往后第n行数据
+select name,orderdate,cost,ntile(5) over(order by orderdate) groupid from bussiness;
+-- 分组，分为五个组
+-- rank() 排序相同会重复，总数不会变 1 1 3
+-- dens_rank() 排序相同时会重复，总数会减少 1 1 2
+-- row_number() 会顺序计算 1 2 3 
+
+--
+
+
+
+```
+
+
+
 
 
 
