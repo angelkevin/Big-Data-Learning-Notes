@@ -14,7 +14,7 @@ public class BatchWordCount {
         // 1.创建环境
         ExecutionEnvironment environment = ExecutionEnvironment.getExecutionEnvironment();
         // 2.从文件里读取数据
-        DataSource<String> dataSource = environment.readTextFile("input//1.txt");
+        DataSource<String> dataSource = environment.readTextFile("D:\\java\\Fink\\src\\main\\input\\1.txt");
         // 3.将每行数据进行分词，然后转换成二元组类型
         FlatMapOperator<String, Tuple2<String, Long>> result = dataSource.flatMap((String line, Collector<Tuple2<String, Long>> out) -> {
             String[] words = line.split(",");

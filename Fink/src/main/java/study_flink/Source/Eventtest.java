@@ -16,21 +16,21 @@ public class Eventtest {
         StreamExecutionEnvironment executionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment();
         executionEnvironment.setParallelism(1);
         ArrayList<Event> events = new ArrayList<Event>();
-//        events.add(new Event("asd", "asd", 456L));
-//        从集合中读取数据
-//        DataStreamSource<Event> eventDataStreamSource = executionEnvironment.fromCollection(events);
-//
-//        eventDataStreamSource.print();
-        DataStreamSource<String> line = executionEnvironment.readTextFile("input/user");
-        SingleOutputStreamOperator<Tuple1<String>> res = line.flatMap((String data, Collector<Tuple1<String>> out) ->
-        {
-            String[] strings = data.split(",");
-            Event event = new Event(strings[0], strings[1], Long.parseLong(strings[2]));
-            String rr = event.toString();
-            out.collect(Tuple1.of(rr));
-        }).returns(Types.TUPLE(Types.STRING));
+        events.add(new Event("asd", "asd", 456L));
+        //从集合中读取数据
+        DataStreamSource<Event> eventDataStreamSource = executionEnvironment.fromCollection(events);
 
-        res.print();
+        eventDataStreamSource.print();
+//        DataStreamSource<String> line = executionEnvironment.readTextFile("input/user");
+//        SingleOutputStreamOperator<Tuple1<String>> res = line.flatMap((String data, Collector<Tuple1<String>> out) ->
+//        {
+//            String[] strings = data.split(",");
+//            Event event = new Event(strings[0], strings[1], Long.parseLong(strings[2]));
+//            String rr = event.toString();
+//            out.collect(Tuple1.of(rr));
+//        }).returns(Types.TUPLE(Types.STRING));
+//
+//        res.print();
         executionEnvironment.execute();
     }
 }

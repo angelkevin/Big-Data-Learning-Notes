@@ -9,8 +9,6 @@ flink run -m centos01:8081 -c FLink.StreamWordCounts -p 2 ./******.jar
 flink cancel JobID
 ```
 
-
-
 ```shell
 #yarn模式
 yarn-session.sh  -nm test
@@ -26,6 +24,24 @@ yarn-session.sh  -nm test
 ## 支持的数据类型
 
 >![image-20220810214154408](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20220810214154408.png)
+
+一个fink程序，其实就是对DataStream的各种转换。具体来说，代码基本上由以下几种部分构成：
+
+- 获取执行环境 execution environment
+- 读取数据源 source
+- 定义数据转换操作 transformtions
+- 定义输出位置 sink
+- 触发程序执行 execute
+
+
+
+
+
+
+
+
+
+
 
 # 窗口
 

@@ -13,7 +13,7 @@ public class StreamWordcount {
 
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-        DataStreamSource<String> line = env.readTextFile("input/1.txt");
+        DataStreamSource<String> line = env.readTextFile("D:\\java\\Fink\\src\\main\\input\\1.txt");
         SingleOutputStreamOperator<Tuple2<String, Long>> res = line.flatMap((String data, Collector<Tuple2<String, Long>> out) -> {
             String[] words = data.split(",");
             for (String word : words
