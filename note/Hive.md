@@ -230,14 +230,150 @@ select name,orderdate,cost,ntile(5) over(order by orderdate) groupid from bussin
 -- rank() 排序相同会重复，总数不会变 1 1 3
 -- dens_rank() 排序相同时会重复，总数会减少 1 1 2
 -- row_number() 会顺序计算 1 2 3 
-
 --
 
 
 
 ```
 
+>
+>
+>UDF：操作单个数据行，产生单个数据行；
+>
+>UDAF：操作多个数据行，产生一个数据行；
+>
+>UDTF：操作一个数据行，产生多个数据行一个表作为输出；
+>
+>
 
+# UDF(一进一出)
+
+>
+>
+>继承org.apache.hadoop.hive.ql.udf.generic.GenericUDTF,实现initialize, evaluate, getDisplayString三个方法。
+>
+>UDF首先会调用initialize方法，此方法返回UDTF的返回行的信息（返回个数，类型）。
+>
+>初始化完成后，会调用evaluate方法,真正的处理过程在evaluate函数中，
+>
+>
+
+```shell
+add jar [path]
+create [temporary] function fun_name as "com.hive.HiveUDF"
+temporary #临时函数
+```
+
+```java
+package com.hive;
+
+import org.apache.hadoop.hive.ql.exec.UDFArgumentException;
+import org.apache.hadoop.hive.ql.metadata.HiveException;
+import org.apache.hadoop.hive.ql.udf.generic.GenericUDF;
+import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspector;
+import org.apache.hadoop.hive.serde2.objectinspector.PrimitiveObjectInspector;
+import org.apache.hadoop.hive.serde2.objectinspector.primitive.PrimitiveObjectInspectorFactory;
+
+public class HiveUDF extends GenericUDF {
+    @Override
+    public ObjectInspector initialize(ObjectInspector[] objectInspectors) throws UDFArgumentException {
+        if(objectInspectors.length!=1){
+            throw new UDFArgumentException("参数个数不为1");
+        }
+        return PrimitiveObjectInspectorFactory.javaIntObjectInspector;
+    }
+//    初始化
+
+    @Override
+    public Object evaluate(DeferredObject[] deferredObjects) throws HiveException {
+
+        String input = deferredObjects[0].get().toString();
+
+        if (input== null){
+            return 0;
+        }
+
+        return input.length();
+    }
+//    计算
+
+    @Override
+    public String getDisplayString(String[] strings) {
+        return "";
+    }
+//    看sql的执行计划
+}
+
+```
+
+
+
+# UDTF(一进多出)
+
+>继承org.apache.hadoop.hive.ql.udf.generic.GenericUDTF,实现initialize, process, close三个方法。
+>
+>UDTF首先会调用initialize方法，此方法返回UDTF的返回行的信息（返回个数，类型）。
+>
+>初始化完成后，会调用process方法,真正的处理过程在process函数中，在process中，每一次forward()调用产生一行；如果产生多列可以将多个列的值放在一个数组中，然后将该数组传入到forward()函数。
+>
+>最后close()方法调用，对需要清理的方法进行清理。
+>
+>
+
+```java
+package com.hive;
+
+import org.apache.hadoop.hive.ql.exec.UDFArgumentException;
+import org.apache.hadoop.hive.ql.metadata.HiveException;
+import org.apache.hadoop.hive.ql.udf.generic.GenericUDTF;
+import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspector;
+import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspectorFactory;
+import org.apache.hadoop.hive.serde2.objectinspector.StructObjectInspector;
+import org.apache.hadoop.hive.serde2.objectinspector.primitive.PrimitiveObjectInspectorFactory;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * 输入 hello，world
+ * 输出 hello
+ * world
+ */
+
+public class HiveUDTF extends GenericUDTF {
+    private final ArrayList<String> output = new ArrayList<>();
+    @Override
+    public StructObjectInspector initialize(StructObjectInspector argOIs) throws UDFArgumentException {
+//        输出数据的默认列名，可以被覆盖
+        List<String> fieldNames = new ArrayList<>();
+        fieldNames.add("word");
+//        输出数据类型
+        List<ObjectInspector> fieldOIs = new ArrayList<>();
+        fieldOIs.add(PrimitiveObjectInspectorFactory.javaStringObjectInspector);
+//        最终的返回值
+        return ObjectInspectorFactory.getStandardStructObjectInspector(fieldNames, fieldOIs);
+    }
+
+    @Override
+    public void process(Object[] objects) throws HiveException {
+        String input = objects[0].toString();
+        String[] words = input.split(",");
+        for (String word : words) {
+            output.clear();
+            output.add(word);
+//            写出
+            forward(output);
+        }
+
+    }
+
+    @Override
+    public void close() throws HiveException {
+
+    }
+}
+
+```
 
 
 
