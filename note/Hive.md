@@ -379,6 +379,18 @@ public class HiveUDTF extends GenericUDTF {
 
 
 
+# MR支持的压缩编码
+
+| 压缩格式 |  算法   | 文件扩展名 | 是否可以切分 |
+| :------: | :-----: | :--------: | :----------: |
+| DEFLATE  | DEFLATE |  .deflate  |      否      |
+|   Gzip   | DEFLATE |    .gz     |      否      |
+|  bzip2   |  bzip2  |    .bz2    |      是      |
+|   LZO    |   LZO   |    .lzo    |      是      |
+|  Snappy  | Snappy  |  .snappy   |      否      |
+
+
+
 
 
 

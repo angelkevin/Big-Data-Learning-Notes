@@ -5,121 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4762357c-8f82-433f-b727-23fb97d6b519" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/core-site.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/hdfs-site.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MapReduce/HdfsClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MapReduce/Hdfsclient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MapReduce/test.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../note/Hive.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Hive.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/input/1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/input/user" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/logs/error.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/error.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/KafkaInterceptor/ETLInterceptor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/MapReduce/FlowBean.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/MapReduce/FlowMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/MapReduce/FlowReduce.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/MapReduce/Flowjob.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/MapReduce/HdfsClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/MapReduce/JSON.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/MapReduce/Map.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/MapReduce/MapReduce.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/MapReduce/Reduce.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/MapReduce/test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/study_flink/Environment/env.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/study_flink/Sink/SinkToFileTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/study_flink/Sink/SinkToKafkaTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/study_flink/Source/Event.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/study_flink/Source/Eventtest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/study_flink/Source/MySource.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/study_flink/Source/MySourcetest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/study_flink/Source/kafka.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/study_flink/Transform/TransformFilterTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/study_flink/Transform/TransformFlatMapTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/study_flink/Transform/TransformKeyByTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/study_flink/Transform/TransformMapTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/study_flink/Transform/TransformPartitionTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/study_flink/Transform/TransformReduceTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/study_flink/Transform/TransformRichFunctionTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/study_flink/WaterMarkTest/WaterMark.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/study_flink/WordCount/BatchWordCount.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/study_flink/WordCount/StreamWordCounts.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/java/study_flink/WordCount/StreamWordcount.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/src/main/resources/log4j.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/KafkaInterceptor/ETLInterceptor$Builder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/KafkaInterceptor/ETLInterceptor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/MapReduce/FlowBean.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/MapReduce/FlowMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/MapReduce/FlowReduce.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/MapReduce/Flowjob.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/MapReduce/HdfsClient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/MapReduce/JSON.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/MapReduce/Map.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/MapReduce/MapReduce.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/MapReduce/Reduce.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/MapReduce/test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/log4j.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Environment/env.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Sink/SinkToFileTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Sink/SinkToKafkaTest$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Sink/SinkToKafkaTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Source/Event.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Source/Eventtest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Source/MySource.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Source/MySourcetest$ParallelCustomSource.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Source/MySourcetest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Source/kafka.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Transform/TransformFilterTest$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Transform/TransformFilterTest$Myfilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Transform/TransformFilterTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Transform/TransformFlatMapTest$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Transform/TransformFlatMapTest$MYFlatMap.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Transform/TransformFlatMapTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Transform/TransformKeyByTest$MyKeySelector.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Transform/TransformKeyByTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Transform/TransformMapTest$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Transform/TransformMapTest$MyMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Transform/TransformMapTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Transform/TransformPartitionTest$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Transform/TransformPartitionTest$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Transform/TransformPartitionTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Transform/TransformReduceTest$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Transform/TransformReduceTest$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Transform/TransformReduceTest$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Transform/TransformReduceTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Transform/TransformRichFunctionTest$MyRichMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/Transform/TransformRichFunctionTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/WaterMarkTest/WaterMark$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/WaterMarkTest/WaterMark$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/WaterMarkTest/WaterMark$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/WaterMarkTest/WaterMark.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/WordCount/BatchWordCount.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/WordCount/StreamWordCounts.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/classes/study_flink/WordCount/StreamWordcount.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/untitled-1.0-SNAPSHOT-jar-with-dependencies.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/target/untitled-1.0-SNAPSHOT.jar" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -133,6 +28,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
   </component>
   <component name="ProjectId" id="2FA4PJyKyp79toHTx4XYruW1APH" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -148,7 +46,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/java/Hive",
+    "last_opened_file_path": "D:/java/Fink",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
@@ -259,6 +157,8 @@
       <workItem from="1663930201660" duration="14000" />
       <workItem from="1663989162288" duration="13000" />
       <workItem from="1664000996990" duration="26000" />
+      <workItem from="1664009823954" duration="101000" />
+      <workItem from="1664009949573" duration="26000" />
     </task>
     <task id="LOCAL-00001" summary="33">
       <created>1663922014085</created>
