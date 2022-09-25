@@ -33,7 +33,43 @@ yarn-session.sh  -nm test
 - 定义输出位置 sink
 - 触发程序执行 execute
 
+# Transform
 
+- 自定义map：实现MapFunction接口
+
+``` java
+public static class MyMapper implements MapFunction<Event, String> {
+        @Override
+        public String map(Event event) throws Exception {
+            return event.user;
+        }
+    }
+```
+
+- 自定义fliter：实现 FilterFunction接口
+
+```java
+ public static class Myfilter implements FilterFunction<String> {
+        @Override
+        public boolean filter(String s) throws Exception {
+            String[] split = s.split(",");
+            return split[0].equals("Zyf");
+        }
+    }
+```
+
+- 自定义flatMap：实现FlatMapFunction接口
+
+```java
+public static class MYFlatMap implements FlatMapFunction<Event,String>{
+        @Override
+        public void flatMap(Event event, Collector<String> collector) throws Exception {
+            collector.collect(event.user);
+            collector.collect(event.url);
+            collector.collect(String.valueOf(event.timestamp));
+        }
+    }
+```
 
 
 

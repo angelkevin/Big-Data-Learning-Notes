@@ -12,8 +12,8 @@ public class MySourcetest {
 
         StreamExecutionEnvironment executionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment();
         // 非并行数据
-        // DataStreamSource<Event> eventDataStreamSource = executionEnvironment.addSource(new MySource());
-        DataStreamSource<Integer> streamSource = executionEnvironment.addSource(new ParallelCustomSource()).setParallelism(2);
+         DataStreamSource<Event> streamSource = executionEnvironment.addSource(new MySource());
+//        DataStreamSource<Integer> streamSource = executionEnvironment.addSource(new ParallelCustomSource()).setParallelism(2);
         streamSource.print();
         executionEnvironment.execute();
     }
