@@ -1,10 +1,12 @@
 package study_flink.Sink;
 
 import org.apache.flink.api.common.functions.MapFunction;
+import org.apache.flink.api.common.functions.RuntimeContext;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaProducer;
 import org.apache.flink.streaming.util.serialization.KeyedSerializationSchema;
@@ -26,6 +28,7 @@ public class SinkToKafkaTest {
                 return new Event(strings[0].trim(), strings[1].trim(), Long.parseLong(strings[2])).toString();
             }
         });
+
 
         map1.addSink(new FlinkKafkaProducer<String>("centos01:9092", "test", new SimpleStringSchema()));
         executionEnvironment.execute();

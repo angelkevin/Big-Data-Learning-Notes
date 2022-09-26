@@ -42,7 +42,7 @@ public class TransformPartitionTest {
 //      rescale重缩放分区
 //        eventDataStreamSource.rescale().print().setParallelism(4);
 //      自定义分区
-        executionEnvironment.fromElements(1,2,3,4,5,6,7,8).partitionCustom(new Partitioner<Integer>() {
+        executionEnvironment.fromElements(1,2,3,4,5,6,7,8,9,10).partitionCustom(new Partitioner<Integer>() {
             @Override
             public int partition(Integer integer, int i) {
                 return integer%2;

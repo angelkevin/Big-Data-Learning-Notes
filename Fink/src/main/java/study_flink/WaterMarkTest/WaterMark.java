@@ -8,6 +8,7 @@ import study_flink.Source.Event;
 import java.time.Duration;
 
 public class WaterMark {
+
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment executionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment();
         executionEnvironment.setParallelism(1);
@@ -16,6 +17,15 @@ public class WaterMark {
                 new Event("zkw", "pornhub.com", 6666666666L),
                 new Event("zkw", "pornhub", 100000L),
                 new Event("zkw", "pornhub", 100000L));
+
+        eventDataStreamSource.assignTimestampsAndWatermarks(WatermarkStrategy.<Event>forBoundedOutOfOrderness(Duration.ZERO).withTimestampAssigner(
+                new SerializableTimestampAssigner<Event>() {
+                    @Override
+                    public long extractTimestamp(Event event, long l) {
+                        return event.timestamp;
+                    }
+                }
+        ));
         //有序流的watermark
         eventDataStreamSource.assignTimestampsAndWatermarks(WatermarkStrategy.<Event>forMonotonousTimestamps().withTimestampAssigner(
                 new SerializableTimestampAssigner<Event>() {
@@ -40,12 +50,30 @@ public class WaterMark {
         eventDataStreamSource.assignTimestampsAndWatermarks(new WatermarkStrategy<Event>() {
             @Override
             public WatermarkGenerator<Event> createWatermarkGenerator(WatermarkGeneratorSupplier.Context context) {
-                return null;
-            }
+                return new WatermarkGenerator<Event>() {
+                    private Long delayTime = 5000L;
+                    private Long max = Long.MIN_VALUE+delayTime+1L;
+                    @Override
+                    public void onEvent(Event event, long l, WatermarkOutput watermarkOutput) {
+                        max = Math.max(event.timestamp,max);
+                    }
 
+                    @Override
+                    public void onPeriodicEmit(WatermarkOutput watermarkOutput) {
+                        watermarkOutput.emitWatermark(new Watermark(max-delayTime-1L));
+
+
+                    }
+                };
+            }
             @Override
             public TimestampAssigner<Event> createTimestampAssigner(TimestampAssignerSupplier.Context context) {
-                return WatermarkStrategy.super.createTimestampAssigner(context);
+                return new SerializableTimestampAssigner<Event>() {
+                    @Override
+                    public long extractTimestamp(Event event, long l) {
+                        return event.timestamp;
+                    }
+                };
             }
         });
     }
