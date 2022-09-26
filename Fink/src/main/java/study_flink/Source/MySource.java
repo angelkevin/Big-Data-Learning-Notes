@@ -21,7 +21,7 @@ public class MySource implements SourceFunction<Event> {
             String url = urls[random.nextInt(urls.length)];
             long timestamp = Calendar.getInstance().getTimeInMillis();
             sourceContext.collect(new Event(user, url, timestamp));
-            Thread.sleep(5000);
+            Thread.sleep(1000);
         }
     }
 
