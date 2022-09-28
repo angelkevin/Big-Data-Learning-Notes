@@ -19,12 +19,6 @@ yarn-session.sh  -nm test
 -tm		#每个testmanager所使用的
 ```
 
-
-
-## 支持的数据类型
-
->![image-20220810214154408](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20220810214154408.png)
-
 一个fink程序，其实就是对DataStream的各种转换。具体来说，代码基本上由以下几种部分构成：
 
 - 获取执行环境 execution environment
@@ -608,5 +602,481 @@ public class AggregateTest {
 
 ```
 
+##  ProcessWindowFunction
 
+process后实现ProcessWindowsFunction<IN,OUT,KEY,WINDOW>
+
+```java 
+package study_flink.window;
+
+import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.streaming.api.datastream.DataStreamSource;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction;
+import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
+import org.apache.flink.streaming.api.windowing.time.Time;
+import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
+import org.apache.flink.util.Collector;
+import study_flink.Source.Event;
+import study_flink.Source.MySource;
+
+import java.sql.Timestamp;
+import java.util.HashSet;
+
+public class AllWindowFunction {
+    public static void main(String[] args) throws Exception {
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        DataStreamSource<Event> streamSource = env.addSource(new MySource());
+        streamSource.print("input");
+        SingleOutputStreamOperator<Event> watermarks = streamSource.assignTimestampsAndWatermarks(WatermarkStrategy.<Event>forMonotonousTimestamps().withTimestampAssigner(new SerializableTimestampAssigner<Event>() {
+            @Override
+            public long extractTimestamp(Event event, long l) {
+                return event.timestamp;
+            }
+        }));
+        watermarks.keyBy(data -> true).window(TumblingEventTimeWindows.of(Time.seconds(10)))
+                .process(new ProcessWindowFunction<Event, String,  Boolean, TimeWindow>() {
+                    @Override
+                    public void process(Boolean aBoolean, ProcessWindowFunction<Event, String, Boolean, TimeWindow>.Context context, Iterable<Event> iterable, Collector<String> collector) throws Exception {
+                        HashSet<String> hashSet = new HashSet<>();
+                        // 从interable遍历数据进行操作
+                        for (Event event : iterable) {
+                            hashSet.add(event.user);
+                        }
+                        Long uv = (long) hashSet.size();
+                        //
+                        long start = context.window().getStart();
+                        long end = context.window().getEnd();
+                        collector.collect("窗口" + new Timestamp(start) + "~" + new Timestamp(end)
+                        +"\n" + "UV:" + uv);
+
+                    }
+                }).print();
+        env.execute();
+    }
+}
+
+```
+
+## Process and aggregate
+
+两个一起调用相互弥补，Process 可以拿到窗口信息，aggregate可以流处理
+
+```java
+package study_flink.window;
+
+import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.api.common.functions.AggregateFunction;
+import org.apache.flink.streaming.api.datastream.DataStreamSource;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction;
+import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
+import org.apache.flink.streaming.api.windowing.time.Time;
+import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
+import org.apache.flink.util.Collector;
+import study_flink.Source.Event;
+import study_flink.Source.MySource;
+
+import java.sql.Timestamp;
+import java.util.HashSet;
+
+public class Processandaggregate {
+    public static void main(String[] args) throws Exception {
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        DataStreamSource<Event> streamSource = env.addSource(new MySource());
+        streamSource.print("input");
+        SingleOutputStreamOperator<Event> watermarks = streamSource.assignTimestampsAndWatermarks(WatermarkStrategy.<Event>forMonotonousTimestamps().withTimestampAssigner(new SerializableTimestampAssigner<Event>() {
+            @Override
+            public long extractTimestamp(Event event, long l) {
+                return event.timestamp;
+            }
+        }));
+
+        watermarks.keyBy(data -> true).window(TumblingEventTimeWindows.of(Time.seconds(10)))
+                .aggregate(new Uvagg(),new UVCountResult()).print();
+    env.execute();
+    }
+
+    // 自定义实现AggregateFunction<in,acc,out>in是输入数据类型，acc是累加器的类型，out是输出数据类型
+    public static class Uvagg implements AggregateFunction<Event, HashSet<String>,Long> {
+        @Override
+        public HashSet<String> createAccumulator() { //初始化累加器
+            return new HashSet<>();
+        }
+
+        @Override
+        public HashSet<String> add(Event event, HashSet<String> strings) { //累加器进行累加
+            strings.add(event.user);
+            return strings;
+        }
+
+        @Override
+        public Long getResult(HashSet<String> strings) { //输出结果
+            return (long) strings.size();
+        }
+        @Override
+        public HashSet<String> merge(HashSet<String> strings, HashSet<String> acc1) { // 不是会话窗口，没必要
+            return null;
+        }
+    }
+    //ProcessWindowFunction<in，out，key，window>
+    public static class UVCountResult extends ProcessWindowFunction<Long,String, Boolean, TimeWindow>{
+
+        @Override
+        //process(KEY var1, ProcessWindowFunction<IN, OUT, KEY, W>.Context var2, Iterable<IN> var3, Collector<OUT> var4)
+        public void process(Boolean aBoolean, ProcessWindowFunction<Long, String, Boolean, TimeWindow>.Context context, Iterable<Long> iterable, Collector<String> collector) throws Exception {
+            long start = context.window().getStart();
+            long end = context.window().getEnd();
+            long uv = iterable.iterator().next();
+            collector.collect("窗口" + new Timestamp(start) + "~" + new Timestamp(end)
+                    +"\n" + "UV:" + uv); //输出
+        }
+    }
+}
+
+```
+
+## 乱序数据
+
+在flink中，处理乱序数据有延迟水位线，设置延迟等待，以及侧流等方法，延迟水位线相当于乘客把自己的表调慢，延迟等待相当于延迟发车时间
+
+```java
+package study_flink.window;
+
+import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.api.common.functions.AggregateFunction;
+import org.apache.flink.api.common.functions.MapFunction;
+import org.apache.flink.streaming.api.datastream.DataStreamSource;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction;
+import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
+import org.apache.flink.streaming.api.windowing.time.Time;
+import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
+import org.apache.flink.util.Collector;
+import org.apache.flink.util.OutputTag;
+import study_flink.Source.Event;
+import study_flink.Source.MySource;
+
+import java.time.Duration;
+
+public class LateDataTest {
+    public static void main(String[] args) throws Exception {
+
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        env.setParallelism(1);
+
+        SingleOutputStreamOperator<Event> map = env.socketTextStream("192.168.170.133", 7777).map(
+                new MapFunction<String, Event>() {
+                    @Override
+                    public Event map(String s) throws Exception {
+                        String[] split = s.split(",");
+                        return new Event(split[0].trim(), split[1].trim(), Long.parseLong(split[2].trim()));
+                    }
+                }
+        );
+        SingleOutputStreamOperator<Event> watermarks = map.assignTimestampsAndWatermarks(WatermarkStrategy.<Event>forBoundedOutOfOrderness(Duration.ofSeconds(2)).withTimestampAssigner(new SerializableTimestampAssigner<Event>() {
+            @Override
+            public long extractTimestamp(Event event, long l) {
+                return event.timestamp;
+            }
+        }));
+        OutputTag<Event> late = new OutputTag<Event>("late") {
+        };//设置延时标签
+        SingleOutputStreamOperator<UrlViewCount> aggregate = watermarks.keyBy(data -> data.url)
+                .window(TumblingEventTimeWindows.of(Time.seconds(10)))
+                .allowedLateness(Time.minutes(1)) //允许延时
+                .sideOutputLateData(late) //侧流输出
+                .aggregate(new UrlCount(), new UrlInfo());
+        aggregate.print("result");
+        aggregate.getSideOutput(late).print();
+        env.execute();
+    }
+
+    public static class UrlCount implements AggregateFunction<Event, Long, Long> {
+
+        @Override
+        public Long createAccumulator() {
+            return 0L;
+        }
+
+        @Override
+        public Long add(Event event, Long aLong) {
+            return aLong + 1;
+        }
+
+        @Override
+        public Long getResult(Long aLong) {
+            return aLong;
+        }
+
+        @Override
+        public Long merge(Long aLong, Long acc1) {
+            return null;
+        }
+    }
+
+    public static class UrlInfo extends ProcessWindowFunction<Long, UrlViewCount, String, TimeWindow> {
+        @Override
+        public void process(String s, ProcessWindowFunction<Long, UrlViewCount, String, TimeWindow>.Context context, Iterable<Long> iterable, Collector<UrlViewCount> collector) throws Exception {
+            long start = context.window().getStart();
+            long end = context.window().getEnd();
+            long count = iterable.iterator().next();
+            collector.collect(new UrlViewCount(s, count, start, end));
+
+        }
+    }
+
+}
+```
+
+# ProcessFunction
+
+更加底层，在datastream后调用process，实现processfunction，每来一次数据就调用一次，可以获得更加底层的东西他是继承richfunction
+
+```java
+package study_flink.ProcessFunctionTest;
+
+import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.streaming.api.datastream.DataStreamSource;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.functions.ProcessFunction;
+import org.apache.flink.streaming.api.windowing.time.Time;
+import org.apache.flink.util.Collector;
+import study_flink.Source.Event;
+import study_flink.Source.MySource;
+
+import java.time.Duration;
+
+public class ProcessFunctionTest {
+    public static void main(String[] args) throws Exception {
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        env.setParallelism(1);
+        DataStreamSource<Event> streamSource = env.addSource(new MySource());
+        SingleOutputStreamOperator<Event> watermarks = streamSource.assignTimestampsAndWatermarks(WatermarkStrategy.<Event>forBoundedOutOfOrderness(Duration.ZERO).withTimestampAssigner(new SerializableTimestampAssigner<Event>() {
+            @Override
+            public long extractTimestamp(Event event, long l) {
+                return event.timestamp;
+            }
+        }));
+
+        watermarks.process(new ProcessFunction<Event, String>() {
+            @Override
+            public void processElement(Event event, ProcessFunction<Event, String>.Context context, Collector<String> out) throws Exception {
+                if (event.user.equals("zkw")){
+                    out.collect(event.user + event.url);
+                }
+                out.collect(event.toString());
+                System.out.println(context.timestamp());
+                System.out.println(context.timerService().currentWatermark());
+
+            }
+        }).print();
+
+
+        env.execute();
+    }
+}
+```
+
+## Time Timer 定时器，触发器
+
+分为事件时间触发器定时器和处理时间触发器定时器，基于KeyedStream，然后调用process方法，实现其中的KeyedProcessFunction方法
+
+### 事件时间触发器
+
+```java 
+package study_flink.ProcessFunctionTest;
+
+import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.streaming.api.datastream.DataStreamSource;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
+import org.apache.flink.util.Collector;
+import study_flink.Source.Event;
+import study_flink.Source.MySource;
+
+import java.sql.Timestamp;
+import java.time.Duration;
+
+public class EventTimeTimer {
+    public static void main(String[] args) throws Exception {
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        env.setParallelism(1);
+        DataStreamSource<Event> streamSource = env.addSource(new MySource());
+        SingleOutputStreamOperator<Event> watermarks = streamSource.assignTimestampsAndWatermarks(WatermarkStrategy.<Event>forBoundedOutOfOrderness(Duration.ZERO).withTimestampAssigner(new SerializableTimestampAssigner<Event>() {
+            @Override
+            public long extractTimestamp(Event event, long l) {
+                return event.timestamp;
+            }
+        }));
+
+        watermarks.keyBy(data -> data.user).process(
+                new KeyedProcessFunction<String, Event, String>() {
+                    @Override
+                    public void processElement(Event event, KeyedProcessFunction<String, Event, String>.Context context, Collector<String> collector) throws Exception {
+                        long currTs = event.timestamp;
+                        collector.collect(context.getCurrentKey() + "数据到达，时间戳:" + new Timestamp(currTs) + "waterMark：" + context.timerService().currentWatermark());
+                        context.timerService().registerEventTimeTimer(currTs + 10 * 1000);
+                    }
+
+                    @Override
+                    public void onTimer(long timestamp, KeyedProcessFunction<String, Event, String>.OnTimerContext ctx, Collector<String> out) throws Exception {
+                        out.collect(ctx.getCurrentKey() + "定时器触发，触发时间" + new Timestamp(timestamp));
+                    }
+                }
+        ).print();
+        env.execute();
+    }
+}
+
+```
+
+### 处理时间触发器
+
+```java
+package study_flink.ProcessFunctionTest;
+
+import org.apache.flink.streaming.api.datastream.DataStreamSource;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
+import org.apache.flink.util.Collector;
+import study_flink.Source.Event;
+import study_flink.Source.MySource;
+import java.sql.Timestamp;
+
+public class ProcessTimeTimerTest {
+    public static void main(String[] args) throws Exception {
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        env.setParallelism(1);
+        DataStreamSource<Event> streamSource = env.addSource(new MySource());
+        streamSource.keyBy(data -> data.user).process(
+                new KeyedProcessFunction<String, Event, String>() {
+                    @Override
+                    public void processElement(Event event, KeyedProcessFunction<String, Event, String>.Context context, Collector<String> collector) throws Exception {
+                        long currTs = context.timerService().currentProcessingTime();
+                        collector.collect(context.getCurrentKey()+"数据到达，到达时间:" + new Timestamp(currTs));
+                        context.timerService().registerProcessingTimeTimer(currTs+10*1000L);
+                    }
+                    @Override
+                    public void onTimer(long timestamp, KeyedProcessFunction<String, Event, String>.OnTimerContext ctx, Collector<String> out) throws Exception {
+                        out.collect(ctx.getCurrentKey()+"定时器触发，触发时间"+new Timestamp(timestamp));
+                    }
+                }
+        ).print();
+        env.execute();
+    }
+}
+```
+
+## TopN示例
+
+使用windowall的开窗方法，在datastream后调用，并分配窗口生成器，之后调用aggregate方法实现里面的AggregateFunction接口和ProcessAllWindowFunction这个richfunction类用来包装输出
+
+```java
+package study_flink.ProcessFunctionTest;
+
+import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.api.common.functions.AggregateFunction;
+import org.apache.flink.api.java.tuple.Tuple;
+import org.apache.flink.api.java.tuple.Tuple2;
+import org.apache.flink.streaming.api.datastream.DataStreamSource;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.functions.windowing.ProcessAllWindowFunction;
+import org.apache.flink.streaming.api.windowing.assigners.SlidingProcessingTimeWindows;
+import org.apache.flink.streaming.api.windowing.time.Time;
+import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
+import org.apache.flink.util.Collector;
+import study_flink.Source.Event;
+import study_flink.Source.MySource;
+
+import java.sql.Timestamp;
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+
+public class TopN {
+    public static void main(String[] args) throws Exception {
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        DataStreamSource<Event> dataStreamSource = env.addSource(new MySource());
+        SingleOutputStreamOperator<Event> watermarks = dataStreamSource.assignTimestampsAndWatermarks(WatermarkStrategy.<Event>forBoundedOutOfOrderness(Duration.ofSeconds(0)).withTimestampAssigner(
+                new SerializableTimestampAssigner<Event>() {
+                    @Override
+                    public long extractTimestamp(Event event, long l) {
+                        return event.timestamp;
+                    }
+                }
+        ));
+
+        watermarks.map(data -> data.url)
+                .windowAll(SlidingProcessingTimeWindows.of(Time.seconds(10), Time.seconds(5)))
+                .aggregate(new count(),
+                        new allwindowsprocess()).print();
+
+
+        env.execute();
+    }
+
+    public static class count implements AggregateFunction<String, HashMap<String, Integer>, ArrayList<Tuple2<String, Integer>>> {
+        @Override
+        public HashMap<String, Integer> createAccumulator() {
+            return new HashMap<>();
+        }
+
+        @Override
+        public HashMap<String, Integer> add(String url, HashMap<String, Integer> stringIntegerHashMap) {
+            if (stringIntegerHashMap.containsKey(url)) {
+                int i = stringIntegerHashMap.get(url) + 1;
+                stringIntegerHashMap.put(url, i);
+            } else {
+                stringIntegerHashMap.put(url, 1);
+            }
+            return stringIntegerHashMap;
+        }
+
+        @Override
+        public ArrayList<Tuple2<String, Integer>> getResult(HashMap<String, Integer> stringIntegerHashMap) {
+            ArrayList<Tuple2<String, Integer>> tuple2s = new ArrayList<>();
+            for (String s : stringIntegerHashMap.keySet()) {
+                tuple2s.add(Tuple2.of(s, stringIntegerHashMap.get(s)));
+            }
+
+            tuple2s.sort(new Comparator<Tuple2<String, Integer>>() {
+                @Override
+                public int compare(Tuple2<String, Integer> o1, Tuple2<String, Integer> o2) {
+                    return o2.f1 - o1.f1;
+                }
+            });
+            return tuple2s;
+        }
+
+        @Override
+        public HashMap<String, Integer> merge(HashMap<String, Integer> stringIntegerHashMap, HashMap<String, Integer> acc1) {
+            return null;
+        }
+    }
+
+    public static class allwindowsprocess extends ProcessAllWindowFunction<ArrayList<Tuple2<String, Integer>>, String, TimeWindow> {
+        @Override
+        public void process(ProcessAllWindowFunction<ArrayList<Tuple2<String, Integer>>, String, TimeWindow>.Context context,
+                            Iterable<ArrayList<Tuple2<String, Integer>>> iterable, Collector<String> collector) throws Exception {
+            ArrayList<Tuple2<String, Integer>> list = iterable.iterator().next();
+            collector.collect("窗口开始时间" + new Timestamp(context.window().getStart()) + "\n" + "TOP1：" + list.get(0).f0 + "浏览量为：" + list.get(0).f1 + "\n" +
+                    "TOP2：" + list.get(1).f0 + "浏览量为：" + list.get(1).f1 + "\n" + "窗口结束时间" + new Timestamp(context.window().getEnd())+"\n");
+        }
+    }
+}
+```
 
