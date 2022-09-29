@@ -1,4 +1,4 @@
-package study_flink.window;
+package study_flink.Window;
 
 import java.sql.Timestamp;
 

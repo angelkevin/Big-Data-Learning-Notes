@@ -1,4 +1,4 @@
-package study_flink.window;
+package study_flink.Window;
 
 import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
