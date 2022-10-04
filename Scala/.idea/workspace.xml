@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2fadb2a0-c0cf-43f4-8809-f261fd28d0ab" name="Changes" comment="scalaaaaa">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Scala/Day01/IO.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Scala/Day01/String.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Scala/Day01/Student.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Student.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Scala/Day01/test.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/Day01/test.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Day01/test$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Day01/test$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Day01/test.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Day01/test.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +23,18 @@
   <component name="CodeStyleSettingsInfer">
     <option name="done" value="true" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="dummy://scala-decompiled/Int.decompiled.java" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -25,7 +43,9 @@
     <option name="version" value="2" />
   </component>
   <component name="ProjectId" id="2FOzQ27Yvp8nmfNJ3e5HiUvdFNM" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -36,10 +56,39 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/java/Fink"
+    "last_opened_file_path": "C:/Users/22154/.m2/repository/org/scala-lang/scala-library/2.12.4/scala-library-2.12.4.jar",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.IO">
+    <configuration name="IO" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Day01.IO" />
+      <module name="Scala" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Day01.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Student" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Day01.Student" />
+      <module name="Scala" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Day01.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="test" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="Day01.test" />
       <module name="Scala" />
@@ -53,8 +102,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="test02" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Day01.test02" />
+      <module name="Scala" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Day01.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.IO" />
+        <item itemvalue="Application.test02" />
+        <item itemvalue="Application.Student" />
         <item itemvalue="Application.test" />
       </list>
     </recent_temporary>
@@ -69,6 +134,7 @@
       <updated>1664377900861</updated>
       <workItem from="1664377902162" duration="347000" />
       <workItem from="1664417065676" duration="18000" />
+      <workItem from="1664894564129" duration="5396000" />
     </task>
     <task id="LOCAL-00001" summary="scalaaaaa">
       <created>1664378236945</created>
