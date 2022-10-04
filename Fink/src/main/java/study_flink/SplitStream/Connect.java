@@ -69,7 +69,6 @@ public class Connect {
 
         @Override
         public void processElement1(Tuple3<String, String, Long> value, Context ctx, Collector<String> out) throws Exception {
-            System.out.println(app.value());
             if (third.value() != null) {
                 out.collect("对账成功" + value + third.value());
                 third.clear();

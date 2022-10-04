@@ -1080,3 +1080,272 @@ public class TopN {
 }
 ```
 
+# 分流&合流
+
+## SplitStream	分流
+
+```java
+package study_flink.SplitStream;
+
+import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.api.java.tuple.Tuple;
+import org.apache.flink.api.java.tuple.Tuple2;
+import org.apache.flink.streaming.api.datastream.DataStreamSource;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.functions.ProcessFunction;
+import org.apache.flink.util.Collector;
+import org.apache.flink.util.OutputTag;
+import study_flink.Source.Event;
+import study_flink.Source.MySource;
+
+import java.time.Duration;
+
+public class SplitStream {
+    public static void main(String[] args) throws Exception {
+        StreamExecutionEnvironment executionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment();
+        DataStreamSource<Event> eventDataStreamSource = executionEnvironment.addSource(new MySource());
+        SingleOutputStreamOperator<Event> eventSingleOutputStreamOperator = eventDataStreamSource
+                .assignTimestampsAndWatermarks(WatermarkStrategy
+                        .<Event>forBoundedOutOfOrderness(Duration.ZERO)
+                        .withTimestampAssigner(new SerializableTimestampAssigner<Event>() {
+            @Override
+            public long extractTimestamp(Event element, long recordTimestamp) {
+                return element.timestamp;
+            }
+        }));
+
+        OutputTag<Tuple2<String, String>> zkw = new OutputTag<Tuple2<String, String>>("zkw"){};
+
+        SingleOutputStreamOperator<Event> zkw1 = eventSingleOutputStreamOperator.process(new ProcessFunction<Event, Event>() {
+            @Override
+            public void processElement(Event value, ProcessFunction<Event, Event>.Context ctx, Collector<Event> out) throws Exception {
+                if (value.user.equals("zkw")) {
+                    ctx.output(zkw, Tuple2.of(value.user, value.url));
+                }
+                else
+                    out.collect(value);
+            }
+        });
+
+        zkw1.print("else");
+        zkw1.getSideOutput(zkw).print("zkw");
+        executionEnvironment.execute();
+    }
+}
+
+```
+
+创建一个OutputTag对象并实现匿名类，然后再processfunction里面直接调用output方法，然后传入OutputTag，就可以分流
+
+## Connect	合流
+
+两个数据类型不同的datastream可以调用Connect进行合并，stream1.connect（stream2），然后调用process实现里面的coprocerssfunction进行合并操作
+
+```java
+package study_flink.SplitStream;
+
+import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.api.common.state.ValueState;
+import org.apache.flink.api.common.state.ValueStateDescriptor;
+import org.apache.flink.api.common.typeinfo.Types;
+import org.apache.flink.api.java.tuple.Tuple3;
+import org.apache.flink.api.java.tuple.Tuple4;
+import org.apache.flink.configuration.Configuration;
+import org.apache.flink.streaming.api.datastream.DataStreamSource;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.functions.ProcessFunction;
+import org.apache.flink.streaming.api.functions.co.CoProcessFunction;
+import org.apache.flink.util.Collector;
+
+import java.time.Duration;
+
+public class Connect {
+    public static void main(String[] args) throws Exception {
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
+        SingleOutputStreamOperator<Tuple3<String, String, Long>> stream1 = env.fromElements(
+                Tuple3.of("order1", "app", 1000L),
+                Tuple3.of("order2", "app", 2000L),
+                Tuple3.of("order3", "app", 7000L)
+
+        ).assignTimestampsAndWatermarks(WatermarkStrategy.<Tuple3<String, String, Long>>forBoundedOutOfOrderness(Duration.ZERO).withTimestampAssigner(
+                new SerializableTimestampAssigner<Tuple3<String, String, Long>>() {
+                    @Override
+                    public long extractTimestamp(Tuple3<String, String, Long> element, long recordTimestamp) {
+                        return element.f2;
+                    }
+                }
+        ));
+
+        SingleOutputStreamOperator<Tuple4<String, String, String, Long>> stream2 = env.fromElements(
+                Tuple4.of("order1", "third-party", "success", 3000L),
+                Tuple4.of("order3", "third-party", "success", 4000L)
+
+        ).assignTimestampsAndWatermarks(WatermarkStrategy.<Tuple4<String, String, String, Long>>forBoundedOutOfOrderness(Duration.ZERO).withTimestampAssigner(
+                new SerializableTimestampAssigner<Tuple4<String, String, String, Long>>() {
+                    @Override
+                    public long extractTimestamp(Tuple4<String, String, String, Long> element, long recordTimestamp) {
+                        return element.f3;
+                    }
+                }
+        ));
+//        检测同一支付单在两条流中是否匹配，不匹配就报警
+        stream1.connect(stream2).keyBy(data -> data.f0, data1 -> data1.f0)
+                .process(new OrderMatchResult()).print();
+
+
+        env.execute();
+    }
+    public static class OrderMatchResult extends CoProcessFunction<Tuple3<String, String, Long>, Tuple4<String, String, String, Long>, String> {
+        //定义状态变量，用来保存已经到达的事件
+        private ValueState<Tuple3<String, String, Long>> app;
+        private ValueState<Tuple4<String, String, String, Long>> third;
+
+        @Override
+        public void open(Configuration parameters) throws Exception {
+            app = getRuntimeContext().getState(new ValueStateDescriptor<Tuple3<String, String, Long>>("app", Types.TUPLE(Types.STRING, Types.STRING, Types.LONG)));
+            third = getRuntimeContext().getState(new ValueStateDescriptor<Tuple4<String, String, String, Long>>("third", Types.TUPLE(Types.STRING, Types.STRING, Types.STRING, Types.LONG)));
+        }
+
+        @Override
+        public void processElement1(Tuple3<String, String, Long> value, Context ctx, Collector<String> out) throws Exception {
+            if (third.value() != null) {
+                out.collect("对账成功" + value + third.value());
+                third.clear();
+            } else {
+                app.update(value);
+                //注册一个五秒的定时器
+                ctx.timerService().registerEventTimeTimer(value.f2 +5000L);
+            }
+
+        }
+
+        @Override
+        public void processElement2(Tuple4<String, String, String, Long> value, Context ctx, Collector<String> out) throws Exception {
+
+            if (app.value() != null) {
+                out.collect("对账成功" + value + app.value());
+                app.clear();
+            } else {
+                third.update(value);
+                ctx.timerService().registerEventTimeTimer(value.f3);
+            }
+        }
+        @Override
+        public void onTimer(long timestamp, CoProcessFunction<Tuple3<String, String, Long>, Tuple4<String, String, String, Long>, String>.OnTimerContext ctx, Collector<String> out) throws Exception {
+            if (app.value() != null) {
+                System.out.println(666);
+                out.collect("第三方失败");
+            }
+            if (third.value() != null) {
+                out.collect("app失败");
+            }
+            app.clear();
+            third.clear();
+
+        }
+    }
+}
+
+```
+
+## Union 合流
+
+用来合并两个相同数据类型的数据流
+
+## WindowJion合并窗口
+
+datastream1 join datastream2 先 where 传入一个 keyselector 再 equalTo 传入一个 keyselector ，然后开窗，最后得到的是两个流再这个窗口里面的数据的笛卡尔积
+
+stream1.join(stream2).where(keyseletor).equalto(keyselector).window().apply
+
+```java
+stream1.join(stream2).where(data -> data.f0).equalTo(data1 -> data1.f0).window(TumblingEventTimeWindows.of(Time.seconds(5)))
+        .apply(new JoinFunction<Tuple3<String, String, Long>, Tuple4<String, String, String, Long>, String>() {
+            @Override
+            public String join(Tuple3<String, String, Long> first, Tuple4<String, String, String, Long> second) throws Exception {
+                return first + "," + second;
+            }
+        });
+```
+
+## intervaljoin间隔连接窗口
+
+stream1.keyby(keyselector).intervaljion(stream2.keyby(keyseleter)).process(new processjoinfunction())
+
+```java
+package study_flink.SplitStream;
+
+import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.api.common.functions.JoinFunction;
+import org.apache.flink.api.java.tuple.Tuple3;
+import org.apache.flink.api.java.tuple.Tuple4;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.functions.co.ProcessJoinFunction;
+import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
+import org.apache.flink.streaming.api.windowing.time.Time;
+import org.apache.flink.util.Collector;
+
+import java.time.Duration;
+
+public class IntervalJoin {
+    public static void main(String[] args) throws Exception {
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
+        SingleOutputStreamOperator<Tuple3<String, String, Long>> stream1 = env.fromElements(
+                Tuple3.of("zkw", "app", 1000L),
+                Tuple3.of("jly", "app", 2000L),
+                Tuple3.of("zkw", "app", 3500L)
+        ).assignTimestampsAndWatermarks(WatermarkStrategy.<Tuple3<String, String, Long>>forBoundedOutOfOrderness(Duration.ofSeconds(0)).withTimestampAssigner(
+                new SerializableTimestampAssigner<Tuple3<String, String, Long>>() {
+                    @Override
+                    public long extractTimestamp(Tuple3<String, String, Long> element, long recordTimestamp) {
+                        return element.f2;
+                    }
+                }
+        ));
+        SingleOutputStreamOperator<Tuple4<String, String, String, Long>> stream2 = env.fromElements(
+                Tuple4.of("zkw", "third-party", "success", 2000L),
+                Tuple4.of("zkw", "third-party", "success", 3000L),
+                Tuple4.of("jly", "third-party", "success", 4000L)
+        ).assignTimestampsAndWatermarks(WatermarkStrategy.<Tuple4<String, String, String, Long>>forBoundedOutOfOrderness(Duration.ZERO).withTimestampAssigner(
+                new SerializableTimestampAssigner<Tuple4<String, String, String, Long>>() {
+                    @Override
+                    public long extractTimestamp(Tuple4<String, String, String, Long> element, long recordTimestamp) {
+                        return element.f3;
+                    }
+                }
+        ));
+
+        stream1.keyBy(data -> data.f0).intervalJoin(stream2.keyBy(data1 -> data1.f0)).between(Time.seconds(-2), Time.seconds(2)).process(
+                new ProcessJoinFunction<Tuple3<String, String, Long>, Tuple4<String, String, String, Long>, String>() {
+                    @Override
+                    public void processElement(Tuple3<String, String, Long> left, Tuple4<String, String, String, Long> right, ProcessJoinFunction<Tuple3<String, String, Long>, Tuple4<String, String, String, Long>, String>.Context ctx, Collector<String> out) throws Exception {
+                        out.collect(right + "=>" + left);
+                    }
+                }
+        ).print();
+
+
+        env.execute();
+
+    }
+}
+
+```
+
+## cogroup窗口组连接
+
+stream1.coGroup(stream2).where(keyseletor).equalto(keyselector).window().apply()
+
+一个集合匹配另外一个集合
+
+# 状态
+
+在流处理中，数据是连续不断的到来和处理。每个任务进行计算的时候，可以基于当前数据直接得到转换输出结果，也可以作为一些依赖，这些由一个任务维护并且用来输出计算结果的所有数据就叫做状态。
