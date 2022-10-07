@@ -13,9 +13,6 @@ object RDD_Par {
     val rdd: RDD[Int] = sc.makeRDD(List(1, 2, 3, 4), 2)
     //将处理的数据保存为分区文件
     rdd.saveAsTextFile("output")
-
-
-
     sc.stop()
 
   }
