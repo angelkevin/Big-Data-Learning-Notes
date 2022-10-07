@@ -2,14 +2,15 @@ package Day01
 
 import scala.collection.immutable
 import scala.language.postfixOps
+import scala.util.control.Breaks
 
 object forfor {
   def main(args: Array[String]): Unit = {
 
     //[1,10]
     for (i <- 1 to 10) {
-      println(i)
-
+      val x: Int = i
+      println(x)
     }
     //[1,10)
     for (i <- Range(1, 10)) {
@@ -52,6 +53,19 @@ object forfor {
     val units: immutable.IndexedSeq[Int] = for (i <- 1 to 10) yield i
     println(units)
 
+    //循环中断，调用breaks下面的breakable方法，本质是抛出异常
+    Breaks.breakable(
+      for (i <- 1 to 10) {
+        if (i ==3){
+          println(i)
+          Breaks.break()
+        }
+      }
+
+    )
+
+
   }
+
 
 }

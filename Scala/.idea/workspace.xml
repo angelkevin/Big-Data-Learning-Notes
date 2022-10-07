@@ -5,13 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2fadb2a0-c0cf-43f4-8809-f261fd28d0ab" name="Changes" comment="scalaaaaa">
-      <change afterPath="$PROJECT_DIR$/src/main/Scala/Day01/DataType.scala" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/Scala/Day01/DataTypeConversion.scala" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/Scala/Day01/Iftest.scala" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/Scala/Day01/forfor.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Scala/Day01/Function.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Scala/Day01/FunctionDefine.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Scala/Day01/Lambda.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Day01/IO$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Day01/IO$.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Day01/Student$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Day01/Student$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Scala/Day01/forfor.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/Day01/forfor.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Day01/forfor$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Day01/forfor$.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../note/Scala.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Scala.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,9 +57,9 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.forfor">
-    <configuration name="DataType" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="Day01.DataType" />
+  <component name="RunManager" selected="Application.Lambda">
+    <configuration name="Function" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Day01.Function" />
       <module name="Scala" />
       <extension name="coverage">
         <pattern>
@@ -72,21 +71,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DataTypeConversion" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="Day01.DataTypeConversion" />
-      <module name="Scala" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Day01.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="FileIo" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="Day01.FileIo" />
+    <configuration name="FunctionDefine" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Day01.FunctionDefine" />
       <module name="Scala" />
       <extension name="coverage">
         <pattern>
@@ -100,6 +86,19 @@
     </configuration>
     <configuration name="Iftest" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="Day01.Iftest" />
+      <module name="Scala" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Day01.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Lambda" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Day01.Lambda" />
       <module name="Scala" />
       <extension name="coverage">
         <pattern>
@@ -126,11 +125,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Lambda" />
+        <item itemvalue="Application.FunctionDefine" />
+        <item itemvalue="Application.Function" />
         <item itemvalue="Application.forfor" />
         <item itemvalue="Application.Iftest" />
-        <item itemvalue="Application.DataTypeConversion" />
-        <item itemvalue="Application.DataType" />
-        <item itemvalue="Application.FileIo" />
       </list>
     </recent_temporary>
   </component>
@@ -146,7 +145,8 @@
       <workItem from="1664417065676" duration="18000" />
       <workItem from="1664894564129" duration="6165000" />
       <workItem from="1664900974604" duration="28000" />
-      <workItem from="1664945405957" duration="11734000" />
+      <workItem from="1664945405957" duration="12170000" />
+      <workItem from="1665036192517" duration="3680000" />
     </task>
     <task id="LOCAL-00001" summary="scalaaaaa">
       <created>1664378236945</created>
@@ -169,7 +169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664950799998</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="scalaaaaa">
+      <created>1664975681374</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1664975681374</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
