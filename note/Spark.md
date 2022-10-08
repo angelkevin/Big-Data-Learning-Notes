@@ -206,7 +206,72 @@ object Map_test {
 
 ```
 
+#### mapPartitions
 
+> 可以以分区为单位来进行分区转换操作,但是会将整个分区来加载到内存进行引用如果处理完的数据不被释放掉,存在对象的引用,在内存较小,数据量较大的场合下容易内存溢出
 
+```scala
+package Operate
 
+import org.apache.spark.rdd.RDD
+import org.apache.spark.{SparkConf, SparkContext}
+
+object RDD_test_partitions {
+  def main(args: Array[String]): Unit = {
+    val sparkConf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("Map")
+    val sc = new SparkContext(sparkConf)
+    var rdd: RDD[Int] = sc.makeRDD(
+      List(1, 2, 3, 4), 2
+    )
+    rdd.mapPartitions(
+      iter => {
+        println(">>>>>>")
+        iter.map(_*2)
+      }
+    ).collect()
+  }
+}
+
+```
+
+mapPartitions算子需要传入一个迭代器,返回一个迭代器,没有要求元素的个数不变,map算子类似于串行操作,所以性能较低,mapPartitions类似于批处理,但是容易造成内存溢出
+
+#### mapPartitionsWithIndex
+
+>将待处理的数据以分区为单位发送到计算节点进行处理，这里的处理是指可以进行任意的处 理，哪怕是过滤数据，在处理时同时可以获取当前分区索引。
+
+```scala
+package Operate
+
+import org.apache.spark.{SparkConf, SparkContext}
+import org.apache.spark.rdd.RDD
+
+object RDD_test_mapPartitionswithIndex {
+  def main(args: Array[String]): Unit = {
+    val sparkConf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("Map")
+    val sc = new SparkContext(sparkConf)
+    var rdd: RDD[Int] = sc.makeRDD(
+      List(1, 2, 3, 4), 2
+    )
+    rdd.mapPartitionsWithIndex(
+      (index, iter) => {
+        if (index == 1) {
+          iter
+        } else {
+          Nil.iterator //空迭代器
+        }
+      }
+    )
+    rdd.mapPartitionsWithIndex(
+      (index, iter) => {
+        iter.map(
+          num => (index, num)
+        )
+      }
+    ).collect().foreach(println)
+  }
+
+}
+
+```
 

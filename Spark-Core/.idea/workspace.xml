@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="62cf5192-6624-4fc5-a69c-1d5fa126d7b7" name="变更" comment="变更">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Scala/RDD/RDD_Par.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/RDD/RDD_Par.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../note/Flink.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Flink.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../note/Spark.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Spark.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,6 +41,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/java/Spark-Core",
     "project.structure.last.edited": "项目",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -52,9 +53,9 @@
       <recent name="Operate" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.Map_test_par">
-    <configuration name="Map_test" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="Operate.Map_test" />
+  <component name="RunManager" selected="应用程序.RDD_test_Groupby">
+    <configuration name="Flatmap" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Operate.Flatmap" />
       <module name="Spark-Core" />
       <extension name="coverage">
         <pattern>
@@ -66,8 +67,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Map_test_par" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="Operate.Map_test_par" />
+    <configuration name="RDD_test_Groupby" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Operate.RDD_test_Groupby" />
       <module name="Spark-Core" />
       <extension name="coverage">
         <pattern>
@@ -79,18 +80,52 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="Test" />
+    <configuration name="RDD_test_glom" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Operate.RDD_test_glom" />
       <module name="Spark-Core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Operate.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RDD_test_mapPartitionswithIndex" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Operate.RDD_test_mapPartitionswithIndex" />
+      <module name="Spark-Core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Operate.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RDD_test_partitions" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Operate.RDD_test_partitions" />
+      <module name="Spark-Core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Operate.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.Map_test_par" />
-        <item itemvalue="应用程序.Map_test" />
-        <item itemvalue="应用程序.Test" />
+        <item itemvalue="应用程序.RDD_test_Groupby" />
+        <item itemvalue="应用程序.Flatmap" />
+        <item itemvalue="应用程序.RDD_test_glom" />
+        <item itemvalue="应用程序.RDD_test_mapPartitionswithIndex" />
+        <item itemvalue="应用程序.RDD_test_partitions" />
       </list>
     </recent_temporary>
   </component>
@@ -102,7 +137,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1665151443835</updated>
-      <workItem from="1665151445050" duration="1813000" />
+      <workItem from="1665151445050" duration="1884000" />
+      <workItem from="1665189583261" duration="156000" />
+      <workItem from="1665189773697" duration="10118000" />
     </task>
     <task id="LOCAL-00001" summary="666">
       <created>1665151685630</created>
@@ -125,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665151885469</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="变更">
+      <created>1665153275709</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1665153275709</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
