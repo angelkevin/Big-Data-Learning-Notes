@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62cf5192-6624-4fc5-a69c-1d5fa126d7b7" name="变更" comment="变更">
-      <change afterPath="$PROJECT_DIR$/src/main/Scala/Operate/RDD_test_filter.scala" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/Scala/Operate/RDD_test_sample.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Scala/Operate/RDD_test_Groupby.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/Operate/RDD_test_Groupby.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Scala/Operate/Map_test.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/Operate/RDD_test_Map.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Scala/Operate/Map_test_par.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/Operate/RDD_test_Map_par.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +45,7 @@
     "project.structure.last.edited": "项目",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "configurable.group.tools"
+    "settings.editor.selected.configurable": "vcs.Git"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -54,9 +53,9 @@
       <recent name="Operate" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.RDD_test_sample">
-    <configuration name="Flatmap" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="Operate.Flatmap" />
+  <component name="RunManager" selected="应用程序.RDD_test_coalesce">
+    <configuration name="RDD_test_Distinct" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Operate.RDD_test_Distinct" />
       <module name="Spark-Core" />
       <extension name="coverage">
         <pattern>
@@ -81,8 +80,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RDD_test_filter" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="Operate.RDD_test_filter" />
+    <configuration name="RDD_test_coalesce" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Operate.RDD_test_coalesce" />
       <module name="Spark-Core" />
       <extension name="coverage">
         <pattern>
@@ -94,8 +93,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RDD_test_glom" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="Operate.RDD_test_glom" />
+    <configuration name="RDD_test_filter" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Operate.RDD_test_filter" />
       <module name="Spark-Core" />
       <extension name="coverage">
         <pattern>
@@ -122,11 +121,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.RDD_test_coalesce" />
+        <item itemvalue="应用程序.RDD_test_Distinct" />
         <item itemvalue="应用程序.RDD_test_sample" />
         <item itemvalue="应用程序.RDD_test_filter" />
         <item itemvalue="应用程序.RDD_test_Groupby" />
-        <item itemvalue="应用程序.Flatmap" />
-        <item itemvalue="应用程序.RDD_test_glom" />
       </list>
     </recent_temporary>
   </component>
@@ -140,7 +139,7 @@
       <updated>1665151443835</updated>
       <workItem from="1665151445050" duration="1884000" />
       <workItem from="1665189583261" duration="156000" />
-      <workItem from="1665189773697" duration="13419000" />
+      <workItem from="1665189773697" duration="15933000" />
     </task>
     <task id="LOCAL-00001" summary="666">
       <created>1665151685630</created>
@@ -177,7 +176,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665205919800</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="变更">
+      <created>1665213978266</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1665213978266</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -201,5 +207,9 @@
     <MESSAGE value="666" />
     <MESSAGE value="变更" />
     <option name="LAST_COMMIT_MESSAGE" value="变更" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

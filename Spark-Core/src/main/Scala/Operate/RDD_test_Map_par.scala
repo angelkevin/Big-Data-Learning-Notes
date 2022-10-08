@@ -3,7 +3,7 @@ package Operate
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 
-object Map_test_par {
+object RDD_test_Map_par {
   def main(args: Array[String]): Unit = {
     val sparkConf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("Map")
     val sc = new SparkContext(sparkConf)
