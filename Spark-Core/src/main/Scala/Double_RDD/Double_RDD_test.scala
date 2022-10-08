@@ -14,6 +14,7 @@ object Double_RDD_test {
       List(5, 8, 7, 6, 4)
     )
 
+    //数据类型需要一样
     //交集
     println(rdd.intersection(rdd1).collect().mkString("Array(", ", ", ")"))
 
@@ -23,7 +24,7 @@ object Double_RDD_test {
     //差集
     println(rdd.subtract(rdd1).collect().mkString("Array(", ", ", ")"))
 
-    //拉链
+    //拉链,数据类型可以不一样,数据源的分区数量要一样,每一个分区的里面的元素数量要一致
     println(rdd.zip(rdd1).collect().mkString("Array(", ", ", ")"))
 
     sc.stop()

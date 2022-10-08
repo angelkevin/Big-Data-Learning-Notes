@@ -6,13 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="62cf5192-6624-4fc5-a69c-1d5fa126d7b7" name="变更" comment="变更">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/._SUCCESS.crc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/.part-00000.crc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/.part-00001.crc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/_SUCCESS" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/part-00000" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/part-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Scala/Operate/RDD_test_coalesce.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/Operate/RDD_test_coalesce.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Scala/Double_RDD/Double_RDD_test.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/Double_RDD/Double_RDD_test.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../note/Spark.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Spark.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,29 +50,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="KV" />
+      <recent name="Double_RDD" />
       <recent name="Operate" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.Double_RDD_test">
+  <component name="RunManager" selected="应用程序.RDD_test_reduceByKey">
     <configuration name="Double_RDD_test" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="Double_RDD.Double_RDD_test" />
       <module name="Spark-Core" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Double_RDD.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RDD_test_Distinct" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="Operate.RDD_test_Distinct" />
-      <module name="Spark-Core" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Operate.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -112,6 +95,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="RDD_test_reduceByKey" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="KV.RDD_test_reduceByKey" />
+      <module name="Spark-Core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="KV.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="RDD_test_sortBy" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="Operate.RDD_test_sortBy" />
       <module name="Spark-Core" />
@@ -127,11 +123,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.RDD_test_reduceByKey" />
         <item itemvalue="应用程序.Double_RDD_test" />
         <item itemvalue="应用程序.RDD_test_flatmap" />
         <item itemvalue="应用程序.RDD_test_sortBy" />
         <item itemvalue="应用程序.RDD_test_coalesce" />
-        <item itemvalue="应用程序.RDD_test_Distinct" />
       </list>
     </recent_temporary>
   </component>
@@ -145,7 +141,7 @@
       <updated>1665151443835</updated>
       <workItem from="1665151445050" duration="1884000" />
       <workItem from="1665189583261" duration="156000" />
-      <workItem from="1665189773697" duration="19972000" />
+      <workItem from="1665189773697" duration="24062000" />
     </task>
     <task id="LOCAL-00001" summary="666">
       <created>1665151685630</created>
@@ -196,7 +192,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665224583115</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="变更">
+      <created>1665229523264</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1665229523264</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
