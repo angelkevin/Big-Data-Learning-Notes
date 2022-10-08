@@ -171,6 +171,8 @@ RDD算子：执行：触发任务调度和作业执行
 
 RDD分区内数据的执行是有序的,RDD的计算一个分区内的数据是一个个执行逻辑,只有前面一个数据全部的逻辑执行完毕后,才会执行.	
 
+### RDD value类型
+
 #### map
 
 >将处理的数据逐条进行映射转换，这里的转换可以是类型的转换，也可以是值的转换。
@@ -274,4 +276,271 @@ object RDD_test_mapPartitionswithIndex {
 }
 
 ```
+
+#### flatmap
+
+>将处理的数据进行扁平化后再进行映射处理，所以算子也称之为扁平映射
+
+```scala
+package Operate
+
+import org.apache.spark.rdd.RDD
+import org.apache.spark.{SparkConf, SparkContext}
+
+object Flatmap {
+
+  def main(args: Array[String]): Unit = {
+    val sparkConf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("Map")
+    val sc = new SparkContext(sparkConf)
+    val value = sc.makeRDD(List(
+      List(1, 2, 3, 4), List(5, 6, 7, 8))
+    )
+    val value1: RDD[Int] = value.flatMap(
+      (list: Seq[Int]) => {
+        println(list)
+        list
+      }
+    )
+    val rdd : RDD[String] =sc.makeRDD(List("Hello World","Fuck you"))
+    val value2: RDD[String] = rdd.flatMap(
+      _.split(" ")
+    )
+    value2.collect().foreach(println)
+    value1.collect().foreach(println)
+  }
+}
+
+```
+
+#### glom
+
+> 将同一个分区的数据直接转换为相同类型的内存数组进行处理，分区不变
+
+```scala
+package Operate
+
+import org.apache.spark.rdd.RDD
+import org.apache.spark.{SparkConf, SparkContext}
+
+object RDD_test_glom {
+  def main(args: Array[String]): Unit = {
+    val sparkConf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("Map")
+    val sc = new SparkContext(sparkConf)
+    val rdd: RDD[Int] = sc.makeRDD(
+      List(1, 2, 3, 4), 2
+    )
+    //将同一个分区直接转换成相同类型的内存数组进行处理,分区数量不变
+    val value: RDD[Array[Int]] = rdd.glom()
+    println(value.map(
+      data => data.max
+    ).collect().sum)
+  }
+}
+```
+
+#### groupBy
+
+> 将数据根据指定的规则进行分组, 分区默认不变，但是数据会被打乱重新组合，我们将这样 的操作称之为 shuffle。极限情况下，数据可能被分在同一个分区中
+
+```scala
+package Operate
+
+import org.apache.spark.rdd.RDD
+import org.apache.spark.{SparkConf, SparkContext}
+
+object RDD_test_Groupby {
+  def main(args: Array[String]): Unit = {
+    val sparkConf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("Map")
+    val sc = new SparkContext(sparkConf)
+    val rdd: RDD[Int] = sc.makeRDD(
+      List(1, 2, 3, 4), 2
+    )
+    val words = sc.makeRDD(List("Hello", "Hadoop", "Fuck"))
+    val GroupRDD: RDD[(Char, Iterable[String])] = words.groupBy(
+      data => data.charAt(0)
+    )
+    GroupRDD.map(data => (data._1, data._2.size)).collect().foreach(println)
+
+
+    //模式匹配
+    GroupRDD.map({
+      case (c, strings) => (c, strings.size)
+    }
+    ).collect().foreach(println)
+
+
+    //GroupBy会将数据打乱重新组合,这个操作我们称之为shuffle
+    val tuples: RDD[(Int, Iterable[Int])] = rdd.groupBy(data => data % 2)
+
+
+    tuples.collect().foreach(println)
+  }
+}
+```
+
+#### filter
+
+>将数据根据指定的规则进行筛选过滤，符合规则的数据保留，不符合规则的数据丢弃。 当数据进行筛选过滤后，分区不变，但是分区内的数据可能不均衡，生产环境下，可能会出 现数据倾斜。
+
+```scala
+package Operate
+
+import org.apache.spark.rdd.RDD
+import org.apache.spark.{SparkConf, SparkContext}
+
+object RDD_test_filter {
+  def main(args: Array[String]): Unit = {
+    val sparkConf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("Map")
+    val sc = new SparkContext(sparkConf)
+    val rdd: RDD[Int] = sc.makeRDD(
+      List(1, 2, 3, 4), 2
+    )
+    //将数据根据指定的规则进行筛选过滤,符合数据的保留,不符合的丢弃.当数据进行筛选过滤后,分区不变,可能会数据倾斜
+    val FilterRDD: RDD[Int] = rdd.filter(num => num % 2 != 0)
+
+    FilterRDD.collect().foreach(println)
+  }
+}
+```
+
+#### sample
+
+> // 抽取数据不放回（伯努利算法） 
+>
+> // 伯努利算法：又叫 0、1 分布。例如扔硬币，要么正面，要么反面。
+>
+>  // 具体实现：根据种子和随机算法算出一个数和第二个参数设置几率比较，小于第二个参数要，大于不 要
+>
+>  // 第一个参数：抽取的数据是否放回，false：不放回
+>
+>  // 第二个参数：抽取的几率，范围在[0,1]之间,0：全不取；1：全取； /
+>
+> / 第三个参数：随机数种子 
+>
+> // 抽取数据放回（泊松算法）
+>
+>  // 第一个参数：抽取的数据是否放回，true：放回；false：不放回 
+>
+> // 第二个参数：重复数据的几率，范围大于等于 0.表示每一个元素被期望抽取到的次数 
+>
+> // 第三个参数：随机数种子
+
+```scala
+package Operate
+
+import org.apache.spark.rdd.RDD
+import org.apache.spark.{SparkConf, SparkContext}
+
+object RDD_test_sample {
+  def main(args: Array[String]): Unit = {
+    val sparkConf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("Map")
+    val sc = new SparkContext(sparkConf)
+    val rdd: RDD[Int] = sc.makeRDD(
+      List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12), 2
+    )
+
+    //sample需要传入三个参数
+    //第一个表示数据是否放回,true放回,false丢弃
+    //第二个表示数据源中的数据被抽取的概率
+    //第三个表示抽取时随机种子,如果不传递,那么使用的是当前的系统时间
+    rdd.sample(false, 0.4, 2).collect().foreach(println)
+
+  }
+}
+```
+
+#### distinct
+
+> 将数据集中重复的数据去重
+
+```scala 
+package Operate
+
+import org.apache.spark.rdd.RDD
+import org.apache.spark.{SparkConf, SparkContext}
+
+object RDD_test_Distinct {
+  def main(args: Array[String]): Unit = {
+    val sparkConf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("Map")
+    val sc = new SparkContext(sparkConf)
+    var rdd: RDD[Int] = sc.makeRDD(
+      List(1, 2, 3, 4, 1, 2, 3, 4), 2
+    )
+
+
+    //case _ => map(x => (x, null)).reduceByKey((x, _) => x, numPartitions).map(_._1)
+    //(1,null) (2,null) (1,null) (2,null)
+    //reducebykey
+    //(1,null)=>()1
+    rdd.distinct().collect().foreach(println)
+  }
+}
+```
+
+#### coalesce
+
+> 根据数据量缩减分区，用于大数据集过滤后，提高小数据集的执行效率 当 spark 程序中，存在过多的小任务的时候，可以通过 coalesce 方法，收缩合并分区，减少 分区的个数，减小任务调度成本
+
+```scala
+package Operate
+
+import org.apache.spark.rdd.RDD
+import org.apache.spark.{SparkConf, SparkContext}
+
+object RDD_test_coalesce {
+  def main(args: Array[String]): Unit = {
+    val sparkConf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("Map")
+    val sc = new SparkContext(sparkConf)
+    val rdd: RDD[Int] = sc.makeRDD(
+      List(1, 2, 3, 4,5,6,7,8),4
+    )
+    //coalesce减少分区数量,防止资源浪费
+    //不会将数据打乱重新组合,只是缩减分区
+    //如果想让数据均衡一些可以进行shuffle处理,没有规律
+    //def coalesce(numPartitions: Int, shuffle: Boolean = false)
+    rdd.coalesce(2,true).saveAsTextFile("output")
+    //coalesce可以增加分区数量,如果不shuffle将没有意义
+    //扩大分区可以使用repartition
+    rdd.repartition(8)
+    //coalesce(numPartitions, shuffle = true)
+    rdd.coalesce(8,true).saveAsTextFile("output1")
+    sc.stop()
+  }
+}
+```
+
+#### repartition
+
+> 该操作内部其实执行的是 coalesce 操作，参数 shuffle 的默认值为 true。无论是将分区数多的 RDD 转换为分区数少的 RDD，还是将分区数少的 RDD 转换为分区数多的 RDD，repartition 操作都可以完成，因为无论如何都会经 shuffle 过程。
+
+```scala
+rdd.repartition(8)
+```
+
+#### sortBy
+
+> 该操作用于排序数据。在排序之前，可以将数据通过 f 函数进行处理，之后按照 f 函数处理 的结果进行排序，默认为升序排列。排序后新产生的 RDD 的分区数与原 RDD 的分区数一 致。中间存在 shuffle 的过程
+
+```scala
+package Operate
+
+import org.apache.spark.rdd.RDD
+import org.apache.spark.{SparkConf, SparkContext}
+
+object RDD_test_sortBy {
+  def main(args: Array[String]): Unit = {
+    val sparkConf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("Map")
+    val sc = new SparkContext(sparkConf)
+    val rdd: RDD[Int] = sc.makeRDD(
+      List(1, 2, 4, 3, 5, 8, 7, 6), 4
+    )
+    //默认升序,不会改变分区,会存在shuffle组合
+    //false是降序
+    rdd.sortBy(num => num).collect().foreach(print)
+    sc.stop()
+  }
+}
+```
+
+### RDD双value类型
 
