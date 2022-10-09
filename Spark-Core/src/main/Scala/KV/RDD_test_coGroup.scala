@@ -7,7 +7,7 @@ object RDD_test_coGroup {
   def main(args: Array[String]): Unit = {
     val sparkConf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("Map")
     val sc = new SparkContext(sparkConf)
-    val rdd = sc.makeRDD(List(("a", 1), ("b", 1), ("b", 3)), 2)
+    val rdd = sc.makeRDD(List(("a", 1), ("b", 1), ("c", 3)), 2)
 
     val rdd1 = sc.makeRDD(List(("a", 2), ("b", 2), ("a", 3)), 2)
 

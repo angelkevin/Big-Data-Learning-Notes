@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="62cf5192-6624-4fc5-a69c-1d5fa126d7b7" name="变更" comment="变更">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Scala/WC/Spark_WordCount.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/WC/Spark_WordCount.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Scala/Broadcast/broadcast.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/Broadcast/broadcast.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Scala/KV/RDD_test_aggregateBy.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/KV/RDD_test_aggregateBy.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Scala/KV/RDD_test_coGroup.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/KV/RDD_test_coGroup.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +17,13 @@
   </component>
   <component name="CodeStyleSettingsInfer">
     <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Scala Object" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="PUSH_AUTO_UPDATE" value="true" />
@@ -56,20 +65,46 @@
       <recent name="D:\java\Spark-Core\data" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Broadcast" />
       <recent name="acc" />
       <recent name="" />
       <recent name="Action" />
       <recent name="KV" />
-      <recent name="Double_RDD" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.RDD_test_myACC">
-    <configuration name="RDD_test_ACC" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="acc.RDD_test_ACC" />
+  <component name="RunManager" selected="应用程序.Double_RDD_test">
+    <configuration name="Double_RDD_test" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Double_RDD.Double_RDD_test" />
       <module name="Spark-Core" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="acc.*" />
+          <option name="PATTERN" value="Double_RDD.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HotCategoryTop10Analysis" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Example.HotCategoryTop10Analysis" />
+      <module name="Spark-Core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RDD_test_coGroup" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="KV.RDD_test_coGroup" />
+      <module name="Spark-Core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="KV.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -90,19 +125,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RDD_test_partitionBy" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="RDD_test_partitionBy" />
-      <module name="Spark-Core" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Spark_WordCount" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="WC.Spark_WordCount" />
+    <configuration name="broadcast" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Broadcast.broadcast" />
       <module name="Spark-Core" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="WC.*" />
+          <option name="PATTERN" value="Broadcast.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -110,20 +138,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="topN" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="topN" />
-      <module name="Spark-Core" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.Double_RDD_test" />
+        <item itemvalue="应用程序.RDD_test_coGroup" />
+        <item itemvalue="应用程序.HotCategoryTop10Analysis" />
+        <item itemvalue="应用程序.broadcast" />
         <item itemvalue="应用程序.RDD_test_myACC" />
-        <item itemvalue="应用程序.RDD_test_ACC" />
-        <item itemvalue="应用程序.RDD_test_partitionBy" />
-        <item itemvalue="应用程序.Spark_WordCount" />
-        <item itemvalue="应用程序.topN" />
       </list>
     </recent_temporary>
   </component>
@@ -139,7 +160,7 @@
       <workItem from="1665189583261" duration="156000" />
       <workItem from="1665189773697" duration="24556000" />
       <workItem from="1665237569029" duration="1337000" />
-      <workItem from="1665285187186" duration="20681000" />
+      <workItem from="1665285187186" duration="26862000" />
     </task>
     <task id="LOCAL-00001" summary="666">
       <created>1665151685630</created>
@@ -218,7 +239,21 @@
       <option name="project" value="LOCAL" />
       <updated>1665313366028</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="变更">
+      <created>1665320791686</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1665320791686</updated>
+    </task>
+    <task id="LOCAL-00013" summary="变更">
+      <created>1665320902733</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1665320902733</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

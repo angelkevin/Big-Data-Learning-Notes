@@ -7,7 +7,7 @@ object RDD_test_aggregateBy {
   def main(args: Array[String]): Unit = {
     val sparkConf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("Map")
     val sc = new SparkContext(sparkConf)
-    val rdd = sc.makeRDD(
+    val rdd: RDD[(String, Int)] = sc.makeRDD(
       List(("a", 1), ("b", 1), ("b", 3), ("a", 2), ("b", 2), ("a", 3)), 2)
 
 
