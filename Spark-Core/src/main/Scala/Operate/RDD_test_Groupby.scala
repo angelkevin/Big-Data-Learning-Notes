@@ -8,13 +8,14 @@ object RDD_test_Groupby {
     val sparkConf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("Map")
     val sc = new SparkContext(sparkConf)
     val rdd: RDD[Int] = sc.makeRDD(
-      List(1, 2, 3, 4), 2
+      List(1, 2, 3, 4, 5, 6, 7, 8), 2
     )
+   // rdd.saveAsTextFile("output")
     val words = sc.makeRDD(List("Hello", "Hadoop", "Fuck"))
     val GroupRDD: RDD[(Char, Iterable[String])] = words.groupBy(
       data => data.charAt(0)
     )
-    GroupRDD.map(data => (data._1, data._2.size)).collect().foreach(println)
+    //GroupRDD.map(data => (data._1, data._2.size)).collect().foreach(println)
 
 
     //模式匹配
@@ -25,10 +26,18 @@ object RDD_test_Groupby {
 
 
     //GroupBy会将数据打乱重新组合,这个操作我们称之为shuffle
-    val tuples: RDD[(Int, Iterable[Int])] = rdd.groupBy(data => data % 2)
+    val tuples: RDD[(Int, Iterable[Int])] = rdd.groupBy(data => data)
+
+    tuples.map(data => {
+      for(i <- data._2){
+        println(i)
+      }
+    }).collect()
 
 
-    tuples.collect().foreach(println)
+
+ //   tuples.saveAsTextFile("output1")
+
   }
 }
 

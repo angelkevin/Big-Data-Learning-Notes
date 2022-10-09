@@ -6,7 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="62cf5192-6624-4fc5-a69c-1d5fa126d7b7" name="变更" comment="变更">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Scala/Double_RDD/Double_RDD_test.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/Double_RDD/Double_RDD_test.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Scala/KV/RDD_test_GroupBy.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/KV/RDD_test_GroupBy.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Scala/KV/RDD_test_partitionBy.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/KV/RDD_test_partitionBy.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Scala/KV/RDD_test_reduceByKey.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/KV/RDD_test_reduceByKey.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Scala/Operate/RDD_test_Groupby.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/Operate/RDD_test_Groupby.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../note/Hive.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Hive.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../note/Spark.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Spark.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,67 +40,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/java/Spark-Core",
-    "project.structure.last.edited": "项目",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "vcs.Git"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/java/Spark-Core&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;项目&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\java\Spark-Core\data" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="KV" />
       <recent name="Double_RDD" />
       <recent name="Operate" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.RDD_test_reduceByKey">
-    <configuration name="Double_RDD_test" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="Double_RDD.Double_RDD_test" />
-      <module name="Spark-Core" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Double_RDD.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RDD_test_coalesce" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="Operate.RDD_test_coalesce" />
-      <module name="Spark-Core" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Operate.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RDD_test_flatmap" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="Operate.RDD_test_flatmap" />
-      <module name="Spark-Core" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Operate.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RDD_test_reduceByKey" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="KV.RDD_test_reduceByKey" />
+  <component name="RunManager" selected="应用程序.topN">
+    <configuration name="RDD_test_aggregateBy" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="KV.RDD_test_aggregateBy" />
       <module name="Spark-Core" />
       <extension name="coverage">
         <pattern>
@@ -108,12 +76,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RDD_test_sortBy" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="Operate.RDD_test_sortBy" />
+    <configuration name="RDD_test_coGroupByKey" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="KV.RDD_test_coGroupByKey" />
       <module name="Spark-Core" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Operate.*" />
+          <option name="PATTERN" value="KV.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -121,13 +89,46 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="RDD_test_combineByKey" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="KV.RDD_test_combineByKey" />
+      <module name="Spark-Core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="KV.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RDD_test_jionByKey" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="KV.RDD_test_jionByKey" />
+      <module name="Spark-Core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="KV.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="topN" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="topN" />
+      <module name="Spark-Core" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.RDD_test_reduceByKey" />
-        <item itemvalue="应用程序.Double_RDD_test" />
-        <item itemvalue="应用程序.RDD_test_flatmap" />
-        <item itemvalue="应用程序.RDD_test_sortBy" />
-        <item itemvalue="应用程序.RDD_test_coalesce" />
+        <item itemvalue="应用程序.topN" />
+        <item itemvalue="应用程序.RDD_test_coGroupByKey" />
+        <item itemvalue="应用程序.RDD_test_jionByKey" />
+        <item itemvalue="应用程序.RDD_test_combineByKey" />
+        <item itemvalue="应用程序.RDD_test_aggregateBy" />
       </list>
     </recent_temporary>
   </component>
@@ -141,7 +142,9 @@
       <updated>1665151443835</updated>
       <workItem from="1665151445050" duration="1884000" />
       <workItem from="1665189583261" duration="156000" />
-      <workItem from="1665189773697" duration="24062000" />
+      <workItem from="1665189773697" duration="24556000" />
+      <workItem from="1665237569029" duration="1337000" />
+      <workItem from="1665285187186" duration="9442000" />
     </task>
     <task id="LOCAL-00001" summary="666">
       <created>1665151685630</created>
@@ -199,11 +202,21 @@
       <option name="project" value="LOCAL" />
       <updated>1665229523264</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="变更">
+      <created>1665234978640</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1665234978640</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.log" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

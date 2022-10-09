@@ -8,11 +8,10 @@ object RDD_test_GroupBy {
     val sparkConf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("Map")
     val sc = new SparkContext(sparkConf)
     val rdd = sc.makeRDD(
-      List(("a",1),("b",2),("c",3))
-    )
+      List(("a",1),("b",2),("c",3)),3)
 
 
-    rdd.groupByKey()
+    rdd.groupByKey().saveAsTextFile("outpath")
 
     sc.stop()
 

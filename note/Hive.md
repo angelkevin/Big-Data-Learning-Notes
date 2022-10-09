@@ -232,6 +232,102 @@ select name,orderdate,cost,ntile(5) over(order by orderdate) groupid from bussin
 -- row_number() 会顺序计算 1 2 3 
 --
 
+1，计算每门科目的成绩排名：
+ 
+[isea@hadoop108 datas]$ cat score.txt 
+悟空		语文		87
+悟空		数学		95
+悟空		英语		68
+八戒		语文		94
+八戒		数学		56
+八戒		英语		84
+张飞		语文		64
+张飞		数学		86
+张飞		英语		84
+小乔		语文		65
+小乔		数学		85
+小乔		英语		78
+ 
+创建hive表，并导入数据：
+create table score(name string,subject string,score int)
+row format delimited
+fields terminated by '\t';
+ 
+load data local inpath '/opt/module/datas/score.txt' into table score;
+ 
+> select * from score;
+ 
++-------------+----------------+--------------+--+
+| score.name  | score.subject  | score.score  |
++-------------+----------------+--------------+--+
+| 悟空          | 语文             | 87           |
+| 悟空          | 数学             | 95           |
+| 悟空          | 英语             | 68           |
+| 八戒          | 语文             | 94           |
+| 八戒          | 数学             | 56           |
+| 八戒          | 英语             | 84           |
+| 张飞          | 语文             | 64           |
+| 张飞          | 数学             | 86           |
+| 张飞          | 英语             | 84           |
+| 小乔          | 语文             | 65           |
+| 小乔          | 数学             | 85           |
+| 小乔          | 英语             | 78           |
++-------------+----------------+--------------+--+
+ 
+ 
+计算每门科目的成绩排名：每门科目，表示要对科目进行分组，排名所以要排序。这里面的rank只是打标记而已
+ 
+select *,rank() over(partition by subject order by score desc) rank,
+dense_rank() over(partition by subject order by score desc) dense_rank,
+row_number() over(partition by subject order by score desc) row_number
+from score;
+ 
++-------------+----------------+--------------+-------+-------------+-------------+--+
+| score.name  | score.subject  | score.score  | rank  | dense_rank  | row_number  |
++-------------+----------------+--------------+-------+-------------+-------------+--+
+| 悟空          | 数学             | 95           | 1     | 1           | 1           |
+| 张飞          | 数学             | 86           | 2     | 2           | 2           |
+| 小乔          | 数学             | 85           | 3     | 3           | 3           |
+| 八戒          | 数学             | 56           | 4     | 4           | 4           |
+| 张飞          | 英语             | 84           | 1     | 1           | 1           |
+| 八戒          | 英语             | 84           | 1     | 1           | 2           |
+| 小乔          | 英语             | 78           | 3     | 2           | 3           |
+| 悟空          | 英语             | 68           | 4     | 3           | 4           |
+| 八戒          | 语文             | 94           | 1     | 1           | 1           |
+| 悟空          | 语文             | 87           | 2     | 2           | 2           |
+| 小乔          | 语文             | 65           | 3     | 3           | 3           |
+| 张飞          | 语文             | 64           | 4     | 4           | 4           |
++-------------+----------------+--------------+-------+-------------+-------------+--+
+ 
+2，求出每门学科前三名的学生？
+ 
+t1:
+select *,row_number() over(partition by subject order by score desc) row_number
+from score;
+ 
+select * from
+(
+select *,row_number() over(partition by subject order by score desc) row_number
+from score)t1
+where t1.row_number <= 3;
+ 
++----------+-------------+-----------+----------------+--+
+| t1.name  | t1.subject  | t1.score  | t1.row_number  |
++----------+-------------+-----------+----------------+--+
+| 悟空       | 数学          | 95        | 1              |
+| 张飞       | 数学          | 86        | 2              |
+| 小乔       | 数学          | 85        | 3              |
+| 张飞       | 英语          | 84        | 1              |
+| 八戒       | 英语          | 84        | 2              |
+| 小乔       | 英语          | 78        | 3              |
+| 八戒       | 语文          | 94        | 1              |
+| 悟空       | 语文          | 87        | 2              |
+| 小乔       | 语文          | 65        | 3              |
++----------+-------------+-----------+----------------+--+
+
+
+
+
 
 
 ```
