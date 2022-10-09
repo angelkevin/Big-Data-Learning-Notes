@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="62cf5192-6624-4fc5-a69c-1d5fa126d7b7" name="变更" comment="变更">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Scala/Test.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/Test.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Scala/WC/Spark_WordCount.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/WC/Spark_WordCount.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,19 +56,20 @@
       <recent name="D:\java\Spark-Core\data" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="acc" />
+      <recent name="" />
       <recent name="Action" />
       <recent name="KV" />
       <recent name="Double_RDD" />
-      <recent name="Operate" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.topN">
-    <configuration name="RDD_test_aggregateBy" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="KV.RDD_test_aggregateBy" />
+  <component name="RunManager" selected="应用程序.RDD_test_myACC">
+    <configuration name="RDD_test_ACC" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="acc.RDD_test_ACC" />
       <module name="Spark-Core" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="KV.*" />
+          <option name="PATTERN" value="acc.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -76,12 +77,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RDD_test_coGroupByKey" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="KV.RDD_test_coGroupByKey" />
+    <configuration name="RDD_test_myACC" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="acc.RDD_test_myACC" />
       <module name="Spark-Core" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="KV.*" />
+          <option name="PATTERN" value="acc.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -89,25 +90,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RDD_test_combineByKey" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="KV.RDD_test_combineByKey" />
+    <configuration name="RDD_test_partitionBy" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="RDD_test_partitionBy" />
       <module name="Spark-Core" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="KV.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RDD_test_jionByKey" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="KV.RDD_test_jionByKey" />
+    <configuration name="Spark_WordCount" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="WC.Spark_WordCount" />
       <module name="Spark-Core" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="KV.*" />
+          <option name="PATTERN" value="WC.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -124,11 +119,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.RDD_test_myACC" />
+        <item itemvalue="应用程序.RDD_test_ACC" />
+        <item itemvalue="应用程序.RDD_test_partitionBy" />
+        <item itemvalue="应用程序.Spark_WordCount" />
         <item itemvalue="应用程序.topN" />
-        <item itemvalue="应用程序.RDD_test_coGroupByKey" />
-        <item itemvalue="应用程序.RDD_test_jionByKey" />
-        <item itemvalue="应用程序.RDD_test_combineByKey" />
-        <item itemvalue="应用程序.RDD_test_aggregateBy" />
       </list>
     </recent_temporary>
   </component>
@@ -144,7 +139,7 @@
       <workItem from="1665189583261" duration="156000" />
       <workItem from="1665189773697" duration="24556000" />
       <workItem from="1665237569029" duration="1337000" />
-      <workItem from="1665285187186" duration="14208000" />
+      <workItem from="1665285187186" duration="20681000" />
     </task>
     <task id="LOCAL-00001" summary="666">
       <created>1665151685630</created>
@@ -216,7 +211,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665303446552</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="变更">
+      <created>1665313366028</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1665313366028</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
