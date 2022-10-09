@@ -1,7 +1,13 @@
 object Test {
 
   def main(args: Array[String]): Unit = {
-    println("666")
+
+  }
+
+
+  class  zzz extends Serializable{
+    var age = 10
+
   }
 
 }

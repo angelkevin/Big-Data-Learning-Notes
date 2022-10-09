@@ -6,12 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="62cf5192-6624-4fc5-a69c-1d5fa126d7b7" name="变更" comment="变更">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Scala/KV/RDD_test_GroupBy.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/KV/RDD_test_GroupBy.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Scala/KV/RDD_test_partitionBy.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/KV/RDD_test_partitionBy.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Scala/KV/RDD_test_reduceByKey.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/KV/RDD_test_reduceByKey.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Scala/Operate/RDD_test_Groupby.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/Operate/RDD_test_Groupby.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../note/Hive.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Hive.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../note/Spark.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Spark.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Scala/Test.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/Test.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +20,10 @@
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
     <option name="SWAP_SIDES_IN_COMPARE_BRANCHES" value="true" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="dummy://scala-decompiled/Double_RDD_test.decompiled.java" root0="SKIP_HIGHLIGHTING" />
+    <setting file="dummy://scala-decompiled/Double_RDD_test_zip.decompiled.java" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -57,6 +56,7 @@
       <recent name="D:\java\Spark-Core\data" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Action" />
       <recent name="KV" />
       <recent name="Double_RDD" />
       <recent name="Operate" />
@@ -144,7 +144,7 @@
       <workItem from="1665189583261" duration="156000" />
       <workItem from="1665189773697" duration="24556000" />
       <workItem from="1665237569029" duration="1337000" />
-      <workItem from="1665285187186" duration="9442000" />
+      <workItem from="1665285187186" duration="14208000" />
     </task>
     <task id="LOCAL-00001" summary="666">
       <created>1665151685630</created>
@@ -209,7 +209,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665234978640</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="变更">
+      <created>1665303446552</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1665303446552</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
