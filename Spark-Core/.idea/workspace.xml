@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="62cf5192-6624-4fc5-a69c-1d5fa126d7b7" name="变更" comment="变更">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Scala/Broadcast/broadcast.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/Broadcast/broadcast.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Scala/KV/RDD_test_aggregateBy.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/KV/RDD_test_aggregateBy.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Scala/KV/RDD_test_coGroup.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/KV/RDD_test_coGroup.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,10 +26,6 @@
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
     <option name="SWAP_SIDES_IN_COMPARE_BRANCHES" value="true" />
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="dummy://scala-decompiled/Double_RDD_test.decompiled.java" root0="SKIP_HIGHLIGHTING" />
-    <setting file="dummy://scala-decompiled/Double_RDD_test_zip.decompiled.java" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -72,7 +65,7 @@
       <recent name="KV" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.Double_RDD_test">
+  <component name="RunManager" selected="应用程序.Top10Session">
     <configuration name="Double_RDD_test" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="Double_RDD.Double_RDD_test" />
       <module name="Spark-Core" />
@@ -112,12 +105,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RDD_test_myACC" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="acc.RDD_test_myACC" />
+    <configuration name="Top10Session" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Example.Top10Session" />
       <module name="Spark-Core" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="acc.*" />
+          <option name="PATTERN" value="Example.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -140,11 +133,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.Top10Session" />
         <item itemvalue="应用程序.Double_RDD_test" />
         <item itemvalue="应用程序.RDD_test_coGroup" />
         <item itemvalue="应用程序.HotCategoryTop10Analysis" />
         <item itemvalue="应用程序.broadcast" />
-        <item itemvalue="应用程序.RDD_test_myACC" />
       </list>
     </recent_temporary>
   </component>
@@ -160,7 +153,8 @@
       <workItem from="1665189583261" duration="156000" />
       <workItem from="1665189773697" duration="24556000" />
       <workItem from="1665237569029" duration="1337000" />
-      <workItem from="1665285187186" duration="26862000" />
+      <workItem from="1665285187186" duration="26881000" />
+      <workItem from="1665378018174" duration="2078000" />
     </task>
     <task id="LOCAL-00001" summary="666">
       <created>1665151685630</created>
@@ -253,7 +247,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665320902733</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="变更">
+      <created>1665327782076</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1665327782076</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
