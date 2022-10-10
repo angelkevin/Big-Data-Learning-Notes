@@ -1,4 +1,4 @@
-# Spark
+# Spark-Core
 
 ## WordCount
 
@@ -70,8 +70,6 @@ Spark 框架的核心是一个计算引擎，整体来说，它采用了标准 m
 如下图所示，它展示了一个 Spark 执行时的基本结构。图形中的 Driver 表示 master，
 负责管理整个集群中的作业任务调度。图形中的 Executor 则是 slave，负责实际执行任务。
 #### 核心组件
-由上图可以看出，对于 Spark 框架有两个核心组件：
-
 ##### Driver
 
 Spark 驱动器节点，用于执行 Spark 任务中的 main 方法，负责实际代码的执行工作。
@@ -80,8 +78,7 @@ Driver 在 Spark 作业执行时主要负责：
 ➢ 在 Executor 之间调度任务(task)
 ➢ 跟踪 Executor 的执行情况
 ➢ 通过 UI 展示查询运行情况
-实际上，我们无法准确地描述 Driver 的定义，因为在整个的编程过程中没有看到任何有关
-Driver 的字眼。所以简单理解，所谓的 Driver 就是驱使整个应用运行起来的程序，也称之为Driver 类。
+实际上，我们无法准确地描述 Driver 的定义，因为在整个的编程过程中没有看到任何有关Driver 的字眼。所以简单理解，所谓的 Driver 就是驱使整个应用运行起来的程序，也称之为Driver 类。
 
 ##### Executor
 
@@ -121,8 +118,7 @@ Spark Executor 是集群中运行在工作节点（Worker）中的一个 JVM 进
 
 #### Yarn Client 模式
 
-Client 模式将用于监控和调度的 Driver 模块在客户端执行，而不是在 Yarn 中，所以一
-般用于测试。
+Client 模式将用于监控和调度的 Driver 模块在客户端执行，而不是在 Yarn 中，所以一般用于测试。
 ➢ Driver 在任务提交的本地机器上运行
 ➢ Driver 启动后会和 ResourceManager 通讯申请启动 ApplicationMaster
 ➢ ResourceManager 分配 container，在合适的 NodeManager 上启动 ApplicationMaster，负责向 ResourceManager 申请 Executor 内存
