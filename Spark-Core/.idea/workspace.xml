@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62cf5192-6624-4fc5-a69c-1d5fa126d7b7" name="变更" comment="变更">
+      <change afterPath="$PROJECT_DIR$/../SparkStreaming/src/main/resources/log4j.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../note/Spark-Core.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Spark-Core.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SparkStreaming/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SparkStreaming/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SparkStreaming/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SparkStreaming/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../note/SparkStreaming.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/SparkStreaming.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +50,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/java/Spark-Core&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/java/SparkStreaming&quot;,
     &quot;project.structure.last.edited&quot;: &quot;项目&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
@@ -157,6 +160,8 @@
       <workItem from="1665285187186" duration="26881000" />
       <workItem from="1665378018174" duration="4122000" />
       <workItem from="1665399287928" duration="32000" />
+      <workItem from="1665399778236" duration="16000" />
+      <workItem from="1665399998404" duration="14000" />
     </task>
     <task id="LOCAL-00001" summary="666">
       <created>1665151685630</created>
