@@ -11,7 +11,7 @@
 - **缓存/消峰**:有助于控制和优化数据流经过系统的速度,解决生产消息和消费消息处理速度不一样的情况
 - **解耦**:允许独立的扩展或修改两边的处理过程,只要确保他们遵守同样的接口约束
 
-![image-20221010213439158](C:\Users\22154\AppData\Roaming\Typora\typora-user-images\image-20221010213439158.png)
+![image-20221010213439158](D:\java\img\image-20221010213439158.png)
 
 - **异步通信**:允许用户把一个消息放入队列,但并不去处理他,然后在需要的时候再去处理他们
 
@@ -19,7 +19,7 @@
 
 ### 点对点
 
-![image-20221010214239582](C:\Users\22154\AppData\Roaming\Typora\typora-user-images\image-20221010214239582.png)
+![image-20221010214239582](D:\java\img\image-20221010214239582.png)
 
 ### 发布订阅
 
@@ -29,7 +29,7 @@
 
 ## Kafka 基础架构
 
-<img src="C:\Users\22154\AppData\Roaming\Typora\typora-user-images\image-20221010215347752.png" alt="image-20221010215347752" style="zoom:150%;" />
+<img src="D:\java\img\image-20221010215347752.png" alt="image-20221010215347752" style="zoom:150%;" />
 
 ## 命令
 
@@ -424,3 +424,84 @@ public class CustomProducerAcks {
 
 ## 数据去重
 
+- 至少一次（At Least Once）= ACK级别设置为-1 + 分区副本大于等于2 + ISR里应答的最小副本数量大于等于2
+
+- 最多一次（At Most Once）= ACK级别设置为0 
+-  总结： At Least Once可以保证数据不丢失，但是不能保证数据不重复； At Most Once可以保证数据不重复，但是不能保证数据不丢失。
+
+### 幂等性
+
+**重复数据的判断标准**：具有相同<PID, Partition, SeqNumber>主键的消息提交时，Broker只会持久化一条。其 中PID是Kafka每次重启都会分配一个新的；Partition 表示分区号；Sequence Number是单调自增的。 所以幂等性只能保证的是在单分区单会话内不重复。
+
+> 开启参数 enable.idempotence 默认为 true，false 关闭
+
+### 事务
+
+### 
+
+![image-20221011191800054](D:\java\img\image-20221011191800054-16654957183731.png)
+
+
+
+```java
+package producer;
+
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.serialization.StringSerializer;
+
+import java.util.Properties;
+
+public class CustomProducerTransactions {
+    public static void main(String[] args) {
+        // 1 创建kafka生产者对象
+        Properties properties = new Properties();
+        //连接
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "hadoop01:9092,hadoop02:9092");
+        //指定kv的序列化
+        properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+
+
+        //指定事务ID
+        properties.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG,"Transactions");
+        
+        
+        KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(properties);
+
+        //初始化事务
+        kafkaProducer.initTransactions();
+        //开始事务
+        kafkaProducer.beginTransaction();
+
+        // 2 发送数据
+        try {
+            for (int i = 0; i < 100; i++) {
+                kafkaProducer.send(new ProducerRecord<>("test", "i:" + i));
+            }
+            //提交事务
+            kafkaProducer.commitTransaction();
+        } catch (Exception e) {
+            //回滚事务
+            kafkaProducer.abortTransaction();
+        } finally {
+            //3 关闭资源
+            kafkaProducer.close();
+        }
+
+
+    }
+}
+
+```
+
+## 数据乱序
+
+1）kafka在1.x版本之前保证数据单分区有序，条件如下： max.in.flight.requests.per.connection=1（不需要考虑是否开启幂等性）。 
+
+2）kafka在1.x及以后版本保证数据单分区有序，条件如下： 
+
+（1）未开启幂等性 max.in.flight.requests.per.connection需要设置为1
+
+（2）开启幂等性 max.in.flight.requests.per.connection需要设置小于等于5。 原因说明：因为在kafka1.x以后，启用幂等后，kafka服务端会缓存producer发来的最近5个request的元数据， 故无论如何，都可以保证最近5个request的数据都是有序的。

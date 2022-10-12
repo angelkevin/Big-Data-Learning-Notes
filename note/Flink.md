@@ -1391,3 +1391,135 @@ stream1.coGroup(stream2).where(keyseletor).equalto(keyselector).window().apply()
 # 状态
 
 在流处理中，数据是连续不断的到来和处理。每个任务进行计算的时候，可以基于当前数据直接得到转换输出结果，也可以作为一些依赖，这些由一个任务维护并且用来输出计算结果的所有数据就叫做状态。
+
+## 算子状态
+
+在流处理中,数据是连续不断的到来的和处理的,每个任务进行计算和处理的时候,可以基于当前数据直接转换给出结果;也可以依赖一些别的数据。这些由一个任务维护,并且用来计算出结果的所有数据,就叫作这个任务的状态。
+
+在Flink中,算子任务可以分为有状态和无状态的两种情况
+
+- 无状态只需观察每个独立的事件，根据当前输入的数据直接转化输出结果，如flatMap，map，filter，计算时不依赖其他的数据，叫做无状态
+
+- 有状态的算子任务是除了当前的数据之外，还需要一些其他的数据来得到计算结果，这里的其他数据就是所谓的状态，最常见的是之前到达的数据，或者由之前数据计算出的某个结果，比如sum，聚合算子，窗口算子
+
+直接把状态保存到内存里面来保存性能，并且通过分布式扩展来提高吞吐量。
+
+## 状态的分类
+
+- 托管状态：由Flink状态统一管理，由Runtime进行托管，在配置容错机制后，全部由Flink来管理，状态内容有：值状态valuestate，列表状态liststate，映射状态mapstate，聚合状态aggregatestate等状态，也可以通过复函数类中的上下文在自定义状态。
+- 原始状态：需要我们自己去定义。
+
+### 算子状态和按键分区状态
+
+1.算子状态：状态的作用范围为当前的算子任务实例，也就是值对当前并行子任务实例有效，这就意味着，每一个并行子任务占据了一个分区，他处理的所有数据都会访问到相同的状态，状态对于一个任务而言是共享的。算子状态可以用在所有的算子上，和本地变量没有什么区别，因为本地的变量的作用域也就是当前的任务实例中，在使用中，我们还要进一步实现checkpiontfunction
+
+2.按键分区状态：是根据输入流中的键来维护和访问，所有只能定义在按键分区流中，也就是keyby后才可以使用，按键分区状态应用广泛。所有的聚合算子必须在keybay后才可以使用，因为聚合的结果就是以按键分区状态保存的。在底层，所有状态都会和key保存成键值对的形式，具有相同的key的值可以访问到相同的状态，而不同的是被隔离的。
+
+3.他们都是在本地实例上维护的，每个并行子任务维护对应的状态。keyedstate按照key维护一组状态。
+
+## keyedstate
+
+```java
+package study_flink.State;
+
+import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.api.common.functions.AggregateFunction;
+import org.apache.flink.api.common.functions.ReduceFunction;
+import org.apache.flink.api.common.functions.RichFlatMapFunction;
+import org.apache.flink.api.common.state.*;
+import org.apache.flink.configuration.Configuration;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.util.Collector;
+import study_flink.Source.Event;
+import study_flink.Source.MySource;
+
+import java.time.Duration;
+
+public class valueState<E> {
+    public static void main(String[] args) throws Exception {
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        env.setParallelism(1);
+        SingleOutputStreamOperator<Event> stream = env.addSource(new MySource()).assignTimestampsAndWatermarks(WatermarkStrategy.<Event>forBoundedOutOfOrderness(Duration.ZERO).withTimestampAssigner(new SerializableTimestampAssigner<Event>() {
+            @Override
+            public long extractTimestamp(Event event, long recordTimestamp) {
+                return event.timestamp;
+            }
+        }));
+        stream.keyBy(data -> data.user).flatMap(new MyFlatMap()).print();
+
+
+        env.execute();
+    }
+
+    //实现自定义的RichFlatMapFunction
+    public static class MyFlatMap extends RichFlatMapFunction<Event, String> {
+
+        //定义状态
+        ValueState<Event> myValueState;
+        ListState<Event> myListState;
+        MapState<String, Long> myMapState;
+        ReducingState<Event> myReducingState;
+        AggregatingState<Event, String> myAggregatingState;
+
+        @Override
+        public void open(Configuration parameters) throws Exception {
+            myValueState = getRuntimeContext().getState(new ValueStateDescriptor<Event>("myValueState", Event.class));
+            myListState = getRuntimeContext().getListState(new ListStateDescriptor<Event>("myListState", Event.class));
+            myMapState = getRuntimeContext().getMapState(new MapStateDescriptor<String, Long>("myMapState", String.class, Long.class));
+            myReducingState = getRuntimeContext().getReducingState(new ReducingStateDescriptor<Event>("myReducingState", new ReduceFunction<Event>() {
+                @Override
+                public Event reduce(Event value1, Event value2) throws Exception {
+                    return new Event(value1.user, value2.url, value1.timestamp);
+                }
+            }, Event.class));
+            myAggregatingState = getRuntimeContext().getAggregatingState(new AggregatingStateDescriptor<Event, Long, String>("myAggregatingState", new AggregateFunction<Event, Long, String>() {
+                @Override
+                public Long createAccumulator() {
+
+                    return 0L;
+                }
+
+                @Override
+                public Long add(Event value, Long accumulator) {
+                    return accumulator + 1;
+                }
+
+                @Override
+                public String getResult(Long accumulator) {
+                    return "count:" + accumulator;
+                }
+
+                @Override
+                public Long merge(Long a, Long b) {
+                    return a + b;
+                }
+            }, Long.class));
+
+
+        }
+
+        @Override
+        public void flatMap(Event value, Collector<String> out) throws Exception {
+
+
+            myValueState.update(value);
+            System.out.println("myValueState: " + myValueState.value());
+
+            myListState.add(value);
+            System.out.println("myListState: " + myListState.toString());
+
+            myMapState.put(value.user, myMapState.get(value.user) == null ? 1 : myMapState.get(value.user) + 1);
+            System.out.println("myMapState: " + myMapState.get(value.user));
+
+            myAggregatingState.add(value);
+            System.out.println("myAggregatingState: " + myAggregatingState.get());
+
+            myReducingState.add(value);
+            System.out.println("myReducingState: " + myReducingState.get());
+
+        }
+    }
+}
+```
