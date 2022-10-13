@@ -1,4 +1,4 @@
-package study_flink.State;
+package study_flink.KeyedState;
 
 import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;

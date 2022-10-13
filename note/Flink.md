@@ -1392,8 +1392,6 @@ stream1.coGroup(stream2).where(keyseletor).equalto(keyselector).window().apply()
 
 在流处理中，数据是连续不断的到来和处理。每个任务进行计算的时候，可以基于当前数据直接得到转换输出结果，也可以作为一些依赖，这些由一个任务维护并且用来输出计算结果的所有数据就叫做状态。
 
-## 算子状态
-
 在流处理中,数据是连续不断的到来的和处理的,每个任务进行计算和处理的时候,可以基于当前数据直接转换给出结果;也可以依赖一些别的数据。这些由一个任务维护,并且用来计算出结果的所有数据,就叫作这个任务的状态。
 
 在Flink中,算子任务可以分为有状态和无状态的两种情况
@@ -1417,7 +1415,7 @@ stream1.coGroup(stream2).where(keyseletor).equalto(keyselector).window().apply()
 
 3.他们都是在本地实例上维护的，每个并行子任务维护对应的状态。keyedstate按照key维护一组状态。
 
-## keyedstate
+## 按键分区状态keyedstate
 
 ```java
 package study_flink.State;
@@ -1523,3 +1521,496 @@ public class valueState<E> {
     }
 }
 ```
+
+#### ListState
+
+```java
+package study_flink.State;
+
+import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.api.common.state.ListState;
+import org.apache.flink.api.common.state.ListStateDescriptor;
+import org.apache.flink.api.common.state.ValueState;
+import org.apache.flink.api.common.state.ValueStateDescriptor;
+import org.apache.flink.api.common.typeinfo.Types;
+import org.apache.flink.api.java.tuple.Tuple3;
+import org.apache.flink.configuration.Configuration;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
+import org.apache.flink.streaming.api.functions.co.CoProcessFunction;
+import org.apache.flink.util.Collector;
+import study_flink.Source.Event;
+import study_flink.Source.MySource;
+
+public class TwoStreamJoin {
+    public static void main(String[] args) throws Exception {
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        env.setParallelism(1);
+        SingleOutputStreamOperator<Tuple3<String, String, Long>> stream1 = env
+                .fromElements(
+                        Tuple3.of("a", "stream-1", 1000L),
+                        Tuple3.of("b", "stream-1", 2000L)
+                )
+                .assignTimestampsAndWatermarks(
+                        WatermarkStrategy.<Tuple3<String, String, Long>>forMonotonousTimestamps()
+                                .withTimestampAssigner(new SerializableTimestampAssigner<Tuple3<String, String, Long>>() {
+                                    @Override
+                                    public long extractTimestamp(Tuple3<String,
+                                            String, Long> t, long l) {
+                                        return t.f2;
+                                    }
+                                })
+                );
+        SingleOutputStreamOperator<Tuple3<String, String, Long>> stream2 = env
+                .fromElements(
+                        Tuple3.of("a", "stream-2", 3000L),
+                        Tuple3.of("b", "stream-2", 4000L)
+                )
+                .assignTimestampsAndWatermarks(
+                        WatermarkStrategy.<Tuple3<String, String, Long>>forMonotonousTimestamps()
+                                .withTimestampAssigner(new SerializableTimestampAssigner<Tuple3<String, String, Long>>() {
+                                    @Override
+                                    public long extractTimestamp(Tuple3<String,
+                                            String, Long> t, long l) {
+                                        return t.f2;
+                                    }
+                                })
+                );
+
+        stream1.keyBy(s -> s.f0).connect(stream2.keyBy(d -> d.f0)).process(new CoProcessFunction<Tuple3<String, String, Long>, Tuple3<String, String, Long>, String>() {
+            ListState<Tuple3<String, String, Long>> listState1;
+            ListState<Tuple3<String, String, Long>> listState2;
+
+            @Override
+            public void open(Configuration parameters) throws Exception {
+                listState1 = getRuntimeContext().getListState(new ListStateDescriptor<>("list1", Types.TUPLE(Types.STRING, Types.STRING, Types.LONG)));
+                listState2 = getRuntimeContext().getListState(new ListStateDescriptor<>("list2", Types.TUPLE(Types.STRING, Types.STRING, Types.LONG)));
+            }
+
+            @Override
+            public void processElement1(Tuple3<String, String, Long> value, CoProcessFunction<Tuple3<String, String, Long>, Tuple3<String, String, Long>, String>.Context ctx, Collector<String> out) throws Exception {
+                //获取另一条的数据,配对输出
+                for (Tuple3<String, String, Long> right : listState2.get()) {
+                    out.collect(value + "=>" + right);
+                }
+                listState1.add(value);
+            }
+
+            @Override
+            public void processElement2(Tuple3<String, String, Long> value, CoProcessFunction<Tuple3<String, String, Long>, Tuple3<String, String, Long>, String>.Context ctx, Collector<String> out) throws Exception {
+                //获取另一条的数据,配对输出
+                for (Tuple3<String, String, Long> left : listState1.get()) {
+                    out.collect(left + "=>" + value);
+                }
+                listState2.add(value);
+            }
+        }).print();
+        env.execute();
+
+
+    }
+}
+
+```
+
+#### MapSrate
+
+```java
+package study_flink.State;
+
+import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.api.common.state.MapState;
+import org.apache.flink.api.common.state.MapStateDescriptor;
+import org.apache.flink.configuration.Configuration;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
+import org.apache.flink.util.Collector;
+import study_flink.Source.Event;
+import study_flink.Source.MySource;
+
+import java.sql.Timestamp;
+import java.time.Duration;
+
+public class FakeWindow {
+    public static void main(String[] args) throws Exception {
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        env.setParallelism(1);
+        SingleOutputStreamOperator<Event> stream = env.addSource(new MySource()).assignTimestampsAndWatermarks(WatermarkStrategy.<Event>forBoundedOutOfOrderness(Duration.ZERO).withTimestampAssigner(
+                new SerializableTimestampAssigner<Event>() {
+                    @Override
+                    public long extractTimestamp(Event element, long recordTimestamp) {
+                        return element.timestamp;
+                    }
+                }
+        ));
+        stream.keyBy(data -> data.url).process(new KeyedProcessFunction<String, Event, String>() {
+
+
+            MapState<Long, Long> windowUrlCountState;
+
+
+            @Override
+            public void open(Configuration parameters) throws Exception {
+                windowUrlCountState = getRuntimeContext().getMapState(new MapStateDescriptor<>("window", Long.class, Long.class));
+            }
+
+            @Override
+            public void processElement(Event value, KeyedProcessFunction<String, Event, String>.Context ctx, Collector<String> out) throws Exception {
+                //每来一条数据，根据时间戳判断他属于哪个窗口
+                Long windowStart = value.timestamp/10000L*10000L;
+                Long windowEnd = windowStart + 10000L;
+                //注册end减一的定时器
+                ctx.timerService().registerEventTimeTimer(windowEnd - 1L);
+                //更新状态，进行聚合
+                if (windowUrlCountState.contains(windowStart)) {
+                    Long count = windowUrlCountState.get(windowStart);
+                    windowUrlCountState.put(windowStart, count + 1);
+                } else {
+                    windowUrlCountState.put(windowStart, 1L);
+                }
+            }
+
+            @Override
+            public void onTimer(long timestamp, KeyedProcessFunction<String, Event, String>.OnTimerContext ctx, Collector<String> out) throws Exception {
+                Long windowEnd = timestamp + 1;
+                Long windowStart = windowEnd - 10000L;
+                Long count = windowUrlCountState.get(windowStart);
+                out.collect("窗口 :" + new Timestamp(windowStart) + "~" + new Timestamp(windowEnd) + "Url = " + ctx.getCurrentKey() + "count =" + count);
+
+                windowUrlCountState.remove(windowStart);
+
+
+            }
+        }).print();
+        env.execute();
+
+
+    }
+}
+
+```
+
+#### AggregatingState
+
+```java
+package study_flink.State;
+
+import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.api.common.functions.AggregateFunction;
+import org.apache.flink.api.common.functions.RichFlatMapFunction;
+import org.apache.flink.api.common.state.*;
+import org.apache.flink.api.common.typeinfo.Types;
+import org.apache.flink.api.java.tuple.Tuple2;
+import org.apache.flink.configuration.Configuration;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
+import org.apache.flink.util.Collector;
+import study_flink.Source.Event;
+import study_flink.Source.MySource;
+
+import java.sql.Timestamp;
+import java.time.Duration;
+
+public class AverageTimestamp {
+    public static void main(String[] args) throws Exception {
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        env.setParallelism(1);
+        SingleOutputStreamOperator<Event> stream = env.addSource(new MySource()).assignTimestampsAndWatermarks(WatermarkStrategy.<Event>forBoundedOutOfOrderness(Duration.ZERO).withTimestampAssigner(
+                new SerializableTimestampAssigner<Event>() {
+                    @Override
+                    public long extractTimestamp(Event element, long recordTimestamp) {
+                        return element.timestamp;
+                    }
+                }
+        ));
+
+        stream.keyBy(data -> data.user)
+                .flatMap(new AvgTsResult())
+                .print();
+        env.execute();
+    }
+
+    public static class AvgTsResult extends RichFlatMapFunction<Event, String> {
+        // 定义聚合状态，用来计算平均时间戳
+        AggregatingState<Event, Long> avgTsAggState;
+        // 定义一个值状态，用来保存当前用户访问频次
+        ValueState<Long> countState;
+
+        @Override
+        public void open(Configuration parameters) throws Exception {
+            avgTsAggState = getRuntimeContext().getAggregatingState(new
+                    AggregatingStateDescriptor<Event, Tuple2<Long, Long>, Long>(
+                    "avg-ts",
+                    new AggregateFunction<Event, Tuple2<Long, Long>, Long>() {
+                        @Override
+                        public Tuple2<Long, Long> createAccumulator() {
+                            return Tuple2.of(0L, 0L);
+                        }
+
+                        @Override
+                        public Tuple2<Long, Long> add(Event value, Tuple2<Long, Long>
+                                accumulator) {
+                            return Tuple2.of(accumulator.f0 + value.timestamp,
+                                    accumulator.f1 + 1);
+                        }
+
+                        @Override
+                        public Long getResult(Tuple2<Long, Long> accumulator) {
+                            return accumulator.f0 / accumulator.f1;
+                        }
+
+                        @Override
+                        public Tuple2<Long, Long> merge(Tuple2<Long, Long> a,
+                                                        Tuple2<Long, Long> b) {
+                            return null;
+                        }
+                    },
+                    Types.TUPLE(Types.LONG, Types.LONG)
+            ));
+            countState = getRuntimeContext().getState(new
+                    ValueStateDescriptor<Long>("count", Long.class));
+        }
+
+        @Override
+        public void flatMap(Event value, Collector<String> out) throws Exception {
+            Long count = countState.value();
+            if (count == null) {
+                count = 1L;
+            } else {
+                count++;
+
+            }
+            countState.update(count);
+            avgTsAggState.add(value);
+            // 达到 5 次就输出结果，并清空状态
+            if (count == 5) {
+                out.collect(value.user + " 平均时间戳： " + new
+                        Timestamp(avgTsAggState.get()));
+                countState.clear();
+            }
+        }
+    }
+}
+
+
+```
+
+#### ValueState
+
+```java
+package study_flink.State;
+
+import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.api.common.state.ValueState;
+import org.apache.flink.api.common.state.ValueStateDescriptor;
+import org.apache.flink.configuration.Configuration;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
+import org.apache.flink.util.Collector;
+import study_flink.Source.Event;
+import study_flink.Source.MySource;
+
+import java.time.Duration;
+
+public class myValueState {
+    public static void main(String[] args) throws Exception {
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        env.setParallelism(1);
+        SingleOutputStreamOperator<Event> stream = env.addSource(new MySource()).assignTimestampsAndWatermarks(WatermarkStrategy.<Event>forBoundedOutOfOrderness(Duration.ZERO).withTimestampAssigner(new SerializableTimestampAssigner<Event>() {
+            @Override
+            public long extractTimestamp(Event event, long recordTimestamp) {
+                return event.timestamp;
+            }
+        }));
+
+
+        stream.keyBy(data -> data.user).process(new KeyedProcessFunction<String, Event, String>() {
+            ValueState<Long> countCount;
+            ValueState<Long> timerTsState;
+
+            @Override
+            public void open(Configuration parameters) throws Exception {
+                countCount = getRuntimeContext().getState(new ValueStateDescriptor<Long>("count", Long.class));
+                timerTsState = getRuntimeContext().getState(new ValueStateDescriptor<>("ts", Long.class));
+
+            }
+
+            //每来一条数据都会调用
+            @Override
+            public void processElement(Event value, KeyedProcessFunction<String, Event, String>.Context ctx, Collector<String> out) throws Exception {
+                Long count = countCount.value();
+                countCount.update(count == null ? 1 : count + 1);
+
+                if (timerTsState.value() == null) {
+                    ctx.timerService().registerEventTimeTimer(value.timestamp + 10 * 1000L);
+                    timerTsState.update(value.timestamp + 10 * 1000L);
+                }
+
+            }
+
+            @Override
+            public void onTimer(long timestamp, KeyedProcessFunction<String, Event, String>.OnTimerContext ctx, Collector<String> out) throws Exception {
+                out.collect("定时器触发：" + ctx.getCurrentKey() + " " + "PV:" + countCount.value());
+                timerTsState.clear();
+            }
+        }).print();
+
+
+        env.execute();
+    }
+}
+
+```
+
+### TTL状态生存时间
+
+在实际应用中，很多状态会随着时间的推移逐渐增长，如果不加以限制，最终就会导致存 储空间的耗尽。一个优化的思路是直接在代码中调用.clear()方法去清除状态，但是有时候我们 的逻辑要求不能直接清除。这时就需要配置一个状态的“生存时间”（time-to-live，TTL），当 状态在内存中存在的时间超出这个值时，就将它清除。
+
+具体实现上，如果用一个进程不停地扫描所有状态看是否过期，显然会占用大量资源做无 用功。状态的失效其实不需要立即删除，所以我们可以给状态附加一个属性，也就是状态的“失 效时间”。状态创建的时候，设置 失效时间 = 当前时间 + TTL；之后如果有对状态的访问和 修改，我们可以再对失效时间进行更新；当设置的清除条件被触发时（比如，状态被访问的时 候，或者每隔一段时间扫描一次失效状态），就可以判断状态是否失效、从而进行清除了。 配置状态的 TTL 时，需要创建一个 StateTtlConfig 配置对象，然后调用状态描述器 的.enableTimeToLive()方法启动 TTL 功能。
+
+```java
+// 在open生命周期函数里面或者在获得状态控制句柄的时候进行配置
+StateTtlConfig ttlConfig = StateTtlConfig
+    .newBuilder(Time.seconds(10))
+    .setUpdateType(StateTtlConfig.UpdateType.OnCreateAndWrite)
+    .setStateVisibility(StateTtlConfig.StateVisibility.NeverReturnExpired)
+    .build();
+ValueStateDescriptor<String> stateDescriptor = new ValueStateDescriptor<>("my
+state", String.class);
+stateDescriptor.enableTimeToLive(ttlConfig);
+```
+
+- .newBuilder() 状态 TTL 配置的构造器方法，必须调用，返回一个 Builder 之后再调用.build()方法就可以 得到 StateTtlConfig 了。方法需要传入一个 Time 作为参数，这就是设定的状态生存时间。 
+- .setUpdateType() 设置更新类型。更新类型指定了什么时候更新状态失效时间，这里的 OnCreateAndWrite 表示只有创建状态和更改状态（写操作）时更新失效时间。另一种类型 OnReadAndWrite 则表 示无论读写操作都会更新失效时间，也就是只要对状态进行了访问，就表明它是活跃的，从而 延长生存时间。这个配置默认为 OnCreateAndWrite。
+- .setStateVisibility() 设置状态的可见性。所谓的“状态可见性”，是指因为清除操作并不是实时的，所以当状 态过期之后还有可能基于存在，这时如果对它进行访问，能否正常读取到就是一个问题了。这 里设置的 NeverReturnExpired 是默认行为，表示从不返回过期值，也就是只要过期就认为它已 经被清除了，应用不能继续读取；这在处理会话或者隐私数据时比较重要。对应的另一种配置 是 ReturnExpireDefNotCleanedUp，就是如果过期状态还存在，就返回它的值。
+
+## 算子状态（Operator State）
+
+算子状态（Operator State）就是一个算子并行实例上定义的状态，作用范围被限定为当前 算子任务。算子状态跟数据的 key 无关，所以不同 key 的数据只要被分发到同一个并行子任务， 就会访问到同一个 Operator State。
+
+算子状态也支持不同的结构类型，主要有三种：**ListState**、**UnionListState** 和**BroadcastState**。
+
+1. **列表状态（ListState）** 与 Keyed State 中的 ListState 一样，将状态表示为一组数据的列表。当算子并行度进行缩放调整时，算子的列表状态中的所有元素项会被统一收集起来，相当 于把多个分区的列表合并成了一个“大列表”，然后再均匀地分配给所有并行任务。这种“均 匀分配”的具体方法就是“轮询”（round-robin），与之前介绍的 rebanlance 数据传输方式类似， 是通过逐一“发牌”的方式将状态项平均分配的。这种方式也叫作“平均分割重组”（even-split redistribution）。
+
+2. **联合列表状态（UnionListState）** 与 ListState 类似，联合列表状态也会将状态表示为一个列表。它与常规列表状态的区别 在于，算子并行度进行缩放调整时对于状态的分配方式不同。UnionListState 的重点就在于“联合”（union）。在并行度调整时，常规列表状态是轮询分 配状态项，而联合列表状态的算子则会直接广播状态的完整列表。这样，并行度缩放之后的并 行子任务就获取到了联合后完整的“大列表”，可以自行选择要使用的状态项和要丢弃的状态 项。这种分配也叫作“联合重组”（union redistribution）。如果列表中状态项数量太多，为资源 和效率考虑一般不建议使用联合重组的方式
+
+3. **广播状态（BroadcastState）** 有时我们希望算子并行子任务都保持同一份“全局”状态，用来做统一的配置和规则设定。 这时所有分区的所有数据都会访问到同一个状态，状态就像被“广播”到所有分区一样，这种 特殊的算子状态，就叫作广播状态（BroadcastState）。因为广播状态在每个并行子任务上的实例都一样，所以在并行度调整的时候就比较简单， 只要复制一份到新的并行任务就可以实现扩展；而对于并行度缩小的情况，可以将多余的并行 子任务连同状态直接砍掉——因为状态都是复制出来的，并不会丢失。
+
+#### 列表状态（ListState）
+
+```JAVA
+package study_flink.Operatortate;
+
+import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.api.common.state.ListState;
+import org.apache.flink.api.common.state.ListStateDescriptor;
+import org.apache.flink.runtime.state.FunctionInitializationContext;
+import org.apache.flink.runtime.state.FunctionSnapshotContext;
+import org.apache.flink.streaming.api.checkpoint.CheckpointedFunction;
+import org.apache.flink.streaming.api.datastream.DataStreamSource;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.functions.sink.SinkFunction;
+import study_flink.Source.Event;
+import study_flink.Source.MySource;
+
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+
+public class BufferingSink {
+    public static void main(String[] args) throws Exception {
+
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        env.setParallelism(1);
+        DataStreamSource<Event> streamSource = env.addSource(new MySource());
+
+        SingleOutputStreamOperator<Event> stream = streamSource.assignTimestampsAndWatermarks(WatermarkStrategy.<Event>forBoundedOutOfOrderness(Duration.ZERO).withTimestampAssigner(new SerializableTimestampAssigner<Event>() {
+            @Override
+            public long extractTimestamp(Event event, long l) {
+                return event.timestamp;
+            }
+        }));
+
+        stream.addSink(new MyBufferingSink(10));
+
+
+        env.execute();
+
+
+    }
+
+    public static class MyBufferingSink implements SinkFunction<Event>, CheckpointedFunction {
+        //定义当前类的属性，批量阈值
+        private final int threshold;
+        private List<Event> list;
+
+        //定义算子状态
+        ListState<Event> checkpointState;
+
+        public MyBufferingSink(int threshold) {
+            this.threshold = threshold;
+            this.list = new ArrayList<>();
+        }
+
+
+        @Override
+        public void invoke(Event value, Context context) throws Exception {
+            list.add(value);
+            if (list.size() == threshold) {
+                //打印到控制台来模拟
+                for (Event event : list) {
+                    System.out.println(event);
+                }
+                System.out.println("===========================");
+                list.clear();
+            }
+        }
+
+        //保存状态快照到检查点时，调用这个方法
+        @Override
+        public void snapshotState(FunctionSnapshotContext context) throws Exception {
+            //先清空状态
+            checkpointState.clear();
+
+
+            //对状态进行持久化的状态，复制缓存的列表到列表状态
+            for (Event event : list) {
+                checkpointState.add(event);
+            }
+
+        }
+
+
+        //初始化算子状态。也会在恢复状态时调用
+        @Override
+        public void initializeState(FunctionInitializationContext context) throws Exception {
+            //定义算子状态
+            ListStateDescriptor<Event> descriptor = new ListStateDescriptor<>("list", Event.class);
+            checkpointState = context.getOperatorStateStore().getListState(descriptor);
+            //如果从故障恢复，需要将ListState中的所有元素复制到列表中
+            if (context.isRestored()) {
+                for (Event event : checkpointState.get()) {
+                    list.add(event);
+                }
+            }
+
+        }
+
+    }
+
+}
+
+```
+
+#### 广播状态（Broadcast State）
+
