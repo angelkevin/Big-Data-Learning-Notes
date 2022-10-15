@@ -5,13 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2fadb2a0-c0cf-43f4-8809-f261fd28d0ab" name="Changes" comment="scalaaaaa">
-      <change afterPath="$PROJECT_DIR$/src/main/Scala/Day01/Function.scala" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/Scala/Day01/FunctionDefine.scala" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/Scala/Day01/Lambda.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Fink/src/main/java/study_flink/Operatortate/BC.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SparkStreaming/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SparkStreaming/src/main/Scala/DIYSource/queueStream.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SparkStreaming/src/main/Scala/Example/Blacklist.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SparkStreaming/src/main/Scala/Example/data.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SparkStreaming/src/main/Scala/State/State.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../img/image-20221013152607883.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../img/image-20221013152620536.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Fink/target/classes/study_flink/Operatortate/BufferingSink$MyBufferingSink.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Fink/target/classes/study_flink/Operatortate/BufferingSink$MyBufferingSink.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Scala/Day01/forfor.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/Day01/forfor.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Day01/forfor$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Day01/forfor$.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../note/Scala.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Scala.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SparkStreaming/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SparkStreaming/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SparkStreaming/src/main/Scala/kafka/Kafka.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../SparkStreaming/src/main/Scala/kafka/Kafka.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SparkStreaming/src/main/Scala/q.scala" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SparkStreaming/target/classes/DIYSource/Receiver$.class" beforeDir="false" afterPath="$PROJECT_DIR$/../SparkStreaming/target/classes/DIYSource/Receiver$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SparkStreaming/target/classes/DIYSource/Receiver$MyReceiver$$anon$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../SparkStreaming/target/classes/DIYSource/Receiver$MyReceiver$$anon$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SparkStreaming/target/classes/DIYSource/Receiver$MyReceiver.class" beforeDir="false" afterPath="$PROJECT_DIR$/../SparkStreaming/target/classes/DIYSource/Receiver$MyReceiver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SparkStreaming/target/classes/q$.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SparkStreaming/target/classes/q.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../note/Bigdata.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Bigdata.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../note/Flink.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Flink.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../note/Kafka.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Kafka.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../note/SparkStreaming.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/SparkStreaming.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,19 +60,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/22154/.m2/repository/org/scala-lang/scala-library/2.12.4/scala-library-2.12.4.jar&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/java/Kafka",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
-  <component name="RunManager" selected="Application.Lambda">
+}]]></component>
+  <component name="RunManager" selected="应用程序.Function">
     <configuration name="Function" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="Day01.Function" />
       <module name="Scala" />
@@ -125,11 +140,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Lambda" />
-        <item itemvalue="Application.FunctionDefine" />
-        <item itemvalue="Application.Function" />
-        <item itemvalue="Application.forfor" />
-        <item itemvalue="Application.Iftest" />
+        <item itemvalue="应用程序.Function" />
       </list>
     </recent_temporary>
   </component>
@@ -147,6 +158,7 @@
       <workItem from="1664900974604" duration="28000" />
       <workItem from="1664945405957" duration="12170000" />
       <workItem from="1665036192517" duration="3680000" />
+      <workItem from="1665740015784" duration="653000" />
     </task>
     <task id="LOCAL-00001" summary="scalaaaaa">
       <created>1664378236945</created>

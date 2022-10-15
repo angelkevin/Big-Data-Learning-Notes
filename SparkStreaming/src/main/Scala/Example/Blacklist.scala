@@ -1,12 +1,12 @@
-package kafka
+package Example
 
 import org.apache.kafka.clients.consumer.{ConsumerConfig, ConsumerRecord}
 import org.apache.spark.SparkConf
-import org.apache.spark.streaming.dstream.{DStream, InputDStream, ReceiverInputDStream}
+import org.apache.spark.streaming.dstream.{DStream, InputDStream}
 import org.apache.spark.streaming.kafka010.{ConsumerStrategies, KafkaUtils, LocationStrategies}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 
-object Kafka {
+object Blacklist {
   def main(args: Array[String]): Unit = {
 
 
@@ -34,7 +34,7 @@ object Kafka {
       ConsumerStrategies.Subscribe[String, String](Set("test"), kafkaPara)
     )
 
-    kafkaStream.map((_: ConsumerRecord[String, String]).value()).print()
+    val value: DStream[String] = kafkaStream.map((_: ConsumerRecord[String, String]).value())
 
     ssc.start()
     ssc.awaitTermination()

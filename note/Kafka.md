@@ -11,7 +11,7 @@
 - **缓存/消峰**:有助于控制和优化数据流经过系统的速度,解决生产消息和消费消息处理速度不一样的情况
 - **解耦**:允许独立的扩展或修改两边的处理过程,只要确保他们遵守同样的接口约束
 
-![image-20221010213439158](D:\java\img\image-20221010213439158.png)
+![image-20221010213439158](..\img\image-20221010213439158.png)
 
 - **异步通信**:允许用户把一个消息放入队列,但并不去处理他,然后在需要的时候再去处理他们
 
@@ -19,17 +19,23 @@
 
 ### 点对点
 
-![image-20221010214239582](D:\java\img\image-20221010214239582.png)
+![image-20221010214239582](..\img\image-20221010214239582.png)
 
 ### 发布订阅
 
-![image-20221010214349195](C:\Users\22154\AppData\Roaming\Typora\typora-user-images\image-20221010214349195.png)
+![image-20221010214349195](D:\java\img\image-20221010214349195.png)
 
 **同一消费者组内不允许多个消费者同时消费同一分区的消息,而不同的消费者组可以同时消费同一分区消息**
 
 ## Kafka 基础架构
 
-<img src="D:\java\img\image-20221010215347752.png" alt="image-20221010215347752" style="zoom:150%;" />
+<img src="..\img\image-20221010215347752.png" alt="image-20221010215347752" style="zoom:150%;" />
+
+![image-20221014182612805](..\img\image-20221014182612805.png)
+
+![image-20221014182730821](..\img\image-20221014182730821.png)
+
+![image-20221014182644685](..\img\image-20221014182644685.png)
 
 ## 命令
 
@@ -48,20 +54,23 @@
 
 ``` shell
 cd /usr/local/kafka/bin/ ./kafka-server-start.sh -daemon config/server.properties
-
 #启动kafka
-bin/kafka-topics.sh --zookeeper hadoop01:2181 --topic first --create --partitions 1 --replication-factor 3
 
+bin/kafka-topics.sh --zookeeper hadoop01:2181 --topic first --create --partitions 2 --replication-factor 3
 # 创建主题（topic），partitions 分区数，replication-factor 副本数；分区只能加不能减
-kafka-console-producer.sh --broker-list hadoop01:9092 --topic first
+
+kafka-console-producer.sh --broker-list hadoop01:9092 --topic test
 # 创建生产者
-kafka-console-consumer.sh --bootstrap-server hadoop02:9092 --topic first bin/kafka-server-start.sh config/server.properties 
+
+kafka-console-consumer.sh --bootstrap-server hadoop02:9092 --topic test bin/kafka-server-start.sh config/server.properties 
 # 创建消费者
 ```
 
-### 自定义生产者
+# kafka生产者
 
-#### 异步发送
+## 自定义生产者
+
+### 异步发送
 
 ```java
 package producer;
@@ -140,6 +149,8 @@ public class CustomProducerCallback {
 ```
 
 #### 同步发送
+
+加一个get()
 
 ```java
 package producer;
@@ -437,9 +448,7 @@ public class CustomProducerAcks {
 
 ### 事务
 
-### 
-
-![image-20221011191800054](D:\java\img\image-20221011191800054-16654957183731.png)
+![image-20221011191800054](..\img\image-20221011191800054-16654957183731.png)
 
 
 
@@ -505,3 +514,141 @@ public class CustomProducerTransactions {
 （1）未开启幂等性 max.in.flight.requests.per.connection需要设置为1
 
 （2）开启幂等性 max.in.flight.requests.per.connection需要设置小于等于5。 原因说明：因为在kafka1.x以后，启用幂等后，kafka服务端会缓存producer发来的最近5个request的元数据， 故无论如何，都可以保证最近5个request的数据都是有序的。
+
+## 服役新节点
+
+创建新环境，修改borkerid，删除kafka 下的 datas 和 logs
+
+创建要均衡的主题
+
+```json
+vim topics-to-move.json
+
+{
+ "topics": [
+ {"topic": "first"}
+ ],
+ "version": 1
+}
+```
+
+生成一个负载均衡的计划
+
+```shell
+bin/kafka-reassign-partitions.sh --
+bootstrap-server hadoop01:9092 --topics-to-move-json-file
+topics-to-move.json --broker-list "0,1,2,3" --generate
+```
+
+创建副本存储计划
+
+```shell
+vim increase-replication-factor.json
+
+#内容为生成负载均衡计划
+```
+
+执行副本存储计划
+
+```shell
+bin/kafka-reassign-partitions.sh --
+bootstrap-server hadoop01:9092 --reassignment-json-file
+increase-replication-factor.json --execute
+```
+
+验证
+
+```shell
+bin/kafka-reassign-partitions.sh --
+bootstrap-server hadoop01:9092 --reassignment-json-file
+increase-replication-factor.json --verify
+```
+
+## 退役旧节点
+
+创建新环境，修改borkerid，删除kafka 下的 datas 和 logs
+
+创建要均衡的主题
+
+```json
+vim topics-to-move.json
+
+{
+ "topics": [
+ {"topic": "first"}
+ ],
+ "version": 1
+}
+```
+
+生成一个负载均衡的计划
+
+```shell
+bin/kafka-reassign-partitions.sh --
+bootstrap-server hadoop01:9092 --topics-to-move-json-file
+topics-to-move.json --broker-list "0,1,2" --generate
+```
+
+创建副本存储计划
+
+```shell
+vim increase-replication-factor.json
+
+#内容为生成负载均衡计划
+```
+
+执行副本存储计划
+
+```shell
+bin/kafka-reassign-partitions.sh --
+bootstrap-server hadoop01:9092 --reassignment-json-file
+increase-replication-factor.json --execute
+```
+
+验证
+
+```shell
+bin/kafka-reassign-partitions.sh --
+bootstrap-server hadoop01:9092 --reassignment-json-file
+increase-replication-factor.json --verify
+```
+
+然后关掉节点
+
+# kafka副本
+
+## 副本的基本信息
+
+（1）**Kafka 副本作用**：提高数据可靠性。 
+
+（2）Kafka 默认副本 1 个，生产环境一般配置为 2 个，保证数据可靠性；太多副本会 增加磁盘存储空间，增加网络上数据传输，降低效率。
+
+（3）**Kafka 中副本分为**：Leader 和 Follower。Kafka 生产者只会把数据发往 Leader， 然后 Follower 找 Leader 进行同步数据。 
+
+（4）**Kafka 分区中的所有副本统称为 AR（Assigned Repllicas）**。
+
+ AR = ISR + OSR 
+
+**ISR**，表示和 Leader 保持同步的 Follower 集合。如果 Follower 长时间未向 Leader 发送 ，则该 Follower 将被踢出 ISR。该时间阈值由 replica.lag.time.max.ms 参数设定，默认 30s。Leader 发生故障之后，就会从 ISR 中选举新的 Leader。
+
+**OSR**，表示 Follower 与 Leader 副本同步时，延迟过多的副本。
+
+## Leader 选举流程
+
+![image-20221014200320100](..\img\image-20221014200320100.png)
+
+## 高效读写数据
+
+1）Kafka 本身是分布式集群，可以采用分区技术，并行度高 
+
+2）读数据采用稀疏索引，可以快速定位要消费的数据
+
+3）顺序写磁盘
+
+4）页缓存 + 零拷贝技术：走内核，不走应用层
+
+# kafka消费者
+
+![image-20221014203307712](..\img\image-20221014203307712.png)
+
+同一个消费者组里面的不同消费者不能同时消费同一个分区的数据

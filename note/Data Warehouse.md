@@ -1,6 +1,6 @@
 # 数仓分层
 
-<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20220803173627811.png" alt="image-20220803173627811" style="zoom:170%;" />
+![image-20221014235150555](../img/image-20221014235150555.png)
 
 ---
 
@@ -14,15 +14,13 @@
 
 # 数据集市与数据仓库的区别
 
-<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20220803202722229.png" alt="image-20220803202722229" style="zoom:150%;" />
+​                                                              
 
 ---
 
 # 范式概念
 
-<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20220803203718397.png" alt="image-20220803203718397" style="zoom:150%;" />
 
-<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20220803204254278.png" alt="image-20220803204254278" style="zoom:200%;" />
 
 ---
 
@@ -60,11 +58,11 @@
 
 ## 星型模型 星型模型 星座模型
 
-<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20220803220913918.png" alt="image-20220803220913918" style="zoom:200%;" />
+
 
 > 雪花模型对维度表进行规范化
 
-<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20220803221325733.png" alt="image-20220803221325733" style="zoom:200%;" />
+
 
 # 数仓建模
 
@@ -83,6 +81,30 @@
 DIM和DWD层构建维度模型，一般采用星型模型，呈现的状态一般为星座模型
 
 **选择业务过程--声明粒度--确认维度--确认事实**
+
+```shell
+#!/bin/bash
+
+# 定义变量方便修改
+APP=gmall
+
+# 如果是输入的日期按照取输入日期；如果没输入日期取当前时间的前一天
+if [ -n "$1" ] ;then
+   do_date=$1
+else 
+   do_date=`date -d "-1 day" +%F`
+fi 
+
+echo ================== 日志日期为 $do_date ==================
+sql="
+load data inpath '/origin_data/$APP/log/topic_log/$do_date' into table ${APP}.ods_log partition(dt='$do_date');
+"
+
+hive -e "$sql"
+
+hadoop jar hadoop jar /home/softwares/hadoop-3.1.3/share/hadoop/common/hadoop-lzo-0.4.20.jar com.hadoop.compression.lzo.DistributedLzoIndexer /warehouse/$APP/ods/ods_log/dt=$do_date
+
+```
 
 
 

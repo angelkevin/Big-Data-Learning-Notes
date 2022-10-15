@@ -4,14 +4,60 @@
 
 # 大数据环境配置教程
 
-**本环境基于centos 7搭建完成，使用的是单节点模式，搭建分布式仅供参考，所有的文件都解压放在/opt/softwares中，centos01为本虚拟机名字，防火墙需要关闭**
+**本环境基于centos 7搭建完成，使用的是单节点模式，搭建分布式仅供参考，所有的文件都解压放在/home/softwares中，centos01为本虚拟机名字，防火墙需要关闭**
 
 # sudo vim /etc/hosts
 
-```shell
-192.168.170.133 localhost
-192.168.170.133 centos01
-#均可自己修改
+```xml
+<configuration>
+ <property>
+ <property>
+ <name>hive.metastore.warehouse.dir</name>
+ <value>/home/software/hive/warehouse</value>
+ </property>
+ <property>
+ <!-- 配置MySQL的连接字符串 -->
+ <name>javax.jdo.option.ConnectionURL</name>
+ <value>jdbc:mysql://hadoop01:3306/hive?createDatabaseIfNotExist=true</value>
+ </property>
+ <property>
+ <!-- 配置MySQL的连接驱动 -->
+ <name>javax.jdo.option.ConnectionDriverName</name>
+ <value>com.mysql.jdbc.Driver</value>
+ </property>
+<property>
+ <!-- 配置登录MySQL的用户名 -->
+ <name>javax.jdo.option.ConnectionUserName</name>
+ <value>root</value>
+ </property>
+ <property>
+ <!-- 配置登录MySQL的密码 -->
+ <name>javax.jdo.option.ConnectionPassword</name>
+ <value>root</value>
+ </property>
+ <property>
+ <!-- 配置Hive的慢查询的日志目录 -->
+ <name>hive.querylog.location</name>
+ <value>hdfs://192.168.112.128:9000/user/hive/log</value>
+ </property>
+<property>
+ <!-- hive的server2的连接端口 -->
+ <name>hive.server2.thrift.port</name>
+ <value>10000</value>
+ </property>
+ <property>
+ <!-- hive的server2的连接主机名称 -->
+ 分区 郑州轻工业大学大数据实训 的第 21 页
+ <!-- hive的server2的连接主机名称 -->
+ <name>hive.server2.thrift.bind.host</name>
+ <value>192.168.112.128</value>
+ </property>
+<property>
+ <!-- hive的元数据服务的uri -->
+ <name>hive.metastore.uris</name>
+ <value>thrift://192.168.112.128:9083</value>
+ </property>
+</configuration>
 ```
 
 # sudo vim /etc/profile
@@ -19,23 +65,33 @@
 ## 所有的环境变量，在下面就不一一赘述了
 
 ``` shell
-export HADOOP_HOME=/opt/softwares/hadoop-3.1.3
+export HADOOP_HOME=/home/softwares/hadoop-3.1.3
 export PATH=$PATH:$HADOOP_HOME/bin
 export PATH=$PATH:$HADOOP_HOME/sbin
-export JAVA_HOME=/opt/softwares/jdk1.8.0_212
+export JAVA_HOME=/home/softwares/jdk1.8.0_212
 export PATH=$PATH:$JAVA_HOME/bin
-export ZOOKEEPER_HOME=/opt/softwares/apache-zookeeper-3.5.7-bin
+export ZOOKEEPER_HOME=/home/softwares/zookeeper
 export PATH=$PATH:$ZOOKEEPER_HOME/bin:$ZOOKEEPER_HOME/conf
-export FLUME_HOME=/opt/softwares/apache-flume-1.9.0-bin
+export FLUME_HOME=/home/softwares/flume
 export PATH=$PATH:$FLUME_HOME/bin
-export HIVE_HOME=/opt/softwares/apache-hive-3.1.2-bin
+export HIVE_HOME=/home/softwares/hive
 export PATH=$PATH:$HIVE_HOME/bin
-export SQOOP_HOME=/opt/softwares/sqoop-1.4.6.bin__hadoop-2.0.4-alpha
+export SQOOP_HOME=/home/softwares/sqoop
 export PATH=$PATH:$SQOOP_HOME/bin
-export KAFKA_HOME=/opt/softwares/kafka_2.11-2.4.1
+export KAFKA_HOME=/home/softwares/kafka
 export PATH=$PATH:$KAFKA_HOME/bin
-export SPARK_HOME=/opt/softwares/spark-3.0.0-bin-hadoop3.2
+export SPARK_HOME=/home/softwares/spark
 export PATH=$PATH:$SPARK_HOME/bin
+export PATH=/root:$PATH
+export SQOOP_HOME=/home/softwares/sqoop
+export PATH=$PATH:$SQOOP_HOME/bin
+
+export HDFS_NAMENODE_USER=root
+export HDFS_DATANODE_USER=root
+export HDFS_SECONDARYNAMENODE_USER=root
+export YARN_RESOURCEMANAGER_USER=root
+export YARN_NODEMANAGER_USER=root
+
 ```
 
 
@@ -47,7 +103,7 @@ export PATH=$PATH:$SPARK_HOME/bin
 ### hadoop-env.sh maperd-env.sh yarn-env.sh
 
 ```shell
-export JAVA_HOME=/opt/softwares/jdk1.8.0_212
+export JAVA_HOME=/home/softwares/jdk1.8.0_212
 ```
 
 ### core-site.xml
@@ -74,27 +130,13 @@ export JAVA_HOME=/opt/softwares/jdk1.8.0_212
 <configuration>
     <property>
         <name>hadoop.tmp.dir</name>
-        <value>file:/opt/softwares/hadoop-3.1.3/tmp</value>
+        <value>file:/home/softwares/hadoop-3.1.3/tmp</value>
         <description>Abase for other temporary directories.</description>
     </property>
     <property>
         <name>fs.defaultFS</name>
-        <value>hdfs://centos01:9000</value> <!--name node 端口以及Hadoop地址-->
+        <value>hdfs://hadoop01:9000</value> <!--name node 端口以及Hadoop地址-->
     </property>
-    <property>        
-    <name>io.compression.codecs</name>        
-    <value>org.apache.hadoop.io.compress.GzipCodec,
-        org.apache.hadoop.io.compress.DefaultCodec,            
-        org.apache.hadoop.io.compress.BZip2Codec,            
-        org.apache.hadoop.io.compress.SnappyCodec,            
-        com.hadoop.compression.lzo.LzoCodec,            
-        com.hadoop.compression.lzo.LzopCodec        
-    </value>    
-</property>     
-<property>        
-    <name>io.compression.codec.lzo.class</name>        
-    <value>com.hadoop.compression.lzo.LzoCodec</value>    
-</property>
 </configuration>
 ```
 
@@ -122,15 +164,15 @@ export JAVA_HOME=/opt/softwares/jdk1.8.0_212
 <configuration>
     <property>
         <name>dfs.replication</name>
-        <value>1</value>		<!--副本数目-->
+        <value>2</value>		<!--副本数目-->
     </property>
     <property>
         <name>dfs.namenode.name.dir</name>
-        <value>file:/opt/softwares/hadoop-3.1.3/tmp/dfs/name</value>		<!--namenode文件夹地址-->
+        <value>file:/home/softwares/hadoop-3.1.3/tmp/dfs/name</value>		<!--namenode文件夹地址-->
     </property>
     <property>
         <name>dfs.datanode.data.dir</name>
-        <value>file:/opt/softwares/hadoop-3.1.3/tmp/dfs/data</value>		<!--datanode文件夹地址-->
+        <value>file:/home/softwares/hadoop-3.1.3/tmp/dfs/data</value>		<!--datanode文件夹地址-->
     </property>
     <property>
         <name>dfs.permissions.enabled</name>
@@ -210,7 +252,7 @@ jps		#查看是否启动成功
 
 ```shell
 tickTime=2000
-dataDir=/opt/softwares/apache-zookeeper-3.5.7-bin/data		#文件存储位置
+dataDir=/home/softwares/apache-zookeeper-3.5.7-bin/data		#文件存储位置
 clientPort=2181		#端口号
 ```
 
@@ -218,7 +260,7 @@ clientPort=2181		#端口号
 
 ```shell
 tickTime=2000
-dataDir=/opt/softwares/apache-zookeeper-3.5.7-bin/data		#文件存储位置
+dataDir=/home/softwares/apache-zookeeper-3.5.7-bin/data		#文件存储位置
 clientPort=2181		#端口号
 initLimit=5
 syncLimit=2		#最多心跳数
@@ -248,7 +290,7 @@ broker.id=1		#每一个Broker的标识符
 num.partitions=1		#每个主题的分区数量
 offsets.topic.replication.factor=1		#消息备份副本数
 listeners=PLAINTEXT://centos01:9092		#监听地址，默认端口9092
-log.dirs=/opt/softwares/kafka_2.11-2.4.1/tmp/kafka-logs		#KafKa消息数据的存储位置，可以多个，用逗号分割
+log.dirs=/home/softwares/kafka_2.11-2.4.1/tmp/kafka-logs		#KafKa消息数据的存储位置，可以多个，用逗号分割
 zookeeper.connect=centos01:2181		#Zookeeper连接地址，如果有多个节点，一一写上
 ```
 
@@ -266,8 +308,8 @@ kafka-console-consumer.sh --bootstrap-server centos01:9092 --topic test --from-b
 # Flume
 
 ```shell
-flume-ng agent --name a1 --conf conf --conf-file /opt/softwares/apache-flume-1.9.0-bin/conf/flume-kafka.properties -Dflume.root.logger=INFO,console
-flume-ng agent --name a2 --conf conf --conf-file /opt/softwares/apache-flume-1.9.0-bin/conf/flume-hdfs.properties -Dflume.root.logger=INFO,console
+flume-ng agent --name a1 --conf conf --conf-file /home/softwares/apache-flume-1.9.0-bin/conf/flume-kafka.properties -Dflume.root.logger=INFO,console
+flume-ng agent --name a2 --conf conf --conf-file /home/softwares/apache-flume-1.9.0-bin/conf/flume-hdfs.properties -Dflume.root.logger=INFO,console
 ```
 
 ## Flume-config-example
@@ -281,9 +323,9 @@ a1.channels=c1
 a1.sinks=k1
 #配置source
 a1.sources.r1.type = TAILDIR
-a1.sources.r1.positionFile = /opt/softwares/applog/log/taildir_position.json
+a1.sources.r1.positionFile = /home/softwares/applog/log/taildir_position.json
 a1.sources.r1.filegroups = f1
-a1.sources.r1.filegroups.f1 = /opt/softwares/applog/log/app.*
+a1.sources.r1.filegroups.f1 = /home/softwares/applog/log/app.*
 a1.sources.r1.interceptors = i1
 a1.sources.r1.interceptors.i1.type = org.example.ETLInterceptor$Builder
 #配置channel
@@ -450,7 +492,7 @@ flush privileges;
 ### hive-env.sh
 
 ```shell
-HADOOP_HOME=export HADOOP_HOME=/opt/softwares/hadoop-3.1.3
+HADOOP_HOME=export HADOOP_HOME=/home/softwares/hadoop-3.1.3
 ```
 
 ### Set MySQL
@@ -478,7 +520,7 @@ flush privileges;
 <configuration>
     <property>
         <name>javax.jdo.option.ConnectionURL</name>
-        <value>jdbc:mysql://localhost:3306/hive_db</value>
+        <value>jdbc:mysql://192.168.170.130:3306/hive_db</value>
     </property>
     <property>
         <name>javax.jdo.option.ConnectionDriverName</name>
@@ -502,7 +544,7 @@ flush privileges;
     </property>
     <property>
         <name>hive.server2.thrift.bind.host</name>
-        <value>centos01</value>
+        <value>hadoop01</value>
     </property>
     <property>
         <name>hive.metastore.event.db.notification.api.auth</name>
@@ -566,16 +608,222 @@ hadoop fs -put spark-3.0.0-bin-without-hadoop/jars/* /spark-jar
 
 ### sqoop-env.sh
 
+
+
+# sqoop命令
+
 ```shell
-export ZOOKEEPER_HOME=/opt/softwares/apache-zookeeper-3.5.7-bin
-export ZOOCFGDIR=/opt/softwares/apache-zookeeper-3.5.7-bin/conf
+
+bin/sqoop import \
+--connect jdbc:mysql://hadoop01:3306/gmall \
+-username root \
+--password 123456 \
+--table user_info \
+--columns id,login_name \
+--where 'id>=1 and id<=20' \
+--target-dir /user_info \
+--delete-target-dir \
+--fields-terminated-by '\t' \
+--num-mappers 2 \
+--split-by id
+
+
+bin/sqoop import \
+--connect jdbc:mysql://hadoop01:3306/gmall \
+-username root \
+--password 123456 \
+--query 'select id,login_name from user_info where id>=10 and id<=20 and $CONDITIONS' \
+--target-dir /user_info \
+--delete-target-dir \
+--fields-terminated-by '\t' \
+--num-mappers 2 \
+--split-by id
+
 ```
 
-### Sqoop/lib
+```shell
+bin/sqoop import \
+--connect jdbc:mysql://hadoop01:3306/gmall \
+-username root \
+--password 123456 \
+--query 'select * from order_info $CONDITIONS' \
+--target-dir /user_info/2020-0614 \
+--delete-target-dir \
+--fields-terminated-by '\t' \
+--num-mappers 2 \
+--split-by id
+
+
+
+bin/sqoop import \
+--connect jdbc:mysql://hadoop01:3306/gmall \
+-username root \
+--password 123456 \
+--query 'select id,login_name from user_info where create_time='' and id<=20 and $CONDITIONS' \
+--target-dir /user_info \
+--delete-target-dir \
+--fields-terminated-by '\t' \
+--num-mappers 2 \
+--split-by id
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```shell
+
+#! /bin/bash
+
+case $1 in
+"start"){
+        for i in hadoop02 hadoop03
+        do
+                echo " --------启动 $i 采集flume-------"
+                ssh $i "source /etc/profile;nohup /home/softwares/flume/bin/flume-ng agent --conf-file  /home/softwares/flume/conf/file-flume-kafka.conf --name a1 -Dflume.root.logger=INFO,LOGFILE >/home/softwares/flume/log1.txt 2>&1  &"
+        done
+};;	
+"stop"){
+        for i in hadoop02 hadoop03
+        do
+                echo " --------停止 $i 采集flume-------"
+                ssh $i "ps -ef | grep file-flume-kafka | grep -v grep |awk  '{print \$2}' | xargs -n1 kill -9 "
+        done
+
+};;
+esac
 
 ```
-将MySQL驱动上传至lib
+
+```shell
+#! /bin/bash
+
+case $1 in
+"start"){
+        for i in hadoop02 hadoop03
+        do
+                echo " --------启动 $i 采集flume-------"
+                ssh $i "source /etc/profile;nohup /home/softwares/flume/bin/flume-ng agent --conf-file  /home/softwares/flume/conf/kafka-flume-hdfs.conf --name a1 -Dflume.root.logger=INFO,LOGFILE >/home/softwares/flume/log2.txt 2>&1  &"
+        done
+};;	
+"stop"){
+        for i in hadoop02 hadoop03
+        do
+                echo " --------停止 $i 采集flume-------"
+                ssh $i "ps -ef | grep kafka-flume-hdfs.conf | grep -v grep |awk  '{print \$2}' | xargs -n1 kill -9 "
+        done
+
+};;
+esac
+
 ```
+
+
+
+```java
+## 组件
+a1.sources=r1
+a1.channels=c1
+a1.sinks=k1
+
+## source1
+a1.sources.r1.type = org.apache.flume.source.kafka.KafkaSource
+a1.sources.r1.batchSize = 5000
+a1.sources.r1.batchDurationMillis = 2000
+a1.sources.r1.kafka.bootstrap.servers = hadoop01:9092,hadoop02:9092,hadoop03:9092
+a1.sources.r1.kafka.topics=topic_log
+
+
+## channel1
+a1.channels.c1.type = file
+a1.channels.c1.checkpointDir = /home/softwares/flume/checkpoint/behavior1
+a1.channels.c1.dataDirs = /home/softwares/flume/data/behavior1/
+
+
+## sink1
+a1.sinks.k1.type = hdfs
+a1.sinks.k1.hdfs.path = /origin_data/gmall/log/topic_log/%Y-%m-%d
+a1.sinks.k1.hdfs.filePrefix = log-
+a1.sinks.k1.hdfs.round = false
+
+#控制生成的小文件
+a1.sinks.k1.hdfs.rollInterval = 10
+a1.sinks.k1.hdfs.rollSize = 134217728
+a1.sinks.k1.hdfs.rollCount = 0
+
+## 控制输出文件是原生文件。
+a1.sinks.k1.hdfs.fileType = CompressedStream
+a1.sinks.k1.hdfs.codeC = lzop
+
+## 拼装
+a1.sources.r1.channels = c1
+a1.sinks.k1.channel= c1
+
+```
+
+```shell
+#!/bin/bash
+
+case $1 in
+"start"){
+        echo ================== 启动 集群 ==================
+
+        #启动 Zookeeper集群
+        zk.sh start
+
+        #启动 Hadoop集群
+        /home/softwares/hadoop-3.1.3/sbin/start-all.sh
+
+        #启动 Kafka采集集群
+        kf.sh start
+
+        #启动 Flume采集集群
+        f1.sh start
+
+        #启动 Flume消费集群
+        f2.sh start
+
+        };;
+"stop"){
+        echo ================== 停止 集群 ==================
+
+        #停止 Flume消费集群
+        f2.sh stop
+
+        #停止 Flume采集集群
+        f1.sh stop
+
+        #停止 Kafka采集集群
+        kf.sh stop
+
+        #停止 Hadoop集群
+        /home/softwares/hadoop-3.1.3/sbin/stop-all.sh sto
+
+        #停止 Zookeeper集群
+        zk.sh stop
+
+};;
+esac
+
+```
+
+
+
+
+
+
+
+
 
 
 

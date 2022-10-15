@@ -1883,8 +1883,7 @@ StateTtlConfig ttlConfig = StateTtlConfig
     .setUpdateType(StateTtlConfig.UpdateType.OnCreateAndWrite)
     .setStateVisibility(StateTtlConfig.StateVisibility.NeverReturnExpired)
     .build();
-ValueStateDescriptor<String> stateDescriptor = new ValueStateDescriptor<>("my
-state", String.class);
+ValueStateDescriptor<String> stateDescriptor = new ValueStateDescriptor<>("mystate", String.class);
 stateDescriptor.enableTimeToLive(ttlConfig);
 ```
 
@@ -2014,3 +2013,136 @@ public class BufferingSink {
 
 #### 广播状态（Broadcast State）
 
+```java
+package study_flink.Operatortate;
+
+import org.apache.flink.api.common.state.*;
+import org.apache.flink.api.common.typeinfo.Types;
+import org.apache.flink.configuration.Configuration;
+import org.apache.flink.streaming.api.datastream.BroadcastStream;
+import org.apache.flink.streaming.api.datastream.DataStreamSource;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.functions.co.KeyedBroadcastProcessFunction;
+import org.apache.flink.util.Collector;
+
+public class BC {
+    public static void main(String[] args) throws Exception {
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        env.setParallelism(1);
+        //用户的行为数据
+        DataStreamSource<Action> actionStream = env.fromElements(new Action("zkw", "login"),
+                new Action("zkw", "pay"),
+                new Action("jly", "login"),
+                new Action("jly", "order"));
+
+        DataStreamSource<Pattern> patternStream = env.fromElements(new Pattern("login", "pay"),
+                new Pattern("login", "order"));
+
+        //创建描述器，构建广播流
+        MapStateDescriptor<Void, Pattern> descriptor = new MapStateDescriptor<>("pattern", Types.VOID, Types.POJO(Pattern.class));
+        BroadcastStream<Pattern> broadcast = patternStream.broadcast(descriptor);
+        
+        //连接广播流
+        actionStream.keyBy(data ->data.id).connect(broadcast).process(new KeyedBroadcastProcessFunction<String, Action, Pattern, String>() {
+
+            ValueState<String> valueState;
+
+            @Override
+            public void open(Configuration parameters) throws Exception {
+                valueState = getRuntimeContext().getState(new ValueStateDescriptor<String>("zkw",String.class));
+
+            }
+
+            @Override
+            public void processElement(Action value, KeyedBroadcastProcessFunction<String, Action, Pattern, String>.ReadOnlyContext ctx, Collector<String> out) throws Exception {
+                ReadOnlyBroadcastState<Void, Pattern> zz = ctx.getBroadcastState(new MapStateDescriptor<>("pattern", Types.VOID, Types.POJO(Pattern.class)));
+
+                Pattern pattern = zz.get(null);
+//                上一次的行为
+                String value1 = valueState.value();
+                if (value1!=null&&pattern!=null){
+                    if (pattern.action1.equals(value1)&&pattern.action2.equals(value.action)){
+                        out.collect(value.id+pattern);
+                    }
+                }else {
+                    valueState.update(value.action);
+                }
+            }
+
+            @Override
+            public void processBroadcastElement(Pattern value, KeyedBroadcastProcessFunction<String, Action, Pattern, String>.Context ctx, Collector<String> out) throws Exception {
+                BroadcastState<Void, Pattern> zz = ctx.getBroadcastState(new MapStateDescriptor<Void, Pattern>("pattern", Types.VOID, Types.POJO(Pattern.class)));
+                zz.put(null,value);
+
+            }
+        }).print();
+        env.execute();
+
+    }
+
+
+    //定义用户行为和模式的POJO类
+    public static class Action {
+        public String id;
+        public String action;
+
+        public Action() {
+
+        }
+
+        public Action(String id, String action) {
+            this.id = id;
+            this.action = action;
+        }
+
+        @Override
+        public String toString() {
+            return "Action{" +
+                    "id='" + id + '\'' +
+                    ", action='" + action + '\'' +
+                    '}';
+        }
+    }
+
+    public static class Pattern {
+        public String action1;
+        public String action2;
+
+        public Pattern(String action1, String action2) {
+            this.action1 = action1;
+            this.action2 = action2;
+        }
+
+        public Pattern() {
+
+        }
+
+        @Override
+        public String toString() {
+            return "Pattern{" +
+                    "action1='" + action1 + '\'' +
+                    ", action2='" + action2 + '\'' +
+                    '}';
+        }
+    }
+
+
+}
+```
+
+## 状态持久化和状态后端
+
+在Flink的状态管理机制中，很重要的一个功能就是对状态进行持久化（ persistence）保
+存，这样就可以在发生故障后进行重启恢复。 Flink对状态进行持久化的方式，就是将当前所
+有分布式状态进行“快照”保存，写入一个“检查点”（ checkpoint）或者保存点 savepoint
+保存到外部存储系统中。具体的存储介质，一般是分布式文件系统（ distributed file system）。
+
+### 状态后端（ State Backends)
+
+![image-20221013125446535](D:\java\img\image-20221013125446535.png)
+
+
+
+**哈希表状态后端** HashMapStateBackend这种方式就是我们之前所说的，把状态存放在内存里。具体实现上，哈希表状态后端在内部会直接把状态当作对象（ objects），保存在 Taskmanager的 JVM堆（ heap）上。普通的状态以及窗口中收集的数据和触发器（ triggers），都会以键值对 key value）的形式存储起来，所以底层是一个哈希表（ HashMap），这种状态后端也因此得名。
+
+**内嵌 RocksDB状态后端**（ EmbeddedRocksDBState）BackendRocksDB是一种内嵌的 key value存储介质，可以把数据持久化到本地硬盘。配置EmbeddedRocksDBStateBackend后，会将处理中的数据全部放入 RocksDB数据库中， RocksDB默 认存储在 TaskManager的本地数据目录里。
