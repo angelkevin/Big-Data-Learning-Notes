@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/81a001ba-4864-4507-8b94-bba65b86c3f7/DIM.sql" dialect="HiveQL" />
+    <file url="file://$PROJECT_DIR$/gmall.sql" dialect="MySQL" />
+  </component>
+</project>

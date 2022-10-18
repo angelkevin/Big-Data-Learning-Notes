@@ -1,4 +1,1 @@
-```she
-./zkServer.sh start
-```
 

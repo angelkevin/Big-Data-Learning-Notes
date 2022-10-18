@@ -2,27 +2,11 @@
 
 ![image-20221014235150555](../img/image-20221014235150555.png)
 
----
-
 ## 数仓为什么要分层
 
 - 把复杂问题简单：将复杂任务分为多层来完成，每一层只处理简单任务，方便定位问题。。
 - 减少重复开发：规范数据分层，通过的中间层数据，能够减少极大的重复运算，增加一次计算结果的复用性。
 - 隔离原始数据：不论是数据异常还是数据的敏感性，是真实数据与统计数据解耦开。
-
----
-
-# 数据集市与数据仓库的区别
-
-​                                                              
-
----
-
-# 范式概念
-
-
-
----
 
 # 关系建模
 
@@ -58,11 +42,7 @@
 
 ## 星型模型 星型模型 星座模型
 
-
-
 > 雪花模型对维度表进行规范化
-
-
 
 # 数仓建模
 
@@ -81,30 +61,6 @@
 DIM和DWD层构建维度模型，一般采用星型模型，呈现的状态一般为星座模型
 
 **选择业务过程--声明粒度--确认维度--确认事实**
-
-```shell
-#!/bin/bash
-
-# 定义变量方便修改
-APP=gmall
-
-# 如果是输入的日期按照取输入日期；如果没输入日期取当前时间的前一天
-if [ -n "$1" ] ;then
-   do_date=$1
-else 
-   do_date=`date -d "-1 day" +%F`
-fi 
-
-echo ================== 日志日期为 $do_date ==================
-sql="
-load data inpath '/origin_data/$APP/log/topic_log/$do_date' into table ${APP}.ods_log partition(dt='$do_date');
-"
-
-hive -e "$sql"
-
-hadoop jar hadoop jar /home/softwares/hadoop-3.1.3/share/hadoop/common/hadoop-lzo-0.4.20.jar com.hadoop.compression.lzo.DistributedLzoIndexer /warehouse/$APP/ods/ods_log/dt=$do_date
-
-```
 
 
 
