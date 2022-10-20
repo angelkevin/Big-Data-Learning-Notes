@@ -2132,10 +2132,7 @@ public class BC {
 
 ## 状态持久化和状态后端
 
-在Flink的状态管理机制中，很重要的一个功能就是对状态进行持久化（ persistence）保
-存，这样就可以在发生故障后进行重启恢复。 Flink对状态进行持久化的方式，就是将当前所
-有分布式状态进行“快照”保存，写入一个“检查点”（ checkpoint）或者保存点 savepoint
-保存到外部存储系统中。具体的存储介质，一般是分布式文件系统（ distributed file system）。
+在Flink的状态管理机制中，很重要的一个功能就是对状态进行持久化（ persistence）保存，这样就可以在发生故障后进行重启恢复。 Flink对状态进行持久化的方式，就是将当前所有分布式状态进行“快照”保存，写入一个“检查点”（ checkpoint）或者保存点 savepoint保存到外部存储系统中。具体的存储介质，一般是分布式文件系统（ distributed file system）。
 
 ### 状态后端（ State Backends)
 

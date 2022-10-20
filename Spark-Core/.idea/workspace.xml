@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62cf5192-6624-4fc5-a69c-1d5fa126d7b7" name="变更" comment="变更">
-      <change afterPath="$PROJECT_DIR$/../SparkStreaming/src/main/resources/log4j.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Shell/Shell.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SparkStreaming/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SparkStreaming/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SparkStreaming/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SparkStreaming/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../note/SparkStreaming.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/SparkStreaming.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../note/Flink.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Flink.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../note/Hive.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Hive.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,18 +45,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/java/SparkStreaming&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;项目&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/java/Spark-Core",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "MavenSettings"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\java\Spark-Core\data" />
@@ -69,33 +69,7 @@
       <recent name="KV" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.RDD_test_coGroup">
-    <configuration name="Double_RDD_test" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="Double_RDD.Double_RDD_test" />
-      <module name="Spark-Core" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Double_RDD.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="HotCategoryTop10Analysis" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="Example.HotCategoryTop10Analysis" />
-      <module name="Spark-Core" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Example.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Application.SparkSql">
     <configuration name="RDD_test_coGroup" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="KV.RDD_test_coGroup" />
       <module name="Spark-Core" />
@@ -122,6 +96,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SparkSql" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Sql.SparkSql" />
+      <module name="Spark-Core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Sql.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Top10Session" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="Example.Top10Session" />
       <module name="Spark-Core" />
@@ -135,13 +122,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="broadcast" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Broadcast.broadcast" />
+      <module name="Spark-Core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Broadcast.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.RDD_test_coGroup" />
-        <item itemvalue="应用程序.RDD_test_reduceByKey" />
-        <item itemvalue="应用程序.Double_RDD_test" />
-        <item itemvalue="应用程序.Top10Session" />
-        <item itemvalue="应用程序.HotCategoryTop10Analysis" />
+        <item itemvalue="Application.SparkSql" />
+        <item itemvalue="Application.broadcast" />
       </list>
     </recent_temporary>
   </component>
@@ -162,6 +159,7 @@
       <workItem from="1665399287928" duration="32000" />
       <workItem from="1665399778236" duration="16000" />
       <workItem from="1665399998404" duration="14000" />
+      <workItem from="1666255979116" duration="3179000" />
     </task>
     <task id="LOCAL-00001" summary="666">
       <created>1665151685630</created>

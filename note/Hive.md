@@ -485,37 +485,45 @@ public class HiveUDTF extends GenericUDTF {
 |   LZO    |   LZO   |    .lzo    |      是      |
 |  Snappy  | Snappy  |  .snappy   |      否      |
 
+# 优化
 
+* Join
 
+  * 空值过滤
 
+  * MapJoin
+    *  如果不指定MapJoin或者不符合MapJoin的条件，那么Hive解析器会将Join操作转换成Common Join，即：在Reduce阶段完成join。容易发生数据倾斜。可以MapJoin把小表全部加载到内存在map端进行join，避免reducer处理。
 
+  * Group by
+    * 默认情况下，Map阶段同一Key数据分发给一个reduce，当一个key数据过大时就倾斜了。
+    * 并不是所有的聚合操作都需要在Reduce端完成，很多聚合操作都可以先在Map端进行部分聚合，最后在Reduce端得出最终结果。
 
+* Map数
 
+* reduce数
+* jvm重用
 
+* 数据压缩与存储格式
 
+* 合并小文件
 
+* 并行执行
 
+# hive的数据倾斜
 
+## 原因
 
+- key分布不均匀
+- 业务数据本身的特性
+- 建表时考虑不周
+- 某些SQL语句本身就有数据倾斜
 
+## 解决
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+1. 如果任务长时间卡在99%则基本可以认为是发生了数据倾斜，建议开发者调整参数以实现负载均衡：set hive.groupby.skewindata=true
+2. 小表关联大表操作，需要先看能否使用子查询，再看能否使用Mapjoin
+3. Join操作注意关联字段不能出现大量的重复值或者空值
+4. Count(distinct id ) 去重统计要慎用，尽量通过其他方式替换
 
 
 
