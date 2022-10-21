@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62cf5192-6624-4fc5-a69c-1d5fa126d7b7" name="变更" comment="变更">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Scala/Sql/SparkSql.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/Sql/SparkSql.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Warehouse/src/main/java/com/zkw/app/bean/TableProcess.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Warehouse/src/main/java/com/zkw/app/common/GmallConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Warehouse/src/main/java/com/zkw/app/dim/DimApp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Warehouse/src/main/java/com/zkw/app/func/TableProcessFunction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Warehouse/src/main/java/com/zkw/app/utils/MyKafkaUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Warehouse/src/main/resources/hbase-site.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Warehouse/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Warehouse/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Warehouse/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Warehouse/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +53,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/java/zkw1",
+    "last_opened_file_path": "D:/java/Warehouse",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -162,6 +167,7 @@
       <workItem from="1665399998404" duration="14000" />
       <workItem from="1666255979116" duration="10567000" />
       <workItem from="1666337637681" duration="9000" />
+      <workItem from="1666361562831" duration="19000" />
     </task>
     <task id="LOCAL-00001" summary="666">
       <created>1665151685630</created>
