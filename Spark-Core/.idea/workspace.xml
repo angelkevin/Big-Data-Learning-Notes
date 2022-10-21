@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="62cf5192-6624-4fc5-a69c-1d5fa126d7b7" name="变更" comment="变更">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/user.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/user.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Scala/Sql/SparkSql.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/Sql/SparkSql.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +48,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/java/Spark-Core",
+    "last_opened_file_path": "D:/java/zkw1",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -159,7 +160,8 @@
       <workItem from="1665399287928" duration="32000" />
       <workItem from="1665399778236" duration="16000" />
       <workItem from="1665399998404" duration="14000" />
-      <workItem from="1666255979116" duration="7589000" />
+      <workItem from="1666255979116" duration="10567000" />
+      <workItem from="1666337637681" duration="9000" />
     </task>
     <task id="LOCAL-00001" summary="666">
       <created>1665151685630</created>
@@ -287,7 +289,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666260336060</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="变更">
+      <created>1666266581822</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1666266581822</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

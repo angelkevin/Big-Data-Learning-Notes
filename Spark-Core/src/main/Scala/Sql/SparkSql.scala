@@ -13,7 +13,7 @@ object SparkSql {
     import sparkSession.implicits._
     //执行操作
     //DataFrame
-//    val dataFrame: DataFrame = sparkSession.read.json("data/user.json")
+//    val dataFrame: DataFrame =
 //    //dataFrame.show()
 //
 //    //DataFrame=>sql
