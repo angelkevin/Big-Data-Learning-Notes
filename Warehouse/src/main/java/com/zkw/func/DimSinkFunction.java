@@ -1,10 +1,10 @@
-package com.zkw.app.func;
+package com.zkw.func;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidPooledConnection;
 import com.alibaba.fastjson.JSONObject;
-import com.zkw.app.utils.DruidDSUtil;
-import com.zkw.app.utils.PhoenixUtil;
+import com.zkw.utils.DruidDSUtil;
+import com.zkw.utils.PhoenixUtil;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
 

@@ -1,7 +1,7 @@
-package com.zkw.app.utils;
+package com.zkw.utils;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.zkw.app.common.GmallConfig;
+import com.zkw.common.GmallConfig;
 
 public class DruidDSUtil {
     private static DruidDataSource druidDataSource;

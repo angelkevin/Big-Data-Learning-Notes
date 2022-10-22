@@ -5,25 +5,19 @@ import com.alibaba.fastjson.JSONObject;
 import com.ververica.cdc.connectors.mysql.source.MySqlSource;
 import com.ververica.cdc.connectors.mysql.table.StartupOptions;
 import com.ververica.cdc.debezium.JsonDebeziumDeserializationSchema;
-import com.zkw.app.bean.TableProcess;
-import com.zkw.app.func.DimSinkFunction;
-import com.zkw.app.func.TableProcessFunction;
-import com.zkw.app.utils.MyKafkaUtil;
+import com.zkw.func.DimSinkFunction;
+import com.zkw.bean.TableProcess;
+import com.zkw.func.TableProcessFunction;
+import com.zkw.utils.MyKafkaUtil;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
-import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.common.functions.FlatMapFunction;
-import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.common.state.MapStateDescriptor;
-import org.apache.flink.runtime.state.hashmap.HashMapStateBackend;
-import org.apache.flink.streaming.api.CheckpointingMode;
 import org.apache.flink.streaming.api.datastream.BroadcastConnectedStream;
 import org.apache.flink.streaming.api.datastream.BroadcastStream;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.api.functions.co.BroadcastProcessFunction;
 import org.apache.flink.util.Collector;
-import org.checkerframework.checker.units.qual.C;
 
 public class DimApp {
     public static void main(String[] args) throws Exception {

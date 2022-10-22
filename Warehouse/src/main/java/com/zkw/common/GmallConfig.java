@@ -1,4 +1,4 @@
-package com.zkw.app.common;
+package com.zkw.common;
 
 public class GmallConfig {
     // Phoenix库名

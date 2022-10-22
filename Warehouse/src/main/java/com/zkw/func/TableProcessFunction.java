@@ -1,9 +1,8 @@
-package com.zkw.app.func;
+package com.zkw.func;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.zkw.app.bean.TableProcess;
-import com.zkw.app.common.GmallConfig;
+import com.zkw.bean.TableProcess;
+import com.zkw.common.GmallConfig;
 import org.apache.flink.api.common.state.BroadcastState;
 import org.apache.flink.api.common.state.MapStateDescriptor;
 import org.apache.flink.api.common.state.ReadOnlyBroadcastState;

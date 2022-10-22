@@ -1,10 +1,9 @@
-package com.zkw.app.utils;
+package com.zkw.utils;
 
 import com.alibaba.druid.pool.DruidPooledConnection;
 import com.alibaba.fastjson.JSONObject;
-import com.zkw.app.common.GmallConfig;
+import com.zkw.common.GmallConfig;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.flink.shaded.netty4.io.netty.util.internal.StringUtil;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

@@ -1,4 +1,4 @@
-package com.zkw.app.bean;
+package com.zkw.bean;
 
 import lombok.Data;
 
