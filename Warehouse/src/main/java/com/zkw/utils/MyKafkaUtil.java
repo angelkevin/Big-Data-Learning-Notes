@@ -14,10 +14,10 @@ import java.util.Properties;
 public class MyKafkaUtil {
     private static final String KAFKA_SERVER = "hadoop01:9092,hadoop02:9092,hadoop03:9092";
 
-    public static FlinkKafkaConsumer<String> getFlinkKafkaConsumer(String topic, String groupID) {
+    public static FlinkKafkaConsumer<String> getFlinkKafkaConsumer(String topic, String groupId) {
 
         Properties properties = new Properties();
-        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, groupID);
+        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, groupId);
         properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_SERVER);
         return new FlinkKafkaConsumer<String>(topic,
                 new KafkaDeserializationSchema<String>() {
