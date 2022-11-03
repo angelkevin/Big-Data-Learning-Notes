@@ -9,7 +9,7 @@ class FunctionDefine {
   //    无参有返回值
   def f2(): String = {
     println("无参有返回值")
-    return "666"
+    "666"
   }
 }
 
@@ -17,6 +17,7 @@ object FunctionDefine {
   def main(args: Array[String]): Unit = {
     val define = new FunctionDefine
     define.f1()
+    define.f2()
   }
 }
 

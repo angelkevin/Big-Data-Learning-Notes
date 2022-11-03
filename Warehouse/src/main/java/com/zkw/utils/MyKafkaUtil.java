@@ -11,6 +11,8 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 import java.util.Properties;
 
+import static io.debezium.relational.history.KafkaDatabaseHistory.BOOTSTRAP_SERVERS;
+
 public class MyKafkaUtil {
     private static final String KAFKA_SERVER = "hadoop01:9092,hadoop02:9092,hadoop03:9092";
 
@@ -51,4 +53,30 @@ public class MyKafkaUtil {
         return new FlinkKafkaProducer<String>(KAFKA_SERVER, topic, new SimpleStringSchema());
 
     }
+    public static String getKafkaDDL(String topic, String groupId) {
+
+        return " with ('connector' = 'kafka', " +
+                " 'topic' = '" + topic + "'," +
+                " 'properties.bootstrap.servers' = '" + BOOTSTRAP_SERVERS + "', " +
+                " 'properties.group.id' = '" + groupId + "', " +
+                " 'format' = 'json', " +
+                " 'scan.startup.mode' = 'group-offsets')";
+    }
+
+    /**
+     * Kafka-Sink DDL 语句
+     *
+     * @param topic 输出到 Kafka 的目标主题
+     * @return 拼接好的 Kafka-Sink DDL 语句
+     */
+    public static String getKafkaSinkDDL(String topic) {
+        return "WITH ( " +
+                "  'connector' = 'kafka', " +
+                "  'topic' = '" + topic + "', " +
+                "  'properties.bootstrap.servers' = '" + BOOTSTRAP_SERVERS + "', " +
+                "  'format' = 'json' " +
+                ")";
+    }
 }
+
+
