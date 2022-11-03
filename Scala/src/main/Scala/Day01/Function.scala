@@ -14,7 +14,7 @@ object Function {
   }
     //广义方法
   def sayhi(name: String): Unit = {
-    println(s"hi,${name}")
+    println(s"hello,${name}")
   }
 
 

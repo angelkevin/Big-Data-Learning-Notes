@@ -19,7 +19,7 @@ public class Solution541 {
         while (left > right) {
             char tmp = chars[left];
             chars[left] = chars[right];
-            chars[right] = tmp;
+            chars[right] =tmp;
             left--;
             right++;
         }

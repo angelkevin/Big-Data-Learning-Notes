@@ -12,7 +12,7 @@ Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输
 
 
 
-## SparkStreaming 架构图
+## Spark-Streaming 架构图
 
 ![image-20221010190007411](C:\Users\22154\AppData\Roaming\Typora\typora-user-images\image-20221010190007411.png)
 

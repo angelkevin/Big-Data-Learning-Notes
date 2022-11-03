@@ -13,10 +13,8 @@ start-all.sh
 
 echo   启动 Kafka采集集群
 kfk.sh start
-
 echo   启动 Flume采集集群
 f1.sh start
-
 echo      启动 Flume消费集群
 f2.sh start
 echo     启动 maxwell
