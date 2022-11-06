@@ -1,5 +1,6 @@
 package com.study.test
 
+<<<<<<< HEAD
 import scala.collection.mutable.ArrayBuffer
 
 object test {
@@ -15,4 +16,9 @@ object test {
     println(ints.mkString(","))
 
   }
+=======
+object test {
+  val teacher = new Teacher
+
+>>>>>>> origin/main
 }
