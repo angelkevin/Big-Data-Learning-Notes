@@ -5,45 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62cf5192-6624-4fc5-a69c-1d5fa126d7b7" name="变更" comment="变更">
-      <change afterPath="$PROJECT_DIR$/../Scala/src/main/Scala/com/study/test/Person.scala" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Scala/src/main/Scala/com/study/test/test.scala" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Scala/src/main/Scala/day02/Arraytest.scala" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution376.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution455.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution71TOSolution80/Solution78.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution81TOSolution90/Solution90.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../zkw1/src/main/java/com/zkw/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Scala/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Scala/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Scala/src/main/Scala/Day01/Function.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../Scala/src/main/Scala/Day01/Function.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Scala/src/main/Scala/Day01/FunctionDefine.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../Scala/src/main/Scala/Day01/FunctionDefine.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Scala/target/classes/Day01/Function$.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Scala/target/classes/Day01/Function$.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Scala/target/classes/Day01/FunctionDefine$.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Scala/target/classes/Day01/FunctionDefine$.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../note/Data Warehouse.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Data Warehouse.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../note/Kafka.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Kafka.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../note/Spark-Streaming.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Spark-Streaming.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../note/Zookeeper.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Zookeeper.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/cc.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution101.java" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution101TOSolution110/Solution101.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution102.java" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution101TOSolution110/Solution102.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution131.java" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution131TOSolution140/Solution131.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution144.java" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution141TOSolution150/Solution144.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution150.java" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution141TOSolution150/Solution150.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution32.java" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution31TOSolution40/Solution32.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution34.java" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution31TOSolution40/Solution34.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution35.java" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution31TOSolution40/Solution35.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution39.java" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution31TOSolution40/Solution39.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution40.java" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution31TOSolution40/Solution40.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution42.java" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution41TOSolution50/Solution42.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution46.java" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution41TOSolution50/Solution46.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution541.java" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution541.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution55.java" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution51TOSolution60/Solution55.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution59.java" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution51TOSolution60/Solution59.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution77.java" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution71TOSolution80/Solution77.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution83.java" beforeDir="false" afterPath="$PROJECT_DIR$/../zkw1/src/main/java/Leetcode/Solution81TOSolution90/Solution83.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/target/classes/Leetcode/Solution55.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/target/classes/Leetcode/Solution59.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zkw1/target/classes/Leetcode/Solution83.class" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../KevinProject/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../KevinProject/src/main/Scala/com/kevin/app/OdsBaseLogApp.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../KevinProject/src/main/Scala/com/kevin/util/MyConfig.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../KevinProject/src/main/Scala/com/kevin/util/MyKafkaUtils.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../KevinProject/src/main/Scala/com/kevin/util/MyPropsUtils.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../KevinProject/src/main/resources/config.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../KevinProject/src/main/resources/log4j.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../KevinProject/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../KevinProject/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../KevinProject/target/classes/com/kevin/test$.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../KevinProject/target/classes/com/kevin/test.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +55,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/java/zkw1",
+    "last_opened_file_path": "D:/java/KevinProject",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -203,6 +174,7 @@
       <workItem from="1667372301550" duration="18000" />
       <workItem from="1667380545301" duration="3712000" />
       <workItem from="1667451597533" duration="17000" />
+      <workItem from="1667740426887" duration="34000" />
     </task>
     <task id="LOCAL-00001" summary="666">
       <created>1665151685630</created>

@@ -1,8 +1,8 @@
 public class test {
 
     public static void main(String[] args) {
-        String s = "23";
-        System.out.println(s.substring(0,1));
+        System.out.printf("%d%d%d",1,2,3);
+
     }
 
 }
