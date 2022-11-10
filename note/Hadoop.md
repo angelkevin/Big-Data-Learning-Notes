@@ -1,31 +1,166 @@
 # Hadoop
 
-- 广义上来说，Hadoop通常是指一个更广泛的概念——Hadoop生态圈。
-- 狭义上说，Hadoop指Apache这款开源框架，它的核心组件有：
-  - HDFS（分布式文件系统）：解决海量数据存储
-  - YARN（作业调度和集群资源管理的框架）：解决资源任务调度
-  - MAPREDUCE（分布式运算编程框架）：解决海量数据计算
+* 广义上来说，Hadoop通常是指一个更广泛的概念——Hadoop生态圈。
+* 狭义上说，Hadoop指Apache这款开源框架，它的核心组件有：
+  * HDFS（分布式文件系统）：解决海量数据存储
+  * YARN（作业调度和集群资源管理的框架）：解决资源任务调度
+  * MAPREDUCE（分布式运算编程框架）：解决海量数据计算
+
+## NameNode
+
+存储文件的元数据,如文件目录结构,文件属性,以及每个文件的块列表和块所在的DataNode
+
+## DataNode
+
+在本地文件系统存储文件块数据,以及块数据的校验
+
+## SecondaryNameNode
+
+每隔一段时间备份NameNode的元数据
+
+# HDFS
+
+**定义**:是一个文件系统,用于存储文件,通过目录树来定位文件,其次他是分布式的,由很多服务器联合起来实现功能,集群中的服务各有各自的角色
+
+## 优点
+
+>- 高容错:通过副本来提高容错性
+>- 适合处理大数据
+>- 可以构建在廉价的机器上,通过多副本机制,提高可靠性
+
+## 缺点
+
+>* 不适合低延时数据访问
+>* 无法高效的对大量小文件进行存储
+>* 不支持并发写入和文件随机修改
+
+## 组成架构
+
+### NameNode
+
+>* 管理HDFS的名称空间
+>
+>* 配置副本策略
+>
+>* 管理数据块的映射信息
+>
+>* 处理客户端的读写请求
+
+### DataNode
+
+>* 存储实际的数据块
+>
+>* 执行数据块的读写
+
+### SecondaryNameNode
+
+>* 不是NameNode的热备
+>* 辅助NameNode,分担工作量,定期合并Fsimage,和Edits,并推送给NameNode
+>
+>* 辅助恢复NameNode
+
+### Client客户端
+
+>* 文件切分.文件上传HDFS的时候,Client将文件切分成一个个的块
+>
+>* 与NameNode交互,获取文件信息位置
+>* 与DataNode交互,读取或者写入数据
+>* 提供一些命令管理HDFS
+>* 通过一些命令访问HDFS
+
+## HDFS文件块大小
+
+HDFS中的文件在物理上是分块存储的,大小可以通过配置参数(dfs.blocksize)来规定,默认是128M
+
+>HDFS的块设置太小,会增加寻址时间,程序一直在找块的位置
+>
+>HDFS块设置的太大,从磁盘传输的时间会明显大于定位这个块开始位置所需的时间,导致程序处理这块数据的时候非常慢
+
+
+
+## HDFS shell 命令
+
+**hdfs dfs ** 和  **hadoop fs** 一样
+
+```shell
+hadoop fs -mkdir [path]	#创建文件夹
+hadoop fs -moveFromLocal [file] [path]	#从本地文件剪切粘贴到HDFS
+hadoop fs -put [file] [path]  <=> hadoop fs -copyFromLocal [file] [path]	#从本地文件拷贝粘贴到HDFS
+hadoop fs -appendToFile [file]	#往文件追加内容,只能追加
+hadoop fs -get [file] [path] <=> hadoop fs -copyToLocal [file] [path]	#从HDFS拷贝粘贴到本地文件
+hadoop fs -cat [file]	#获取文件内容
+hadoop fs -cp [file] [path] #拷贝文件到另一个路径
+hadoop fs -mv [file] [path]	#移动文件到另外一个路径
+hadoop fs -tail [file]	#显示文件最后1kb的信息
+hadoop fs -rm -r [path]	#递归删除目录和里面的内容
+hadoop fs -rm [file] #删除文件
+hadoop fs -setrep [file]	#设置HDFS文件中的副本数量
+hadoop fs -du -s -h [path]	#目录总大小
+hadoop fs -du -h [path]	#目录里面具体文件大小
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Hadoop特性优点
 
-- 扩容能力（Scalable）：Hadoop是在可用的计算机集群间分配数据并完成计算任务的，这些集群可用方便的扩展到数以千计的节点中。
+* 扩容能力（Scalable）：Hadoop是在可用的计算机集群间分配数据并完成计算任务的，这些集群可用方便的扩展到数以千计的节点中。
 
-- 成本低（Economical）：Hadoop通过普通廉价的机器组成服务器集群来分发以及处理数据，以至于成本很低。
+* 成本低（Economical）：Hadoop通过普通廉价的机器组成服务器集群来分发以及处理数据，以至于成本很低。
 
-- 高效率（Efficient）：通过并发数据，Hadoop可以在节点之间动态并行的移动数据，使得速度非常快。
+* 高效率（Efficient）：通过并发数据，Hadoop可以在节点之间动态并行的移动数据，使得速度非常快。
 
-- 可靠性（Rellable）：能自动维护数据的多份复制，并且在任务失败后能自动地重新部署（redeploy）计算任务。所以Hadoop的按位存储和处理数据的能力值得人们信赖。
+* 可靠性（Rellable）：能自动维护数据的多份复制，并且在任务失败后能自动地重新部署（redeploy）计算任务。所以Hadoop的按位存储和处理数据的能力值得人们信赖。
   
 
 # Hadoop集群中Hadoop都需要启动哪些进程，他们的作用分别是什么？
 
-- namenode =>HDFS的守护进程，负责维护整个文件系统，存储着整个文件系统的元数据信息，image+edit log
-- datanode =>是具体文件系统的工作节点，当我们需要某个数据，namenode告诉我们去哪里找，就直接和那个DataNode对应的服务器的后台进程进行通信，由DataNode进行数据的检索，然后进行具体的读/写操作
-- secondarynamenode =>一个守护进程，相当于一个namenode的元数据的备份机制，定期的更新，和namenode进行通信，将namenode上的image和edits进行合并，可以作为namenode的备份使用
-- resourcemanager =>是yarn平台的守护进程，负责所有资源的分配与调度，client的请求由此负责，监控nodemanager
-- nodemanager => 是单个节点的资源管理，执行来自resourcemanager的具体任务和命令
-- DFSZKFailoverController高可用时它负责监控NN的状态，并及时的把状态信息写入ZK。它通过一个独立线程周期性的调用NN上的一个特定接口来获取NN的健康状态。FC也有选择谁作为Active NN的权利，因为最多只有两个节点，目前选择策略还比较简单（先到先得，轮换）。
-- JournalNode 高可用情况下存放namenode的editlog文件
+* namenode =>HDFS的守护进程，负责维护整个文件系统，存储着整个文件系统的元数据信息，image+edit log
+* datanode =>是具体文件系统的工作节点，当我们需要某个数据，namenode告诉我们去哪里找，就直接和那个DataNode对应的服务器的后台进程进行通信，由DataNode进行数据的检索，然后进行具体的读/写操作
+* secondarynamenode =>一个守护进程，相当于一个namenode的元数据的备份机制，定期的更新，和namenode进行通信，将namenode上的image和edits进行合并，可以作为namenode的备份使用
+* resourcemanager =>是yarn平台的守护进程，负责所有资源的分配与调度，client的请求由此负责，监控nodemanager
+* nodemanager => 是单个节点的资源管理，执行来自resourcemanager的具体任务和命令
+* DFSZKFailoverController高可用时它负责监控NN的状态，并及时的把状态信息写入ZK。它通过一个独立线程周期性的调用NN上的一个特定接口来获取NN的健康状态。FC也有选择谁作为Active NN的权利，因为最多只有两个节点，目前选择策略还比较简单（先到先得，轮换）。
+* JournalNode 高可用情况下存放namenode的editlog文件
   
 
 # HDFS写数据流程
@@ -86,18 +221,18 @@ Reduce负责“合”，即对map阶段的结果进行全局汇总。
 
 # MapReduce的执行流程
 
-- Map阶段
-  - 第一阶段是把输入目录下文件按照一定的标准逐个进行逻辑切片，形成切片规划。默认情况下，Split size = Block size。每一个切片由一个MapTask处理。（getSplits）
-  - 第二阶段是对切片中的数据按照一定的规则解析成<key,value>对。默认规则是把每一行文本内容解析成键值对。key是每一行的起始位置(单位是字节)，value是本行的文本内容。（TextInputFormat）
-  - 第三阶段是调用Mapper类中的map方法。上阶段中每解析出来的一个<k,v>，调用一次map方法。每次调用map方法会输出零个或多个键值对。
-  - 第四阶段是按照一定的规则对第三阶段输出的键值对进行分区。默认是只有一个区。分区的数量就是Reducer任务运行的数量。默认只有一个Reducer任务。
-  - 第五阶段是对每个分区中的键值对进行排序。首先，按照键进行排序，对于键相同的键值对，按照值进行排序。比如三个键值对<2,2>、<1,3>、<2,1>，键和值分别是整数。那么排序后的结果是<1,3>、<2,1>、<2,2>。如果有第六阶段，那么进入第六阶段；如果没有，直接输出到文件中。
-  - 第六阶段是对数据进行局部聚合处理，也就是combiner处理。键相等的键值对会调用一次reduce方法。经过这一阶段，数据量会减少。本阶段默认是没有的。
+* Map阶段
+  * 第一阶段是把输入目录下文件按照一定的标准逐个进行逻辑切片，形成切片规划。默认情况下，Split size = Block size。每一个切片由一个MapTask处理。（getSplits）
+  * 第二阶段是对切片中的数据按照一定的规则解析成<key,value>对。默认规则是把每一行文本内容解析成键值对。key是每一行的起始位置(单位是字节)，value是本行的文本内容。（TextInputFormat）
+  * 第三阶段是调用Mapper类中的map方法。上阶段中每解析出来的一个<k,v>，调用一次map方法。每次调用map方法会输出零个或多个键值对。
+  * 第四阶段是按照一定的规则对第三阶段输出的键值对进行分区。默认是只有一个区。分区的数量就是Reducer任务运行的数量。默认只有一个Reducer任务。
+  * 第五阶段是对每个分区中的键值对进行排序。首先，按照键进行排序，对于键相同的键值对，按照值进行排序。比如三个键值对<2,2>、<1,3>、<2,1>，键和值分别是整数。那么排序后的结果是<1,3>、<2,1>、<2,2>。如果有第六阶段，那么进入第六阶段；如果没有，直接输出到文件中。
+  * 第六阶段是对数据进行局部聚合处理，也就是combiner处理。键相等的键值对会调用一次reduce方法。经过这一阶段，数据量会减少。本阶段默认是没有的。
 
-- reduce阶段
-  - 第一阶段是Reducer任务会主动从Mapper任务复制其输出的键值对。Mapper任务可能会有很多，因此Reducer会复制多个Mapper的输出。
-  - 第二阶段是把复制到Reducer本地数据，全部进行合并，即把分散的数据合并成一个大的数据。再对合并后的数据排序。
-  - 第三阶段是对排序后的键值对调用reduce方法。键相等的键值对调用一次reduce方法，每次调用会产生零个或者多个键值对。最后把这些输出的键值对写入到HDFS文件中。
+* reduce阶段
+  * 第一阶段是Reducer任务会主动从Mapper任务复制其输出的键值对。Mapper任务可能会有很多，因此Reducer会复制多个Mapper的输出。
+  * 第二阶段是把复制到Reducer本地数据，全部进行合并，即把分散的数据合并成一个大的数据。再对合并后的数据排序。
+  * 第三阶段是对排序后的键值对调用reduce方法。键相等的键值对调用一次reduce方法，每次调用会产生零个或者多个键值对。最后把这些输出的键值对写入到HDFS文件中。
 
 # MapReduce的shuffle阶段
 
@@ -151,5 +286,4 @@ Reduce负责“合”，即对map阶段的结果进行全局汇总。
 尽量减少环形缓冲区flush的次数（减少IO 的使用）
 
 尽量将所有的数据写入内存，在内存中进行计算。
-
 

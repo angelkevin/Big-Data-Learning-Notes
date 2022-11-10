@@ -4,11 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4762357c-8f82-433f-b727-23fb97d6b519" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Fink/src/main/java/study_flink/ProcessFunctionTest/TopN.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Fink/src/main/java/study_flink/Source/MySource.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Fink/src/main/java/study_flink/Source/MySource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Fink/target/classes/study_flink/Source/MySource.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Fink/target/classes/study_flink/Source/MySource.class" afterDir="false" />
+    <list default="true" id="4762357c-8f82-433f-b727-23fb97d6b519" name="Changes" comment="33">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kevin/HdfsClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HBase/src/main/java/com/kevin/HBaseDML.java" beforeDir="false" afterPath="$PROJECT_DIR$/../HBase/src/main/java/com/kevin/HBaseDML.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MapReduce/FlowBean.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MapReduce/FlowMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MapReduce/FlowReduce.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MapReduce/Flowjob.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MapReduce/Hdfsclient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MapReduce/JSON.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MapReduce/Map.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MapReduce/MapReduce.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MapReduce/Reduce.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../note/Hadoop.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Hadoop.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../note/Hbase.md" beforeDir="false" afterPath="$PROJECT_DIR$/../note/Hbase.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +42,15 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\repository" />
+        <option name="mavenHome" value="$PROJECT_DIR$/../../apache-maven-3.8.6" />
+        <option name="userSettingsFile" value="D:\apache-maven-3.8.6\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="2" />
   </component>
@@ -42,19 +62,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/java",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "bigdataide_conn_settings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/java/Hadoop&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\java\Hadoop\src\main\resources" />
@@ -163,6 +183,8 @@
       <workItem from="1664009949573" duration="26000" />
       <workItem from="1664334585573" duration="87000" />
       <workItem from="1664334704242" duration="20000" />
+      <workItem from="1668059946885" duration="871000" />
+      <workItem from="1668060843986" duration="106000" />
     </task>
     <task id="LOCAL-00001" summary="33">
       <created>1663922014085</created>
@@ -183,6 +205,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
