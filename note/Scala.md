@@ -52,7 +52,7 @@ object FileIo {
 
 # Scala数据类型
 
-![image-20221005141534508](D:\java\img\image-20221005141534508.png)
+![image-20221005141534508](..\img\image-20221005141534508.png)
 
 
 

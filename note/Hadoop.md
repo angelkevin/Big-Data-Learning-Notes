@@ -18,6 +18,28 @@
 
 每隔一段时间备份NameNode的元数据
 
+## Hadoop特性优点
+
+* 扩容能力（Scalable）：Hadoop是在可用的计算机集群间分配数据并完成计算任务的，这些集群可用方便的扩展到数以千计的节点中。
+
+* 成本低（Economical）：Hadoop通过普通廉价的机器组成服务器集群来分发以及处理数据，以至于成本很低。
+
+* 高效率（Efficient）：通过并发数据，Hadoop可以在节点之间动态并行的移动数据，使得速度非常快。
+
+* 可靠性（Rellable）：能自动维护数据的多份复制，并且在任务失败后能自动地重新部署（redeploy）计算任务。所以Hadoop的按位存储和处理数据的能力值得人们信赖。
+
+## Hadoop集群中Hadoop都需要启动哪些进程，他们的作用分别是什么？
+
+* namenode =>HDFS的守护进程，负责维护整个文件系统，存储着整个文件系统的元数据信息，image+edit-log
+* datanode =>是具体文件系统的工作节点，当我们需要某个数据，namenode告诉我们去哪里找，就直接和那个DataNode对应的服务器的后台进程进行通信，由DataNode进行数据的检索，然后进行具体的读/写操作
+* secondarynamenode =>一个守护进程，相当于一个namenode的元数据的备份机制，定期的更新，和namenode进行通信，将namenode上的image和edits进行合并，可以作为namenode的备份使用
+* resourcemanager =>是yarn平台的守护进程，负责所有资源的分配与调度，client的请求由此负责，监控nodemanager
+* nodemanager => 是单个节点的资源管理，执行来自resourcemanager的具体任务和命令
+* DFSZKFailoverController高可用时它负责监控NN的状态，并及时的把状态信息写入ZK。它通过一个独立线程周期性的调用NN上的一个特定接口来获取NN的健康状态。FC也有选择谁作为Active NN的权利，因为最多只有两个节点，目前选择策略还比较简单（先到先得，轮换）。
+* JournalNode 高可用情况下存放namenode的editlog文件
+
+
+
 # HDFS
 
 **定义**:是一个文件系统,用于存储文件,通过目录树来定位文件,其次他是分布式的,由很多服务器联合起来实现功能,集群中的服务各有各自的角色
@@ -76,8 +98,6 @@ HDFS中的文件在物理上是分块存储的,大小可以通过配置参数(df
 >
 >HDFS块设置的太大,从磁盘传输的时间会明显大于定位这个块开始位置所需的时间,导致程序处理这块数据的时候非常慢
 
-
-
 ## HDFS shell 命令
 
 **hdfs dfs ** 和  **hadoop fs** 一样
@@ -99,71 +119,7 @@ hadoop fs -du -s -h [path]	#目录总大小
 hadoop fs -du -h [path]	#目录里面具体文件大小
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Hadoop特性优点
-
-* 扩容能力（Scalable）：Hadoop是在可用的计算机集群间分配数据并完成计算任务的，这些集群可用方便的扩展到数以千计的节点中。
-
-* 成本低（Economical）：Hadoop通过普通廉价的机器组成服务器集群来分发以及处理数据，以至于成本很低。
-
-* 高效率（Efficient）：通过并发数据，Hadoop可以在节点之间动态并行的移动数据，使得速度非常快。
-
-* 可靠性（Rellable）：能自动维护数据的多份复制，并且在任务失败后能自动地重新部署（redeploy）计算任务。所以Hadoop的按位存储和处理数据的能力值得人们信赖。
-  
-
-# Hadoop集群中Hadoop都需要启动哪些进程，他们的作用分别是什么？
-
-* namenode =>HDFS的守护进程，负责维护整个文件系统，存储着整个文件系统的元数据信息，image+edit log
-* datanode =>是具体文件系统的工作节点，当我们需要某个数据，namenode告诉我们去哪里找，就直接和那个DataNode对应的服务器的后台进程进行通信，由DataNode进行数据的检索，然后进行具体的读/写操作
-* secondarynamenode =>一个守护进程，相当于一个namenode的元数据的备份机制，定期的更新，和namenode进行通信，将namenode上的image和edits进行合并，可以作为namenode的备份使用
-* resourcemanager =>是yarn平台的守护进程，负责所有资源的分配与调度，client的请求由此负责，监控nodemanager
-* nodemanager => 是单个节点的资源管理，执行来自resourcemanager的具体任务和命令
-* DFSZKFailoverController高可用时它负责监控NN的状态，并及时的把状态信息写入ZK。它通过一个独立线程周期性的调用NN上的一个特定接口来获取NN的健康状态。FC也有选择谁作为Active NN的权利，因为最多只有两个节点，目前选择策略还比较简单（先到先得，轮换）。
-* JournalNode 高可用情况下存放namenode的editlog文件
-  
-
-# HDFS写数据流程
+## HDFS写数据流程
 
 1）客户端通过Distributed FileSystem模块向namenode请求上传文件，namenode检查目标文件是否已存在，父目录是否存在。
 
@@ -181,15 +137,7 @@ hadoop fs -du -h [path]	#目录里面具体文件大小
 
 8）当一个block传输完成之后，客户端再次请求namenode上传第二个block的服务器。
 
-# HDFS小文件问题及解决方案
-
-1.**Hadoop Archive**: Hadoop Archive或者HAR，是一个高效地将小文件放入HDFS块中的文件存档工具，它能够将多个小文件打包成一个HAR文件，这样在减少namenode内存使用的同时，仍然允许对文件进行透明的访问。
-
-2.**sequence file** ：sequence file由一系列的二进制key/value组成，如果为key小文件名，value为文件内容，则可以将大批小文件合并成一个大文件
-
-3.**CombineFileInputFormat**：CombineFileInputFormat是一种新的inputformat，用于将多个文件合并成一个单独的split
-
-# Hadoop读数据流程
+## HDFS读数据流程
 
 1）客户端通过Distributed FileSystem向namenode请求下载文件，namenode通过查询元数据，找到文件块所在的datanode地址。
 
@@ -199,9 +147,29 @@ hadoop fs -du -h [path]	#目录里面具体文件大小
 
 4）客户端以packet为单位接收，先在本地缓存，然后写入目标文件。
 
-# SecondaryNameNode的作用
+## HDFS小文件问题及解决方案
+
+1.**Hadoop Archive**: Hadoop Archive或者HAR，是一个高效地将小文件放入HDFS块中的文件存档工具，它能够将多个小文件打包成一个HAR文件，这样在减少namenode内存使用的同时，仍然允许对文件进行透明的访问。
+
+2.**sequence file** ：sequence file由一系列的二进制key/value组成，如果为key小文件名，value为文件内容，则可以将大批小文件合并成一个大文件
+
+3.**CombineFileInputFormat**：CombineFileInputFormat是一种新的inputformat，用于将多个文件合并成一个单独的split
+
+## HDFS数据完整性
+
+根据src校验位来确保数据完整性
+
+## 小文件优化
+
+1、从源头干掉，也就是在hdfs上我们不存储小文件，也就是数据上传hdfs的时候我们就合并小文件
+
+2、在FileInputFormat读取入数据的时候我们使用实现类CombineFileInputFormat读取数据，在读取数据的时候进行合并。
+
+## SecondaryNameNode的作用
 
 它的职责是**合并NameNode的edit logs到fsimage文件**
+
+
 
 # MapReduce
 
@@ -209,17 +177,27 @@ MapReduce的思想核心是“分而治之”，适用于大量复杂的任务�
 
 Map负责“分”，即把复杂的任务分解为若干个“简单的任务”来并行处理。可以进行拆分的前提是这些小任务可以并行计算，彼此间几乎没有依赖关系。
 
-Reduce负责“合”，即对map阶段的结果进行全局汇总。
+Reduce负责“合”，即对Map阶段的结果进行全局汇总。
 
-# Combiner
+
+
+
+
+
+
+
+
+
+
+## Combiner
 
 每一个map都可能会产生大量的本地输出，Combiner的作用就是对map端的输出先做一次合并，以减少在map和reduce节点之间的数据传输量，以提高网络IO性能。
 
-# partitioner
+## partitioner
 
 在进行MapReduce计算时，有时候需要把最终的输出数据分到不同的文件中，比如按照省份划分的话，需要把同一省份的数据放到一个文件中；按照性别划分的话，需要把同一性别的数据放到一个文件中。负责实现划分数据的类称作Partitioner。
 
-# MapReduce的执行流程
+## MapReduce的执行流程
 
 * Map阶段
   * 第一阶段是把输入目录下文件按照一定的标准逐个进行逻辑切片，形成切片规划。默认情况下，Split size = Block size。每一个切片由一个MapTask处理。（getSplits）
@@ -234,11 +212,11 @@ Reduce负责“合”，即对map阶段的结果进行全局汇总。
   * 第二阶段是把复制到Reducer本地数据，全部进行合并，即把分散的数据合并成一个大的数据。再对合并后的数据排序。
   * 第三阶段是对排序后的键值对调用reduce方法。键相等的键值对调用一次reduce方法，每次调用会产生零个或者多个键值对。最后把这些输出的键值对写入到HDFS文件中。
 
-# MapReduce的shuffle阶段
+## MapReduce的shuffle阶段
 
 每一个Mapper进程都有一个环形的内存缓冲区，用来存储Map的输出数据，这个内存缓冲区的默认大小100MB，当数据达到阙值0.8，也就是80MB的时候，一个后台的程序就会把数据溢写到磁盘中。在将数据溢写到磁盘的过程中要经过复杂的过程，首先要将数据进行分区排序（按照分区号如0，1，2），分区完以后为了避免Map输出数据的内存溢出，可以将Map的输出数据分为各个小文件再进行分区，这样map的输出数据就会被分为了具有多个小文件的分区已排序过的数据。然后将各个小文件分区数据进行合并成为一个大的文件（将各个小文件中分区号相同的进行合并）。
 
-# MapReduce程序在yarn上的执行流程
+## MapReduce程序在yarn上的执行流程
 
 一：客户端向集群提交一个任务，该任务首先到ResourceManager中的ApplicationManager;
 
@@ -256,14 +234,7 @@ Reduce负责“合”，即对map阶段的结果进行全局汇总。
 
 八：在任务执行完之后，AppMaster向ApplicationManager汇报，以便让ApplicationManager注销并关闭自己，使得资源得以回收；
 
-
-# 小文件优化
-
-1、从源头干掉，也就是在hdfs上我们不存储小文件，也就是数据上传hdfs的时候我们就合并小文件
-
-2、在FileInputFormat读取入数据的时候我们使用实现类CombineFileInputFormat读取数据，在读取数据的时候进行合并。
-
-# 数据倾斜问题优化
+## 数据倾斜问题优化
 
 1、既然默认的是hash算法进行分区，那我们自定义分区，修改分区实现逻辑，结合业务特点，使得每个分区数据基本平衡
 
@@ -273,7 +244,8 @@ Reduce负责“合”，即对map阶段的结果进行全局汇总。
 
 4、既然一个reduce处理慢，那我们可以增加reduce的个数来分摊一些压力呀，也不能根本解决问题，还是有一定的效果。
 
-## 1.如何能够让Map执行效率最高
+## 如何能够让Map执行效率最高
+
 尽量减少环形缓冲区flush的次数（减少IO 的使用）
 
 调大环形缓冲区的大小，将100M调更大。
@@ -282,7 +254,8 @@ Reduce负责“合”，即对map阶段的结果进行全局汇总。
 
 对Map输出的数据进行压缩。（数据在压缩和解压的过程中会消耗CPU）
 
-## 2.如何能够让Reduce执行效率最高
+## 如何能够让Reduce执行效率最高
+
 尽量减少环形缓冲区flush的次数（减少IO 的使用）
 
 尽量将所有的数据写入内存，在内存中进行计算。

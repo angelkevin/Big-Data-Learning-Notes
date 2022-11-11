@@ -1,4 +1,4 @@
-# ![image-20221013152620536](D:\java\img\image-20221013152620536.png)SparkStreaming
+# ![image-20221013152620536](..\img\image-20221013152620536.png)SparkStreaming
 
 > 准实时,微批次
 
@@ -14,7 +14,7 @@ Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输
 
 ## Spark-Streaming 架构图
 
-![image-20221010190007411](C:\Users\22154\AppData\Roaming\Typora\typora-user-images\image-20221010190007411.png)
+![image-20221010190007411](../img/image-20221010190007411-16681543778311.png)
 
 
 
@@ -166,7 +166,7 @@ object Kafka {
 
 ### 无状态转化操作 
 
-![image-20221013154330116](D:\java\img\image-20221013154330116.png)
+![image-20221013154330116](..\img\image-20221013154330116.png)
 
 ### 有状态操作
 

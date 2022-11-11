@@ -1,6 +1,6 @@
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FileSystem;
-import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.fs.*;
+import org.apache.hadoop.yarn.webapp.hamlet2.Hamlet;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,6 +45,9 @@ public class HDFSClientTest {
         fs.mkdirs(path);
     }
 
+    /**
+     * 上传文件
+     */
     @Test
     public void TestPut() throws IOException {
         //参数一:是否删除原数据
@@ -56,6 +59,9 @@ public class HDFSClientTest {
 
     }
 
+    /**
+     * 下载文件
+     */
     @Test
     public void TestGet() throws IOException {
         //参数一:是否删除原数据
@@ -65,4 +71,62 @@ public class HDFSClientTest {
         fs.copyToLocalFile(false, new Path("/kevin/tes/MobaXterm.log"), new Path("D:\\java\\HadoopStudy"), false);
     }
 
+    /**
+     * 删除文件
+     */
+    @Test
+    public void TestDelete() throws IOException {
+        //参数一:路径
+        //参数二:是否递归删除
+        //删除非空目录要递归删除
+        fs.delete(new Path("/kevin/tes/MobaXterm.log"), false);
+
+    }
+
+    /**
+     * 移动文件,重命名文件,目录更名
+     */
+    @Test
+    public void TestMove() throws IOException {
+        //参数一:原文件路径
+        //参数二:目标文件路径
+        fs.rename(new Path("/kevin/tes/MobaXterm.log"), new Path("/kevin/tes/Moba.log"));
+
+
+    }
+
+    /**
+     * 获取文件的详细信息
+     */
+    @Test
+    public void FileDetail() throws IOException {
+        //参数一:目录
+        //参数二:是否递归
+        RemoteIterator<LocatedFileStatus> listFiles = fs.listFiles(new Path("/"), true);
+
+        while (listFiles.hasNext()) {
+
+            LocatedFileStatus fileStatus = listFiles.next();
+
+            System.out.println(fileStatus.getPermission());
+            System.out.println(fileStatus.getPath().getName());
+            System.out.println(fileStatus.getGroup());
+
+        }
+
+    }
+
+    /**
+     * 判断是不是文件或者文件夹
+     */
+    @Test
+    public void TestFile() throws IOException {
+        FileStatus[] fileStatuses = fs.listStatus(new Path("/"));
+
+        for (FileStatus fileStatus : fileStatuses) {
+            fileStatus.isFile();
+            fileStatus.isDirectory();
+        }
+
+    }
 }

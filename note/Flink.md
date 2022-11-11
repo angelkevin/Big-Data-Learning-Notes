@@ -2136,7 +2136,7 @@ public class BC {
 
 ### 状态后端（ State Backends)
 
-![image-20221013125446535](D:\java\img\image-20221013125446535.png)
+![image-20221013125446535](..\img\image-20221013125446535.png)
 
 
 
