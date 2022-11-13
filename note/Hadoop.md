@@ -192,17 +192,21 @@ Reduce负责“合”，即对Map阶段的结果进行全局汇总。
 >* 不擅长流式计算
 >* 不擅长DAG有向无环图
 
+## MapReduce 往集群提交任务
 
+```shell
+ hadoop jar wc.jar com.kevin.MapReduce2.WordCountDrive /input /output
+```
 
+**优点** :
 
+* 紧凑:存储空间少;
+* 互操作性
+* 快速:传输速度快
 
+## MapReduce序列化
 
-
-
-
-
-
-
+内存数据往字节码变化过程叫序列化,反之叫反序列化.
 
 ## Combiner
 
