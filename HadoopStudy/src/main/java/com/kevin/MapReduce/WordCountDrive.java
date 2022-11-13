@@ -26,9 +26,12 @@ public class WordCountDrive {
         //设置最终输出的kv
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
+
+        job.setNumReduceTasks(2);
+
         //设置输入和输出路径
         FileInputFormat.setInputPaths(job,new Path("D:\\java\\HadoopStudy\\Word.txt"));
-        FileOutputFormat.setOutputPath(job,new Path("D:\\java\\HadoopStudy\\1"));
+        FileOutputFormat.setOutputPath(job,new Path("D:\\java\\HadoopStudy\\2"));
         //提交job
         job.waitForCompletion(true);
     }

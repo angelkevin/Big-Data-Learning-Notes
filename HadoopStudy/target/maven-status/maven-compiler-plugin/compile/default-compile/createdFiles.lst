@@ -1,0 +1,7 @@
+com\kevin\MapReduce\WordCountDrive.class
+com\kevin\MapReduce2\WordCountReduce.class
+com\kevin\HDFSAPI\HDFSClientTest.class
+com\kevin\MapReduce\WordCountMap.class
+com\kevin\MapReduce2\WordCountMap.class
+com\kevin\MapReduce\WordCountReduce.class
+com\kevin\MapReduce2\WordCountDrive.class

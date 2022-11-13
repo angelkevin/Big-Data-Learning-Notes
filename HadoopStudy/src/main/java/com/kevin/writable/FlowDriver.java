@@ -5,6 +5,7 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.mapreduce.lib.input.CombineFileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
@@ -22,6 +23,8 @@ public class FlowDriver {
         job.setMapOutputValueClass(FlowBean.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(FlowBean.class);
+//        job.setInputFormatClass(CombineFileInputFormat.class);
+//        CombineFileInputFormat.setMaxInputSplitSize(job,4194304);
         FileInputFormat.setInputPaths(job, new Path("D:\\java\\HadoopStudy\\phone_data.txt"));
         FileOutputFormat.setOutputPath(job, new Path("D:\\java\\HadoopStudy\\1"));
         boolean result = job.waitForCompletion(true);
