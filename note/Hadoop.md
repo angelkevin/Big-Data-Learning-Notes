@@ -257,24 +257,6 @@ MapTest个数,决定了Map阶段的任务处理并发度,从而影响整个Job�
 
 ![image-20221113205439089](../img/image-20221113205439089.png)
 
-## MapReduce程序在yarn上的执行流程
-
-一：客户端向集群提交一个任务，该任务首先到ResourceManager中的ApplicationManager;
-
-二：ApplicationManager收到任务之后，会在集群中找一个NodeManager，并在该NodeManager所在DataNode上启动一个AppMaster进程，该进程用于进行任务的划分和任务的监控；
-
-三：AppMaster启动起来之后，会向ResourceManager中的ApplicationManager注册其信息（目的是与之通信）；
-
-四：AppMaster向ResourceManager下的ResourceScheduler申请计算任务所需的资源；
-
-五：AppMaster申请到资源之后，会与所有的NodeManager通信要求它们启动计算任务所需的任务（Map和Reduce）；
-
-六：各个NodeManager启动对应的容器用来执行Map和Reduce任务；
-
-七：各个任务会向AppMaster汇报自己的执行进度和执行状况，以便让AppMaster随时掌握各个任务的运行状态，在某个任务出了问题之后重启执行该任务；
-
-八：在任务执行完之后，AppMaster向ApplicationManager汇报，以便让ApplicationManager注销并关闭自己，使得资源得以回收；
-
 
 
 ## partitioner
@@ -297,17 +279,25 @@ MapTest个数,决定了Map阶段的任务处理并发度,从而影响整个Job�
 
 ### 排序概述
 
-![image-20221113213955116](../img/image-20221113213955116.png)
+排序是MapReduce框架中最重要的操作之一。
 
+MapTask和ReduceTask均会对数据按照key进行排序。该操作属于Hadoop的默认行为。任何应用程序中的数据均会被排序，而不管逻辑上是否需要。
 
+默认排序是按照字典顺序排序，且实现该排序的方法是快速排序。
 
-![image-20221113214014916](../img/image-20221113214014916.png)
+对于MapTask，它会将处理的结果暂时放到环形缓冲区中，当环形缓冲区使用率达到一定阈值后，再对缓冲区中的数据进行一次快速排序，并将这些有序数据溢写到磁盘上，而当数据处理完毕后，它会对磁盘上所有文件进行归并排序。
+
+对于ReduceTask，它从每个MapTask上远程拷贝相应的数据文件，如果文件大小超过一定阈值，则溢写磁盘上，否则存储在内存中。如果磁盘上文件数目达到一定阈值，则进行一次归并排序以生成一个更大文件；如果内存中文件大小或者数目超过一定阈值，则进行一次合并后将数据溢写到磁盘上。当所有数据拷贝完毕后，ReduceTask统一对内存和磁盘上的所有数据进行一次归并排序。
 
 ### 排序分类
 
-![image-20221113214455094](../img/image-20221113214455094.png)
+**部分排序**:MapReduce根据输入记录的键对数据集排序。保证输出的每个文件内部有序。
 
+**全排序**:最终输出结果只有一个文件，且文件内部有序。实现方式是只设置一个ReduceTask。但该方法在处理大型文件时效率极低，因为一台机器处理所有文件，完全丧失了MapReduce所提供的并行架构。
 
+**辅助排序**：（GroupingComparator分组）:    在Reduce端对key进行分组。应用于：在接收的key为bean对象时，想让一个或几个字段相同（全部字段比较不相同）的key进入到同一个reduce方法时，可以采用分组排序。
+
+**二次排序**:在自定义排序过程中，如果compareTo中的判断条件为两个即为二次排序。
 
 ### 自定义排序WritableComparable原理分析
 
@@ -330,6 +320,28 @@ bean对象做为key传输，需要实现WritableComparable接口重写compareTo�
 自定义一个Combiner继承Reducer，重写Reduce方法
 
 在Job驱动类中设置**job.setCombinerClass(WordCountCombiner.class);**
+
+## MapTask工作机制
+
+1. Read阶段,用Inputformat进行读文件
+2. Map阶段,自定义的map方法对数据进行处理
+3. 收集阶段,map后的数据到环形缓冲区
+4. 溢写阶段,环形缓冲区开始溢写,产生溢写文件
+5. merge阶段,合并溢写文件
+
+## ReduceTask工作机制
+
+1. copy阶段,reduce先从硬盘拉去所需要的阶段
+2. sort阶段,合并文件,并排序
+3. Reduce,进行reduce处理,并输出到OutPutFormat
+
+### ReduceTask并行度决定机制
+
+手动进行设置:**job.setNumReduceTask(num)**
+
+默认值是1,所以输出文件是一个
+
+如果数据分布不均匀容易造成在Reduce阶段产生数据倾斜
 
 ## 数据倾斜问题优化
 
@@ -357,3 +369,65 @@ bean对象做为key传输，需要实现WritableComparable接口重写compareTo�
 
 尽量将所有的数据写入内存，在内存中进行计算。
 
+## Join
+
+### Join数据倾斜
+
+1. 把小表缓存到内存中:在Mapper的setup阶段,将文件读取到缓存集合中;在Driver驱动类中加入缓存
+2. 使用mapjoin
+
+# Yarn
+
+## MapReduce程序在yarn上的执行流程
+
+一：客户端向集群提交一个任务，该任务首先到ResourceManager中的ApplicationManager;
+
+二：ApplicationManager收到任务之后，会在集群中找一个NodeManager，并在该NodeManager所在DataNode上启动一个AppMaster进程，该进程用于进行任务的划分和任务的监控；
+
+三：AppMaster启动起来之后，会向ResourceManager中的ApplicationManager注册其信息（目的是与之通信）；
+
+四：AppMaster向ResourceManager下的ResourceScheduler申请计算任务所需的资源；
+
+五：AppMaster申请到资源之后，会与所有的NodeManager通信要求它们启动计算任务所需的任务（Map和Reduce）；
+
+六：各个NodeManager启动对应的容器用来执行Map和Reduce任务；
+
+七：各个任务会向AppMaster汇报自己的执行进度和执行状况，以便让AppMaster随时掌握各个任务的运行状态，在某个任务出了问题之后重启执行该任务；
+
+八：在任务执行完之后，AppMaster向ApplicationManager汇报，以便让ApplicationManager注销并关闭自己，使得资源得以回收；
+
+![image-20221114160842380](../img/image-20221114160842380.png)
+
+ ## Yarn调度器和调度算法
+
+ ### 先进先出调度器（FIFO）
+
+FIFO调度器（First In First Out）：单队列，根据提交作业的先后顺序，先来先服务。
+
+### 容量调度器（Capacity Scheduler）
+
+1、多队列：每个队列可配置一定的资源量，每个队列采用FIFO调度策略。
+
+2、容量保证：管理员可为每个队列设置资源最低保证和资源使用上限
+
+3、灵活性：如果一个队列中的资源有剩余，可以暂时共享给那些需要资源的队列，而一旦该队列有新的应用程序提交，则其他队列借调的资源会归还给该队列。
+
+4、多租户：
+
+​    支持多用户共享集群和多应用程序同时运行。
+
+​    为了防止同一个用户的作业独占队列中的资源，该调度器会对同一用户提交的作业所占资源量进行限定。
+
+![image-20221114162837812](../img/image-20221114162837812.png)
+
+### 公平调度器（Fair Scheduler）
+
+（1）多队列：支持多队列多作业
+
+（2）容量保证：管理员可为每个队列设置资源最低保证和资源使用上线
+
+（3）灵活性：如果一个队列中的资源有剩余，可以暂时共享给那些需要资源的队列，而一旦该队列有新的应用程序提交，则其他队列借调的资源会归还给该队列。
+
+（4）多租户：支持多用户共享集群和多应用程序同时运行；为了防止同一个用户的作业独占队列中的资源，该调度器会对同一用户提交的作业所占资源量进行限定。
+
+![image-20221114162741515](../img/image-20221114162741515.png)
