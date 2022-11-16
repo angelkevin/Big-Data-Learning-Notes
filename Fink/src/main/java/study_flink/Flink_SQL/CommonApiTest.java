@@ -1,19 +1,15 @@
 package study_flink.Flink_SQL;
 
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-
 import org.apache.flink.table.api.Table;
-import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
-
-import static org.apache.flink.table.api.Expressions.$;
-
-
 import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 
 public class CommonApiTest {
     public static void main(String[] args) {
 
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
+        env.setParallelism(1);
 
         StreamTableEnvironment tableEnv = StreamTableEnvironment.create(env);
 
@@ -22,7 +18,7 @@ public class CommonApiTest {
         //TODO 创建输入表
 
         String createInputDDL = "CREATE TABLE clickTable (" +
-                " `user` String," +
+                " `user_name` String," +
                 " `url` String," +
                 " `ts` BIGINT" +
                 ") WITH (" +
@@ -40,17 +36,7 @@ public class CommonApiTest {
         tableEnv.createTemporaryView("result1", clickTable);
 
         //TODO 执行SQL进行表查询
-        Table table = tableEnv.sqlQuery("select user, url from result1");
-
-        //TODO 创建输出表,输出文件系统
-//        String createOutDDL = "CREATE TABLE outTable (" +
-//                " `user` String," +
-//                " `url` String" +
-//                ") WITH (" +
-//                " 'connector' = 'filesystem'," +
-//                " 'path'='D:\\java\\Fink\\output'," +
-//                " 'format' ='csv'" +
-//                ")";
+        Table table = tableEnv.sqlQuery("select `user_name`, `url` from result1 where `user_name` = 'zkw'");
         //TODO 打印控制台
 //        String createOutDDL = "CREATE TABLE outTable (" +
 //                " `user` String," +
@@ -61,18 +47,19 @@ public class CommonApiTest {
 //        tableEnv.executeSql(createOutDDL);
 
 
-
         //TODO 创建输出表 输出到外部系统
         String createOutDDL = "create table outTable (" +
-                " user_name String," +
-                " url String" +
+                " `user_name` String," +
+                " `url` String" +
                 ") with (" +
-                " 'connector' =' filesystem', " +
-                " 'path'='D:\\java\\Fink\\1.csv', " +
+                " 'connector' ='filesystem', " +
+                " 'path'='D:\\java\\Fink\\output', " +
                 " 'format' ='csv'" +
                 ")";
         System.out.println(createOutDDL);
         tableEnv.executeSql(createOutDDL);
+        table.executeInsert("outTable");
+
 
     }
 }
