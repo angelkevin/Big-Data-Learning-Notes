@@ -30,11 +30,11 @@ public class CommonApiTest {
                 " 'path'='D:\\java\\Fink\\123.txt'," +
                 " 'format' ='csv'" +
                 ")";
+        System.out.println(createInputDDL);
         tableEnv.executeSql(createInputDDL);
 
         //TODO TableAPI进行表查询转换
         Table clickTable = tableEnv.from("clickTable");
-//        Table user = clickTable.select($("user"));
 
         //TODO 环境中注册零时表
         tableEnv.createTemporaryView("result1", clickTable);
@@ -42,16 +42,15 @@ public class CommonApiTest {
         //TODO 执行SQL进行表查询
         Table table = tableEnv.sqlQuery("select user, url from result1");
 
-
         //TODO 创建输出表,输出文件系统
-        String createOutDDL = "CREATE TABLE outTable (" +
-                " `user` String," +
-                " `url` String" +
-                ") WITH (" +
-                " 'connector' = 'filesystem'," +
-                " 'path'='D:\\java\\Fink\\output'," +
-                " 'format' ='csv'" +
-                ")";
+//        String createOutDDL = "CREATE TABLE outTable (" +
+//                " `user` String," +
+//                " `url` String" +
+//                ") WITH (" +
+//                " 'connector' = 'filesystem'," +
+//                " 'path'='D:\\java\\Fink\\output'," +
+//                " 'format' ='csv'" +
+//                ")";
         //TODO 打印控制台
 //        String createOutDDL = "CREATE TABLE outTable (" +
 //                " `user` String," +
@@ -59,30 +58,20 @@ public class CommonApiTest {
 //                ") WITH (" +
 //                " 'connector' = 'print'" +
 //                ")";
-        tableEnv.executeSql(createOutDDL);
-        //TODO 输出到外部系统
-        table.executeInsert("outTable");
-//
-//        String createInputDDL = "create table clickTable (" +
-//                " user_name String," +
-//                " url String," +
-//                " ts Bigint" +
-//                ") with (" +
-//                " `connector` = `filesystem`" +
-//                " `path`=`D:\\java\\Fink\\123.txt`" +
-//                " `format` =`csv`" +
-//                ")";
-//        tableEnv.executeSql(createInputDDL);
+//        tableEnv.executeSql(createOutDDL);
 
-        //TODO 创建输出表
-//        String createOutDDL = "create table outTable (" +
-//                " user_name String," +
-//                " url String," +
-//                ") with (" +
-//                " `connector` = `filesystem`" +
-//                " `path`=`D:\\java\\Fink\\output`" +
-//                " `format` =`csv`" +
-//                ")";
+
+
+        //TODO 创建输出表 输出到外部系统
+        String createOutDDL = "create table outTable (" +
+                " user_name String," +
+                " url String" +
+                ") with (" +
+                " 'connector' =' filesystem', " +
+                " 'path'='D:\\java\\Fink\\1.csv', " +
+                " 'format' ='csv'" +
+                ")";
+        System.out.println(createOutDDL);
         tableEnv.executeSql(createOutDDL);
 
     }
