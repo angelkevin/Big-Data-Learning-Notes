@@ -9,7 +9,7 @@ object SparkSql {
     //创建spark的运行环境
     val conf = new SparkConf().setMaster("local[*]").setAppName("sql")
     val sparkSession: SparkSession = SparkSession.builder().config(conf).getOrCreate()
-    //使用dataframe,如果社交转化操作,需要引入转换规则
+    //使用dataframe,如果涉及转化操作,需要引入转换规则
     import sparkSession.implicits._
     //执行操作
     //DataFrame

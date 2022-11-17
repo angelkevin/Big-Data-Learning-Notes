@@ -5,16 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62cf5192-6624-4fc5-a69c-1d5fa126d7b7" name="变更" comment="变更">
-      <change afterPath="$PROJECT_DIR$/../KevinProject/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../KevinProject/src/main/Scala/com/kevin/app/OdsBaseLogApp.scala" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../KevinProject/src/main/Scala/com/kevin/util/MyConfig.scala" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../KevinProject/src/main/Scala/com/kevin/util/MyKafkaUtils.scala" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../KevinProject/src/main/Scala/com/kevin/util/MyPropsUtils.scala" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../KevinProject/src/main/resources/config.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../KevinProject/src/main/resources/log4j.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../KevinProject/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../KevinProject/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../KevinProject/target/classes/com/kevin/test$.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../KevinProject/target/classes/com/kevin/test.class" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Fink/src/main/java/study_flink/Flink_SQL/TimeAndWindows.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Scala/Sql/SparkSql.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Scala/Sql/SparkSql.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +47,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/java/KevinProject",
+    "last_opened_file_path": "D:/java/Spark-Core",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -175,6 +167,7 @@
       <workItem from="1667380545301" duration="3712000" />
       <workItem from="1667451597533" duration="17000" />
       <workItem from="1667740426887" duration="34000" />
+      <workItem from="1668665359202" duration="202000" />
     </task>
     <task id="LOCAL-00001" summary="666">
       <created>1665151685630</created>
