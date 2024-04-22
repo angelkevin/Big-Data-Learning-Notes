@@ -100,7 +100,7 @@ HDFS中的文件在物理上是分块存储的,大小可以通过配置参数(df
 
 ## HDFS shell 命令
 
-**hdfs dfs ** 和  **hadoop fs** 一样
+**hdfs dfs** 和  **hadoop fs** 一样
 
 ```shell
 hadoop fs -mkdir [path]	#创建文件夹
